@@ -1,14 +1,14 @@
-# Design Component Library
+# Design System
 
 ## Introduction
 
-The Design Component Library is a comprehensive suite of UI components, design patterns, and development tools that enable consistent, accessible, and high-quality user interfaces across all CMM applications. Our implementation combines several modern frontend technologies including Storybook, Tailwind CSS, React, Radix UI, Material-UI (MUI), Artifactory, and GitHub Actions to create a robust design system that accelerates development while maintaining design consistency and code quality.
+The Design System is a comprehensive suite of UI components, design patterns, and development tools that enable consistent, accessible, and high-quality user interfaces across all CMM applications. Our implementation combines several modern frontend technologies including Storybook, Tailwind CSS, React, Radix UI, Material-UI (MUI), Artifactory, and GitHub Actions to create a robust design system that accelerates development while maintaining design consistency and code quality.
 
 ## Key Concepts
 
-### What is a Design Component Library?
+### What is a Design System?
 
-A Design Component Library (also known as a design system) is a collection of reusable UI components, design patterns, and guidelines that ensure consistency across applications. In healthcare applications, a well-implemented design system is crucial for:
+A Design System is a collection of reusable UI components, design patterns, and guidelines that ensure consistency across applications. In healthcare applications, a well-implemented design system is crucial for:
 
 - **UI Consistency**: Maintaining a unified look and feel across all applications
 - **Accessibility**: Ensuring all components meet WCAG standards for healthcare applications
@@ -18,7 +18,7 @@ A Design Component Library (also known as a design system) is a collection of re
 
 ### Technology Stack
 
-Our Design Component Library leverages several key technologies:
+Our Design System leverages several key technologies:
 
 - **React**: Component-based JavaScript library for building user interfaces
 - **Tailwind CSS**: Utility-first CSS framework for rapid UI development
@@ -89,7 +89,7 @@ flowchart TB
 
 ### Component Hierarchy
 
-Our Design Component Library is organized in a hierarchical structure:
+Our Design System is organized in a hierarchical structure:
 
 - **Design Tokens**: Fundamental design values (colors, spacing, typography, etc.)
 - **Foundation Components**:
@@ -158,7 +158,7 @@ Automated workflows for quality and delivery:
 
 ## Integration Points
 
-The Design Component Library integrates with several key components in our architecture:
+The Design System integrates with several key components in our architecture:
 
 - **Web Applications**: Providing consistent UI components
 - **Mobile Web Interfaces**: Responsive components for mobile experiences
@@ -177,9 +177,9 @@ To begin working with our Design Component Library:
 
 ## Related Components
 
-- [Identity Provider](../../identity-provider/01-getting-started/overview.md): Authentication UI components
+- [Security and Access Framework](../../security-and-access-framework/01-getting-started/overview.md): Authentication UI components
 - [Federated GraphQL API](../../federated-graph-api/01-getting-started/overview.md): Data fetching patterns
-- [Integration Engine](../../integration-engine/01-getting-started/overview.md): API integration components
+- [API Marketplace](../../api-marketplace/01-getting-started/overview.md): API integration components
 
 ## Next Steps
 

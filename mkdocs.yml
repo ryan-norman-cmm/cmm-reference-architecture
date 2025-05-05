@@ -44,25 +44,25 @@ nav:
         - Disaster Recovery: architecture/core_components/api-marketplace/04-operations/disaster-recovery.md
       - Case Studies:
         - Healthcare Integration: architecture/core_components/api-marketplace/05-case-studies/healthcare-integration.md
-    - Design Component Library:
+    - Design System:
       - Getting Started:
-        - Overview: architecture/core_components/design-component-library/01-getting-started/overview.md
-        - Benefits Overview: architecture/core_components/design-component-library/01-getting-started/benefits-overview.md
-        - Setup Guide: architecture/core_components/design-component-library/01-getting-started/setup-guide.md
+        - Overview: architecture/core_components/design-system/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/design-system/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/design-system/01-getting-started/setup-guide.md
       - Core Functionality:
-        - Component Usage: architecture/core_components/design-component-library/02-core-functionality/component-usage.md
-        - Component Catalog: architecture/core_components/design-component-library/02-core-functionality/component-catalog.md
-        - Healthcare Components: architecture/core_components/design-component-library/02-core-functionality/healthcare-components.md
-        - Authentication Components: architecture/core_components/design-component-library/02-core-functionality/authentication-components.md
+        - Component Usage: architecture/core_components/design-system/02-core-functionality/component-usage.md
+        - Component Catalog: architecture/core_components/design-system/02-core-functionality/component-catalog.md
+        - Healthcare Components: architecture/core_components/design-system/02-core-functionality/healthcare-components.md
+        - Authentication Components: architecture/core_components/design-system/02-core-functionality/authentication-components.md
       - Advanced Patterns:
-        - Accessibility: architecture/core_components/design-component-library/03-advanced-patterns/accessibility.md
-        - Theming: architecture/core_components/design-component-library/03-advanced-patterns/theming.md
-        - Performance: architecture/core_components/design-component-library/03-advanced-patterns/performance.md
+        - Accessibility: architecture/core_components/design-system/03-advanced-patterns/accessibility.md
+        - Theming: architecture/core_components/design-system/03-advanced-patterns/theming.md
+        - Performance: architecture/core_components/design-system/03-advanced-patterns/performance.md
       - Operations:
-        - Contribution Guidelines: architecture/core_components/design-component-library/04-operations/contribution-guidelines.md
-        - Publishing: architecture/core_components/design-component-library/04-operations/publishing.md
+        - Contribution Guidelines: architecture/core_components/design-system/04-operations/contribution-guidelines.md
+        - Publishing: architecture/core_components/design-system/04-operations/publishing.md
       - Case Studies:
-        - Healthcare UI: architecture/core_components/design-component-library/05-case-studies/healthcare-ui.md
+        - Healthcare UI: architecture/core_components/design-system/05-case-studies/healthcare-ui.md
     - FHIR Interoperability Platform:
       - Getting Started:
         - Overview: architecture/core_components/fhir-interoperability-platform/01-getting-started/overview.md

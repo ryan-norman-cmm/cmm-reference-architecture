@@ -71,10 +71,16 @@ spec:
 
 [API Marketplace Documentation →](/architecture/core_components/api-marketplace/01-getting-started/overview/)
 
-### FHIR Server
-Our FHIR-compliant data repository serves as the canonical source for healthcare information, supporting standardized resource models with complete tagging for security, compliance, and data lineage. The server also provides comprehensive interoperability capabilities through FHIR APIs and robust support for FHIR Implementation Guides, enabling standards-based exchange with healthcare ecosystem partners.
+### FHIR Interoperability Platform
+Our comprehensive FHIR Interoperability Platform serves as the foundation for healthcare data exchange, providing not just a FHIR-compliant data repository but a complete solution for healthcare interoperability. The platform includes robust APIs, flexible data persistence options, role-based access control, subscription capabilities, and comprehensive implementation guide support, enabling seamless integration with the broader healthcare ecosystem.
 
-**Supported Standards:** FHIR R4, US Core, DaVinci ePA Implementation Guides, Da Vinci CDex Implementation Guide
+**Key Capabilities:**
+- Comprehensive FHIR Server APIs with RESTful endpoints
+- Flexible data persistence with optimized storage options
+- Role-based access control for healthcare data
+- FHIR Subscription Topics and real-time notifications
+- Implementation Guide installation and development
+- Bulk data operations for population health management
 
 ```javascript
 // Example: Retrieving a patient resource
@@ -82,7 +88,7 @@ GET /fhir/Patient/123456
 Accept: application/fhir+json
 ```
 
-[FHIR Server Documentation →](/architecture/core_components/fhir-server/01-getting-started/overview/)
+[FHIR Interoperability Platform Documentation →](/architecture/core_components/fhir-interoperability-platform/01-getting-started/overview/)
 
 ### Federated Graph API
 The unified API layer exposes capabilities across all systems through a coherent GraphQL interface, enabling product teams to efficiently access data and services while maintaining service boundaries.
@@ -103,8 +109,8 @@ query {
 
 [Federated Graph API Documentation →](/architecture/core_components/federated-graph-api/01-getting-started/overview/)
 
-### Design Component Library
-Our comprehensive UI component library combines Radix UI primitives and Material-UI components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
+### Design System
+Our comprehensive design system combines Radix UI primitives and Material-UI components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
 
 **Key Capabilities:**
 - Accessible, WCAG 2.1 AA compliant components
@@ -131,7 +137,7 @@ function PatientView({ patientId }) {
 }
 ```
 
-[Design Component Library Documentation →](/architecture/core_components/design-component-library/01-getting-started/overview/)
+[Design System Documentation →](/architecture/core_components/design-system/01-getting-started/overview/)
 
 ### Event Broker
 Our platform uses Confluent Kafka to implement a robust event broker, enabling real-time data processing, system decoupling, and comprehensive visibility into the patient journey.
