@@ -1,8 +1,8 @@
-# FHIR Benefits Overview
+# FHIR Interoperability Platform Benefits Overview
 
 ## Introduction
 
-FHIR (Fast Healthcare Interoperability Resources) represents a transformative approach to healthcare data exchange that addresses the longstanding challenges of interoperability in the healthcare industry. This guide explains the key benefits of implementing FHIR in healthcare systems, covering interoperability advantages, cost reduction through standardization, innovation enablement, and time-to-market improvements. Understanding these benefits provides the foundation for making informed decisions about FHIR adoption in your organization.
+The FHIR Interoperability Platform, built on Fast Healthcare Interoperability Resources (FHIR), represents a transformative approach to healthcare data exchange that addresses the longstanding challenges of interoperability in the healthcare industry. This guide explains the key benefits of implementing the FHIR Interoperability Platform in healthcare systems, covering interoperability advantages, cost reduction through standardization, innovation enablement, and time-to-market improvements. Understanding these benefits provides the foundation for making informed decisions about adoption in your organization.
 
 ### Quick Start
 
@@ -14,10 +14,12 @@ FHIR (Fast Healthcare Interoperability Resources) represents a transformative ap
 
 ### Related Components
 
-- [FHIR Server Setup Guide](fhir-server-setup-guide.md): Configure your FHIR environment
-- [FHIR Implementation Guides](fhir-implementation-guides.md): Implement standard FHIR specifications
-- [GraphQL Integration with FHIR](graphql-integration.md): Enhance data access capabilities
-- [Event Processing with FHIR](event-processing-with-fhir.md): Implement event-driven architectures
+- [Setup Guide](setup-guide.md): Configure your FHIR Interoperability Platform environment
+- [FHIR Server APIs](../02-core-functionality/server-apis.md): Core API endpoints for FHIR resources
+- [FHIR Data Persistence](../02-core-functionality/data-persistence.md): Storage options for FHIR data
+- [FHIR RBAC](../02-core-functionality/rbac.md): Role-based access control for healthcare data
+- [Implementation Guide Installation](../02-core-functionality/implementation-guide-installation.md): Install standard FHIR specifications
+- [Implementation Guide Development](../02-core-functionality/implementation-guide-development.md): Create custom implementation guides
 
 ## Healthcare Interoperability Advantages
 

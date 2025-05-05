@@ -63,41 +63,43 @@ nav:
         - Publishing: architecture/core_components/design-component-library/04-operations/publishing.md
       - Case Studies:
         - Healthcare UI: architecture/core_components/design-component-library/05-case-studies/healthcare-ui.md
-    - FHIR Server:
+    - FHIR Interoperability Platform:
       - Getting Started:
-        - Overview: architecture/core_components/fhir-server/01-getting-started/overview.md
-        - Benefits Overview: architecture/core_components/fhir-server/01-getting-started/benefits-overview.md
-        - Setup Guide: architecture/core_components/fhir-server/01-getting-started/setup-guide.md
-        - Standards Tutorial: architecture/core_components/fhir-server/01-getting-started/standards-tutorial.md
-        - Legacy Comparison: architecture/core_components/fhir-server/01-getting-started/legacy-comparison.md
+        - Overview: architecture/core_components/fhir-interoperability-platform/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/fhir-interoperability-platform/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/fhir-interoperability-platform/01-getting-started/setup-guide.md
+        - Standards Tutorial: architecture/core_components/fhir-interoperability-platform/01-getting-started/standards-tutorial.md
+        - Legacy Comparison: architecture/core_components/fhir-interoperability-platform/01-getting-started/legacy-comparison.md
       - Core Functionality:
-        - Client Authentication: architecture/core_components/fhir-server/02-core-functionality/client-authentication.md
-        - Saving Resources: architecture/core_components/fhir-server/02-core-functionality/saving-resources.md
-        - Accessing Resources: architecture/core_components/fhir-server/02-core-functionality/accessing-resources.md
-        - Extending Resources: architecture/core_components/fhir-server/02-core-functionality/extending-resources.md
-        - Implementation Guides: architecture/core_components/fhir-server/02-core-functionality/implementation-guides.md
+        - FHIR Server APIs: architecture/core_components/fhir-interoperability-platform/02-core-functionality/server-apis.md
+        - FHIR Data Persistence: architecture/core_components/fhir-interoperability-platform/02-core-functionality/data-persistence.md
+        - FHIR RBAC: architecture/core_components/fhir-interoperability-platform/02-core-functionality/rbac.md
+        - FHIR Subscription Topics: architecture/core_components/fhir-interoperability-platform/02-core-functionality/subscription-topics.md
+        - FHIR Subscriptions: architecture/core_components/fhir-interoperability-platform/02-core-functionality/subscriptions.md
+        - Implementation Guide Installation: architecture/core_components/fhir-interoperability-platform/02-core-functionality/implementation-guide-installation.md
+        - Implementation Guide Development: architecture/core_components/fhir-interoperability-platform/02-core-functionality/implementation-guide-development.md
       - Advanced Patterns:
-        - Query Optimization: architecture/core_components/fhir-server/03-advanced-patterns/query-optimization.md
-        - GraphQL Integration: architecture/core_components/fhir-server/03-advanced-patterns/graphql-integration.md
-        - Event Processing: architecture/core_components/fhir-server/03-advanced-patterns/event-processing.md
-        - Subscriptions: architecture/core_components/fhir-server/03-advanced-patterns/subscriptions.md
+        - Query Optimization: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/query-optimization.md
+        - GraphQL Integration: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/graphql-integration.md
+        - Event Processing: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/event-processing.md
+        - Bulk Data Operations: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/bulk-data-operations.md
       - Data Management:
-        - Data Tagging: architecture/core_components/fhir-server/04-data-management/data-tagging.md
-        - Entitlement Management: architecture/core_components/fhir-server/04-data-management/entitlement-management.md
-        - Patient Matching: architecture/core_components/fhir-server/04-data-management/patient-matching.md
-        - Golden Records: architecture/core_components/fhir-server/04-data-management/golden-records.md
-        - Identity Linking: architecture/core_components/fhir-server/04-data-management/identity-linking.md
-        - Consent Management: architecture/core_components/fhir-server/04-data-management/consent-management.md
+        - Data Tagging: architecture/core_components/fhir-interoperability-platform/04-data-management/data-tagging.md
+        - Entitlement Management: architecture/core_components/fhir-interoperability-platform/04-data-management/entitlement-management.md
+        - Patient Matching: architecture/core_components/fhir-interoperability-platform/04-data-management/patient-matching.md
+        - Golden Records: architecture/core_components/fhir-interoperability-platform/04-data-management/golden-records.md
+        - Identity Linking: architecture/core_components/fhir-interoperability-platform/04-data-management/identity-linking.md
+        - Consent Management: architecture/core_components/fhir-interoperability-platform/04-data-management/consent-management.md
       - Operations:
-        - Server Monitoring: architecture/core_components/fhir-server/05-operations/server-monitoring.md
-        - Performance Tuning: architecture/core_components/fhir-server/05-operations/performance-tuning.md
-        - Database Optimization: architecture/core_components/fhir-server/05-operations/database-optimization.md
-        - Query Performance: architecture/core_components/fhir-server/05-operations/query-performance.md
-        - Caching Strategies: architecture/core_components/fhir-server/05-operations/caching-strategies.md
-        - Server Configuration: architecture/core_components/fhir-server/05-operations/server-configuration.md
-        - Load Testing: architecture/core_components/fhir-server/05-operations/load-testing.md
+        - Server Monitoring: architecture/core_components/fhir-interoperability-platform/05-operations/server-monitoring.md
+        - Performance Tuning: architecture/core_components/fhir-interoperability-platform/05-operations/performance-tuning.md
+        - Database Optimization: architecture/core_components/fhir-interoperability-platform/05-operations/database-optimization.md
+        - Query Performance: architecture/core_components/fhir-interoperability-platform/05-operations/query-performance.md
+        - Caching Strategies: architecture/core_components/fhir-interoperability-platform/05-operations/caching-strategies.md
+        - Server Configuration: architecture/core_components/fhir-interoperability-platform/05-operations/server-configuration.md
+        - Load Testing: architecture/core_components/fhir-interoperability-platform/05-operations/load-testing.md
       - Case Studies:
-        - Modernization Case Studies: architecture/core_components/fhir-server/06-case-studies/modernization-case-studies.md
+        - Modernization Case Studies: architecture/core_components/fhir-interoperability-platform/06-case-studies/modernization-case-studies.md
     - Event Broker:
       - Getting Started:
         - Overview: architecture/core_components/event-broker/01-getting-started/overview.md

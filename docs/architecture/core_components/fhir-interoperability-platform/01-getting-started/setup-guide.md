@@ -1,8 +1,8 @@
-# FHIR Server Setup Guide
+# FHIR Interoperability Platform Setup Guide
 
 ## Introduction
 
-The FHIR server acts as the system of record for healthcare resources, storing patient data, clinical observations, and administrative information in standardized formats defined by HL7. This guide provides instructions for setting up and configuring the Aidbox FHIR server on your local machine. Aidbox is a powerful FHIR server implementation that provides a comprehensive set of features for healthcare data management and interoperability.
+The FHIR Interoperability Platform acts as the system of record for healthcare resources, storing patient data, clinical observations, and administrative information in standardized formats defined by HL7 FHIR. This guide provides practical instructions for setting up and configuring the platform on your local machine using Aidbox, a powerful FHIR implementation that provides comprehensive capabilities for healthcare data management and interoperability.
 
 ### Quick Start
 
@@ -15,9 +15,10 @@ The FHIR server acts as the system of record for healthcare resources, storing p
 
 ### Related Components
 
-- [FHIR Client Authentication](fhir-client-authentication.md): Configure secure access to your FHIR server
-- [Saving FHIR Resources](saving-fhir-resources.md): Learn how to store data in your FHIR server
-- [Architecture Decisions](fhir-server-decisions.md) (Coming Soon): Understand the rationale behind implementation choices
+- [FHIR Server APIs](../02-core-functionality/server-apis.md): Core API endpoints for accessing FHIR resources
+- [FHIR Data Persistence](../02-core-functionality/data-persistence.md): Storage options for FHIR data
+- [FHIR RBAC](../02-core-functionality/rbac.md): Configure secure role-based access to your platform
+- [FHIR Subscription Topics](../02-core-functionality/subscription-topics.md): Configure event notification topics
 
 ## Prerequisites
 
@@ -278,41 +279,48 @@ const App: React.FC = () => {
 };
 ```
 
-## Implementation Guide Configuration
+## Implementation Guide Installation
 
-Aidbox supports FHIR Implementation Guides (IGs) to define profiles, extensions, value sets, and other FHIR artifacts. This section explains how to configure and use IGs in your Aidbox instance.
+The FHIR Interoperability Platform supports Implementation Guides (IGs) to define profiles, extensions, value sets, and other FHIR artifacts. This section provides the essential steps to install and configure IGs.
 
-### Loading Implementation Guides
+### Installing Standard Implementation Guides
 
-Aidbox can be configured with various implementation guides, such as:
+```bash
+# Start your Aidbox instance if not already running
+docker compose up -d
+```
 
-1. **US Core Implementation Guide** - Defines the minimum conformance requirements for accessing patient data
-2. **Da Vinci Prior Authorization Support (PAS)** - Defines the exchange of clinical and administrative information for prior authorization workflows
-3. **Da Vinci Coverage Requirements Discovery (CRD)** - Defines how payers can communicate coverage requirements to providers
-
-### Custom Implementation Guide Configuration
-
-To add a custom implementation guide to your Aidbox instance, you can use the Zen project approach:
-
-1. Start your local Aidbox instance
-2. Access the Aidbox UI at `http://localhost:8888`
+1. Access the Aidbox UI at `http://localhost:8888`
+2. Log in with your admin credentials
 3. Navigate to Configuration → FHIR Implementation Guides
-4. Verify that the required IGs are listed as "Active"
+4. Click on "Add Implementation Guide"
+5. Select from the standard IGs list or enter a canonical URL:
+   - US Core: `http://hl7.org/fhir/us/core/ImplementationGuide/hl7.fhir.us.core`
+   - Da Vinci PAS: `http://hl7.org/fhir/us/davinci-pas/ImplementationGuide/hl7.fhir.us.davinci-pas`
+6. Enter the version (e.g., `5.0.1` for US Core)
+7. Click "Add" to install the IG
 
-### Adding Custom Implementation Guides
+### Verifying Installation
 
-To add a custom IG to your local environment for testing:
+```bash
+# Check if the IG was installed correctly via API
+curl -X GET http://localhost:8888/fhir/ImplementationGuide \
+  -H "Authorization: Basic $(echo -n root:secret | base64)" \
+  -H "Accept: application/json"
+```
 
-1. Navigate to Configuration → FHIR Implementation Guides in the Aidbox UI
-2. Click on "Add Implementation Guide"
-3. Enter the IG canonical URL and version
-4. Click "Add" to load the IG
+You should see your installed IGs in the response. You can also verify through the UI by navigating to Configuration → FHIR Implementation Guides and checking that your IGs are listed as "Active".
 
-For permanent addition, update the configuration in the `usp-aidbox-config` repository:
+### Troubleshooting IG Installation
 
-1. Edit the `igs.yaml` file in the repository
-2. Add the new IG ID to the list
-3. Create a pull request for review
+If you encounter issues installing an IG:
+
+```bash
+# Check Aidbox logs for errors
+docker compose logs -f aidbox | grep "implementation guide"
+```
+
+Common issues include network connectivity problems, invalid canonical URLs, or incompatible FHIR versions. For more detailed information on developing custom IGs, see [Implementation Guide Development](../02-core-functionality/implementation-guide-development.md).
 
 ## Troubleshooting
 
