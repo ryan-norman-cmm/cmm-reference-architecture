@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: healthcare-modernization-reference-architecture
+  title: Healthcare Modernization Reference Architecture
+  description: Reference architecture for modernizing healthcare systems using FHIR, event-driven architecture, and microservices
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - fhir
+    - healthcare
+    - reference-architecture
+    - modernization
+spec:
+  type: documentation
+  owner: architecture-team
+  system: platform-services

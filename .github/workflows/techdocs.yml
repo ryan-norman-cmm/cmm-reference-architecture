@@ -1,0 +1,36 @@
+name: Publish TechDocs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+jobs:
+  publish-techdocs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      - name: Install techdocs-cli
+        run: npm install -g @techdocs/cli
+        
+      - name: Generate TechDocs
+        run: techdocs-cli generate --no-docker --verbose
+        
+      - name: Publish TechDocs
+        run: |
+          # Replace with your actual publishing command
+          # For example, to publish to AWS S3:
+          # techdocs-cli publish --publisher-type awsS3 --storage-name your-bucket-name --entity default/Component/cmm-reference-architecture
+          echo "Configure this step to publish to your specific TechDocs backend"

@@ -1,0 +1,73 @@
+site_name: 'CMM Technology Platform'
+site_description: 'Reference Architecture Documentation'
+
+nav:
+  - Home: index.md
+  - Principles: architecture/principles.md
+  - Core Components:
+    - FHIR Server:
+      - Getting Started:
+        - Overview: architecture/core_components/fhir-server/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/fhir-server/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/fhir-server/01-getting-started/setup-guide.md
+        - Standards Tutorial: architecture/core_components/fhir-server/01-getting-started/standards-tutorial.md
+        - Legacy Comparison: architecture/core_components/fhir-server/01-getting-started/legacy-comparison.md
+      - Core Functionality:
+        - Client Authentication: architecture/core_components/fhir-server/02-core-functionality/client-authentication.md
+        - Saving Resources: architecture/core_components/fhir-server/02-core-functionality/saving-resources.md
+        - Accessing Resources: architecture/core_components/fhir-server/02-core-functionality/accessing-resources.md
+        - Extending Resources: architecture/core_components/fhir-server/02-core-functionality/extending-resources.md
+        - Implementation Guides: architecture/core_components/fhir-server/02-core-functionality/implementation-guides.md
+      - Advanced Patterns:
+        - Query Optimization: architecture/core_components/fhir-server/03-advanced-patterns/query-optimization.md
+        - GraphQL Integration: architecture/core_components/fhir-server/03-advanced-patterns/graphql-integration.md
+        - Event Processing: architecture/core_components/fhir-server/03-advanced-patterns/event-processing.md
+        - Subscriptions: architecture/core_components/fhir-server/03-advanced-patterns/subscriptions.md
+      - Data Management:
+        - Data Tagging: architecture/core_components/fhir-server/04-data-management/data-tagging.md
+        - Entitlement Management: architecture/core_components/fhir-server/04-data-management/entitlement-management.md
+        - Patient Matching: architecture/core_components/fhir-server/04-data-management/patient-matching.md
+        - Golden Records: architecture/core_components/fhir-server/04-data-management/golden-records.md
+        - Identity Linking: architecture/core_components/fhir-server/04-data-management/identity-linking.md
+        - Consent Management: architecture/core_components/fhir-server/04-data-management/consent-management.md
+      - Operations:
+        - Server Monitoring: architecture/core_components/fhir-server/05-operations/server-monitoring.md
+        - Performance Tuning: architecture/core_components/fhir-server/05-operations/performance-tuning.md
+        - Database Optimization: architecture/core_components/fhir-server/05-operations/database-optimization.md
+        - Query Performance: architecture/core_components/fhir-server/05-operations/query-performance.md
+        - Caching Strategies: architecture/core_components/fhir-server/05-operations/caching-strategies.md
+        - Server Configuration: architecture/core_components/fhir-server/05-operations/server-configuration.md
+        - Load Testing: architecture/core_components/fhir-server/05-operations/load-testing.md
+      - Case Studies:
+        - Modernization Case Studies: architecture/core_components/fhir-server/06-case-studies/modernization-case-studies.md
+    - Event Broker: architecture/event-broker-documentation.md
+    - Federated Graph API:
+      - Getting Started:
+        - Overview: architecture/core_components/federated-graph-api/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/federated-graph-api/01-getting-started/benefits-overview.md
+        - GraphQL vs REST: architecture/core_components/federated-graph-api/01-getting-started/graphql-vs-rest.md
+      - Core Functionality:
+        - Creating Subgraphs: architecture/core_components/federated-graph-api/02-core-functionality/creating-subgraphs.md
+        - FHIR Subgraph: architecture/core_components/federated-graph-api/02-core-functionality/fhir-subgraph.md
+        - Authentication: architecture/core_components/federated-graph-api/02-core-functionality/authentication.md
+        - Querying: architecture/core_components/federated-graph-api/02-core-functionality/querying.md
+      - Advanced Patterns:
+        - Query Optimization: architecture/core_components/federated-graph-api/03-advanced-patterns/query-optimization.md
+        - Schema Federation: architecture/core_components/federated-graph-api/03-advanced-patterns/schema-federation.md
+        - Custom Directives: architecture/core_components/federated-graph-api/03-advanced-patterns/custom-directives.md
+        - Subscriptions: architecture/core_components/federated-graph-api/03-advanced-patterns/subscriptions.md
+      - Data Management:
+        - Access Control: architecture/core_components/federated-graph-api/04-data-management/access-control.md
+        - Schema Governance: architecture/core_components/federated-graph-api/04-data-management/schema-governance.md
+      - Operations:
+        - Monitoring: architecture/core_components/federated-graph-api/05-operations/monitoring.md
+        - Performance Tuning: architecture/core_components/federated-graph-api/05-operations/performance-tuning.md
+        - Deployment: architecture/core_components/federated-graph-api/05-operations/deployment.md
+        - Scaling: architecture/core_components/federated-graph-api/05-operations/scaling.md
+      - Case Studies:
+        - Modernization Case Studies: architecture/core_components/federated-graph-api/06-case-studies/modernization-case-studies.md
+    - Business Process Management: architecture/business-process-management-documentation.md
+
+# Make sure techdocs-core plugin is loaded after our theme configuration
+plugins:
+  - techdocs-core
