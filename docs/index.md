@@ -150,10 +150,39 @@ Our platform uses Confluent Kafka to implement a robust event broker, enabling r
 
 [Event Broker Documentation →](link)
 
-### Business Process Management
-We plan to implement workflow orchestration for complex healthcare processes, separating business logic from implementation details and enabling efficient process monitoring and optimization. While the specific tool has yet to be decided, we will leverage business process management capabilities to better manage workflows and rules engines.
+### Workflow Orchestration Engine
+Our Workflow Orchestration Engine combines multiple technologies to create a comprehensive solution for healthcare process automation. This engine integrates a business process manager, rules engine, Confluent Kafka, and Azure Functions to build flexible orchestration pipelines that handle complex healthcare workflows efficiently.
 
-[Business Process Management Documentation →](link)
+**Key Components:**
+- Business process manager for workflow definition and monitoring
+- Rules engine for complex decision logic and policy enforcement
+- Confluent Kafka for event-driven process triggers and communication
+- Azure Functions for serverless process execution and integration
+- Process analytics and monitoring dashboards
+
+```javascript
+// Example: Defining a workflow step in Azure Functions
+export default async function (context, event) {
+  // Process a prior authorization event
+  const patientId = event.data.patientId;
+  const medicationRequest = event.data.medicationRequest;
+  
+  // Apply rules engine for coverage determination
+  const coverageDecision = await determineCoverage(patientId, medicationRequest);
+  
+  // Publish result to next step in workflow
+  context.bindings.outputEvent = {
+    patientId,
+    medicationRequest,
+    coverageDecision,
+    timestamp: new Date().toISOString()
+  };
+  
+  return { status: 'completed' };
+}
+```
+
+[Workflow Orchestration Engine Documentation →](/architecture/core_components/workflow-orchestration-engine/01-getting-started/overview/)
 
 ## Healthcare Capabilities
 

@@ -145,7 +145,23 @@ nav:
         - Scaling: architecture/core_components/federated-graph-api/05-operations/scaling.md
       - Case Studies:
         - Modernization Case Studies: architecture/core_components/federated-graph-api/06-case-studies/modernization-case-studies.md
-    - Business Process Management: architecture/business-process-management-documentation.md
+    - Workflow Orchestration Engine:
+      - Getting Started:
+        - Overview: architecture/core_components/workflow-orchestration-engine/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/workflow-orchestration-engine/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/workflow-orchestration-engine/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - Business Process Manager: architecture/core_components/workflow-orchestration-engine/02-core-functionality/business-process-manager.md
+        - Rules Engine: architecture/core_components/workflow-orchestration-engine/02-core-functionality/rules-engine.md
+        - Event Integration: architecture/core_components/workflow-orchestration-engine/02-core-functionality/event-integration.md
+        - Azure Functions: architecture/core_components/workflow-orchestration-engine/02-core-functionality/azure-functions.md
+      - Advanced Patterns:
+        - Complex Workflows: architecture/core_components/workflow-orchestration-engine/03-advanced-patterns/complex-workflows.md
+        - Error Handling: architecture/core_components/workflow-orchestration-engine/03-advanced-patterns/error-handling.md
+        - Monitoring: architecture/core_components/workflow-orchestration-engine/03-advanced-patterns/monitoring.md
+      - Healthcare Integration:
+        - Prior Authorization: architecture/core_components/workflow-orchestration-engine/04-healthcare-integration/prior-authorization.md
+        - Care Management: architecture/core_components/workflow-orchestration-engine/04-healthcare-integration/care-management.md
 
 # Make sure techdocs-core plugin is loaded after our theme configuration
 plugins:
