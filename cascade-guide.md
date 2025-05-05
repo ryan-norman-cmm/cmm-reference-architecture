@@ -186,59 +186,134 @@ Documentation is automatically published to Backstage TechDocs when changes are 
 
 No manual steps are required beyond merging changes to the main branch.
 
-## Communication Style Guide for Technical Documentation
+# Communication Style Guide for Technical Documentation
 
-### Overview
-Ensure all documentation is clear, concise, and easy to understand. Break down more complex topics into smaller, digestible chunks and create nested pages instead of one large page.
+## Overview
+Ensure all documentation is clear, concise, and easy to understand. Break down complex topics into smaller, digestible chunks and create nested pages instead of one large page. All documentation should reflect that the platform is fully implemented and ready for developer use, with specific guidance for our TypeScript, Node.js, containerized microservices running on Azure.
 
-### Voice & Tone
+## Voice & Tone
 Write in a voice that balances technical precision with accessibility:
 
-Clear and authoritative without being overly formal
-Precise in technical explanations while remaining approachable
-Solution-oriented, focusing on practical implementation guidance
-Consistent across all documentation artifacts
-Technically accurate while avoiding unnecessary jargon
+- Clear and authoritative, presenting completed functionality
+- Precise in technical explanations while remaining approachable
+- Solution-oriented, focusing on practical implementation guidance
+- Consistent across all documentation artifacts
+- Technically accurate while avoiding unnecessary jargon
 
-### Structure & Flow
+## Technology Stack Standards
 
-Begin each section with a concise overview of the concept before diving into details
-Use progressive disclosure - start with high-level concepts before exploring implementation specifics
-Maintain consistent heading hierarchies for easy navigation and reference
-Employ a logical progression from problem statement to solution pattern to implementation example
-Include clear transition statements between related architectural concepts
+### TypeScript & Node.js
+- Document TypeScript features and patterns used across the platform
+- Include type definitions and interfaces in all code examples
+- Follow Node.js best practices for asynchronous operations using async/await
+- Document TypeScript configuration settings and their impact on development
+- Include ESLint and Prettier configuration guidance
+- Clearly document module patterns and dependency injection approaches
+- Provide examples using appropriate TypeScript patterns (e.g., generics, decorators)
 
-### Technical Language & Diagrams
+### Container Standards
+- Document Docker container specifications and configuration
+- Include Dockerfile examples for each service type
+- Provide docker-compose examples for local development
+- Document container orchestration patterns using Kubernetes on AKS
+- Include Kubernetes manifest examples (Deployments, Services, ConfigMaps)
+- Detail resource requirements and scaling considerations
+- Document container health checks and readiness probes
+- Explain multi-stage build patterns for optimized container images
 
-Define technical terms on first use before employing them throughout the documentation
-Use standardized terminology aligned with industry conventions (FHIR, HL7, etc.)
-Accompany complex concepts with appropriate diagrams (C4 model, BPMN, sequence diagrams)
-Include relevant code snippets and configuration examples for concrete implementation guidance
-Balance conceptual explanations with practical examples
+### Azure Integration
+- Document Azure-specific implementations for all platform components
+- Highlight Azure PaaS services used (App Service, AKS, Azure Functions, etc.)
+- Include Azure CLI commands for common operations
+- Provide Terraform templates for infrastructure provisioning
+- Document GitHub Actions CI/CD pipeline configurations
+- Include guidance on DataDog integration and observability using Open Telemetry
+- Detail Azure-specific security configurations and best practices
+- Provide cost optimization guidance for Azure resources
 
-### Documentation Structure
+## Vendor Integration Approach
 
-Organize documentation into logical, discoverable sections with consistent naming
-Use descriptive headers that clearly indicate the content's focus
-Include a "Quick Start" section for essential implementation patterns
-Provide cross-references to related architectural components
-Include decision logs explaining key architectural choices and their rationale
+- Document both generic implementation approaches and optimized Azure-specific solutions
+- Clearly highlight Azure recommended patterns that simplify implementation
+- Explain the benefits and trade-offs of using Azure-specific features versus generic approaches
+- Use official Azure terminology and naming conventions when documenting services
+- Include links to relevant Azure documentation for additional reference
+- Identify any Azure-specific limitations or considerations that may impact implementation
+- Document integration patterns between Azure services and containerized workloads
 
-### Code Examples & Patterns
+## Structure & Flow
 
-Present code examples in a consistent format with proper syntax highlighting
-Include inline comments explaining key implementation decisions
-Provide complete, working examples rather than fragmented snippets when possible
-Demonstrate both "happy path" and error handling scenarios
-Showcase integration patterns between multiple system components
+- Begin each section with a concise overview of the implemented feature or component
+- Use progressive disclosure - start with high-level concepts before exploring implementation specifics
+- Maintain consistent heading hierarchies for easy navigation and reference
+- Employ a logical progression from use case to solution pattern to implementation example
+- Include clear transition statements between related architectural components
+- For each topic, present the generic approach followed by the optimized Azure solution
 
-### Architecture Diagrams
+## Technical Language & Diagrams
 
-Maintain consistent visual language across all architectural diagrams
-Clearly label components, boundaries and interactions
-Include both static structure and dynamic behavior diagrams
-Use appropriate levels of abstraction for different audiences (C1-C4 models)
-Provide legends explaining notation and symbolism
+- Define technical terms on first use before employing them throughout the documentation
+- Use standardized terminology aligned with industry conventions (FHIR, HL7, etc.)
+- Include diagrams that accurately represent the current system architecture (C4 model, BPMN, sequence diagrams)
+- Clearly distinguish Azure-managed services from custom containerized components in architectural diagrams
+- Provide working TypeScript/Node.js code snippets and configuration examples for immediate implementation
+- Balance conceptual explanations with practical examples of currently available features
+- Include Azure SDK examples alongside generic API implementations
+
+## Documentation Structure
+
+- Organize documentation into logical, discoverable sections with consistent naming
+- Use descriptive headers that clearly indicate the content's focus
+- Include a "Quick Start" section for rapid implementation of available features
+- Provide separate quick start guides for local development and Azure deployment
+- Provide cross-references to related architectural components in the current system
+- Include decision logs explaining key architectural choices that have been implemented
+- Document why specific Azure services were selected and their advantages
+
+## Code Examples & Patterns
+
+- Present TypeScript code examples in a consistent format with proper syntax highlighting
+- Include inline comments explaining key implementation decisions
+- Provide complete, working examples that developers can use immediately
+- Document TypeScript-specific patterns for error handling, validation, and API design
+- Demonstrate implementation using both Azure SDKs and generic approaches
+- Show how to use Azure-specific features that simplify common tasks
+- Demonstrate both "happy path" and error handling scenarios with the current system
+- Showcase integration patterns between containers and Azure services
+- Include Azure DevOps pipeline YAML examples for CI/CD processes
+
+## Architecture Diagrams
+
+- Maintain consistent visual language across all architectural diagrams
+- Clearly label containers, microservices, and their interactions within the existing system
+- Use distinct visual indicators for Azure-managed services versus containerized components
+- Include both static structure and dynamic behavior diagrams of implemented features
+- Use appropriate levels of abstraction for different audiences (C1-C4 models)
+- Provide legends explaining notation and symbolism of the current architecture
+- Show data flow between containers and Azure services
+- Document container orchestration topology and networking patterns
+
+## Deployment & Operations
+
+- Document container deployment processes for both development and production environments
+- Include Azure-specific deployment patterns and configurations
+- Provide guidance on container image versioning and tagging
+- Document Kubernetes deployment strategies (rolling updates, blue/green, canary)
+- Include monitoring and observability setups for containerized services
+- Detail backup and disaster recovery procedures
+- Document scaling patterns for both containers and Azure services
+- Provide security hardening guidance for containerized workloads on Azure
+
+## Troubleshooting & Support
+
+- Document common issues and their resolutions specific to TypeScript, Node.js, and containers
+- Include Azure-specific error codes and their meanings
+- Provide guidance on container log analysis and debugging techniques
+- Document container health check strategies and failure recovery
+- Include troubleshooting guides for common Azure service issues
+- Provide guidance on when to use Azure support channels versus internal support
+- Document Azure SLAs and support processes
+- Include links to Azure status pages and support resources
 
 ## Core Component Documentation Structure
 

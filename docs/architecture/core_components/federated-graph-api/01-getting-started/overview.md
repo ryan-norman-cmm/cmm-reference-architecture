@@ -44,7 +44,7 @@ A federated GraphQL architecture allows you to divide your graph into separate, 
   - Entity references and keys
   - Type extensions
 
-- [FHIR Subgraph Implementation](../02-core-functionality/fhir-subgraph.md)
+- [Legacy System Integration](../02-core-functionality/legacy-integration.md)
   - Mapping FHIR resources to GraphQL types
   - Handling FHIR search parameters
   - Resource references and includes

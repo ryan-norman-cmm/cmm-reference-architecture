@@ -16,7 +16,7 @@ Securing your Federated Graph API is essential for protecting sensitive healthca
 
 - [Federated Graph API Overview](../01-getting-started/overview.md): Understand the overall architecture
 - [Creating Subgraphs](creating-subgraphs.md): Learn how subgraphs work in a federated architecture
-- [FHIR Subgraph Implementation](fhir-subgraph.md): Secure access to FHIR resources
+- [Legacy System Integration](legacy-integration.md): Secure access to legacy systems
 - [Data Access Control](../04-data-management/access-control.md): Advanced access control patterns
 
 ## OAuth 2.0 Authentication Flows

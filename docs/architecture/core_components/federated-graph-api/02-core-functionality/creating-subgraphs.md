@@ -15,7 +15,7 @@ Subgraphs are the building blocks of a federated GraphQL architecture, represent
 ### Related Components
 
 - [Federated Graph API Overview](../01-getting-started/overview.md): Understand the overall architecture
-- [FHIR Subgraph Implementation](fhir-subgraph.md): Learn how to implement a FHIR-specific subgraph
+- [Legacy System Integration](legacy-integration.md): Learn how to integrate legacy systems into your graph
 - [Schema Federation Patterns](../03-advanced-patterns/schema-federation.md): Advanced federation techniques
 - [Schema Governance](../04-data-management/schema-governance.md): Managing schema evolution
 

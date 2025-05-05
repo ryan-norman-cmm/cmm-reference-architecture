@@ -45,12 +45,14 @@ nav:
       - Getting Started:
         - Overview: architecture/core_components/federated-graph-api/01-getting-started/overview.md
         - Benefits Overview: architecture/core_components/federated-graph-api/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/federated-graph-api/01-getting-started/setup-guide.md
         - GraphQL vs REST: architecture/core_components/federated-graph-api/01-getting-started/graphql-vs-rest.md
       - Core Functionality:
         - Creating Subgraphs: architecture/core_components/federated-graph-api/02-core-functionality/creating-subgraphs.md
-        - FHIR Subgraph: architecture/core_components/federated-graph-api/02-core-functionality/fhir-subgraph.md
+        - Gateway Configuration: architecture/core_components/federated-graph-api/02-core-functionality/gateway-configuration.md
         - Authentication: architecture/core_components/federated-graph-api/02-core-functionality/authentication.md
         - Querying: architecture/core_components/federated-graph-api/02-core-functionality/querying.md
+        - Legacy Integration: architecture/core_components/federated-graph-api/02-core-functionality/legacy-integration.md
       - Advanced Patterns:
         - Query Optimization: architecture/core_components/federated-graph-api/03-advanced-patterns/query-optimization.md
         - Schema Federation: architecture/core_components/federated-graph-api/03-advanced-patterns/schema-federation.md
