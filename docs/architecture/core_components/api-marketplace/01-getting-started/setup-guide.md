@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This guide walks you through the process of setting up the API Marketplace for the CMM Reference Architecture. It covers the configuration of F5 Distributed Cloud App Connect for universal ingress, service mesh implementation for service-to-service communication, and Mulesoft for API integration. By following these steps, you'll establish a comprehensive integration platform that provides secure, reliable connectivity for both internal and external services.
+This guide walks you through the essential steps to set up the API Marketplace for the CMM Reference Architecture. The API Marketplace combines F5 Distributed Cloud App Connect for universal ingress, a service mesh for internal communication, and Mulesoft for API integration. This setup guide focuses on the basic installation and configuration needed to get these components up and running in your environment.
 
 ## Prerequisites
 
@@ -11,667 +11,481 @@ Before beginning the API Marketplace setup process, ensure you have:
 - Administrative access to your cloud environments (AWS, Azure, GCP, or on-premises)
 - F5 Distributed Cloud account with appropriate subscription level
 - Mulesoft Anypoint Platform account with appropriate licensing
-- Kubernetes cluster(s) for service mesh deployment
+- Kubernetes cluster(s) for service mesh deployment (v1.21+)
 - DNS domains for API endpoints and ingress configuration
 - TLS certificates for secure communication
 - Network connectivity between all environments
-- Understanding of your organization's security and compliance requirements
 
 ## Setup Process
 
-### 1. F5 Distributed Cloud App Connect Configuration
+### 1. F5 Distributed Cloud App Connect Setup
 
-#### Initial Setup and Organization
+F5 Distributed Cloud App Connect provides universal ingress capabilities for the API Marketplace.
+
+#### Basic Installation
 
 1. **Access F5 Distributed Cloud Console**
-   - Navigate to the F5 Distributed Cloud Console (https://console.f5.com)
-   - Log in with your administrator credentials
-   - Create or select your organization
-
-2. **Configure Tenant Settings**
    ```bash
-   # Using F5 CLI to configure tenant settings
+   # Log in to F5 Distributed Cloud using the CLI
    f5 login --api-token "your-api-token"
+   
+   # Create and select your tenant
    f5 tenant create --name "healthcare-org" --description "Healthcare Organization"
    f5 tenant select healthcare-org
    ```
 
-3. **Set Up Network Configuration**
-   - Configure DNS settings for your domains
-   - Set up TLS certificate management
-   - Define network policies for ingress traffic
-
-#### Universal Ingress Configuration
-
-1. **Create Load Balancer Configuration**
-   ```yaml
-   # Example Load Balancer configuration
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: healthcare-api-gateway
-     annotations:
-       service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-   spec:
-     type: LoadBalancer
-     ports:
-     - port: 443
-       targetPort: 8443
-       protocol: TCP
-     selector:
-       app: api-gateway
+2. **Set Up TLS Certificates**
+   ```bash
+   # Upload your TLS certificate
+   f5 certificate create --name "api-cert" \
+     --certificate-file /path/to/certificate.pem \
+     --private-key-file /path/to/private-key.pem
    ```
 
-2. **Configure HTTP Load Balancer**
-   - In F5 Console, navigate to Multi-Cloud App Connect > HTTP Load Balancers
-   - Click "Add HTTP Load Balancer"
-   - Configure the following settings:
-     - Name: `healthcare-api-gateway`
-     - Domains: `api.healthcare-org.com`
-     - Select appropriate TLS certificates
-     - Configure HTTP to HTTPS redirect
+#### Configure API Gateway
 
-3. **Set Up API Protection**
-   - Enable Web Application Firewall (WAF)
-   - Configure API Discovery and Protection
-   - Set up rate limiting and bot protection
-   - Enable healthcare-specific security rules
+1. **Create HTTP Load Balancer**
+   ```yaml
+   # api-gateway.yaml - Apply with: f5 apply -f api-gateway.yaml
+   apiVersion: api.volterra.io/v1
+   kind: HttpLoadBalancer
+   metadata:
+     name: healthcare-api-gateway
+     namespace: default
+   spec:
+     domains:
+     - "api.healthcare-org.com"
+     https_auto_cert:
+       add_hsts: true
+       http_redirect: true
+       no_mtls: {}
+     default_route_pools:
+     - pool:
+         name: backend-pool
+         namespace: default
+       weight: 1
+     routes:
+     - match:
+         path:
+           prefix: /api/v1
+       route:
+         cors_policy:
+           allow_origins:
+             - origin: "*"
+           allow_methods: ["GET", "POST", "PUT", "DELETE"]
+     waf:
+       enable: true
+       use_default_waf_config: true
+   ```
 
-4. **Configure Origin Pools**
-   - Create origin pools for backend services
-   - Configure health checks and monitoring
-   - Set up load balancing algorithms
-   - Define connection parameters
+2. **Create Origin Pool**
+   ```yaml
+   # backend-pool.yaml - Apply with: f5 apply -f backend-pool.yaml
+   apiVersion: api.volterra.io/v1
+   kind: OriginPool
+   metadata:
+     name: backend-pool
+     namespace: default
+   spec:
+     origin_servers:
+     - k8s_service:
+         service_name: backend-service
+         site_locator:
+           site:
+             namespace: system
+             name: your-k8s-site
+         outside_network: false
+     use_tls:
+       no_mtls: {}
+       skip_server_verification: false
+     port: 8080
+     healthcheck:
+       path: /health
+       use_origin_server_name: true
+   ```
 
-#### Zero Trust Access Configuration
-
-1. **Configure Identity Providers**
-   - Integrate with your Security and Access Framework
-   - Set up OIDC or SAML authentication
-   - Configure multi-factor authentication
-
-2. **Define Access Policies**
-   - Create policy-based access controls
-   - Configure device posture checks
-   - Set up contextual access rules
-   - Define healthcare-specific access policies
-
-3. **Implement API Authentication**
-   - Configure OAuth 2.0 token validation
-   - Set up JWT verification
-   - Define scope-based authorization
-
-### 2. Service Mesh Implementation
-
-#### Infrastructure Preparation
-
-1. **Prepare Kubernetes Clusters**
+3. **Verify Configuration**
    ```bash
-   # Create Kubernetes namespace for service mesh
-   kubectl create namespace service-mesh-system
+   # List HTTP load balancers
+   f5 get http-loadbalancers
    
-   # Label namespace for automatic sidecar injection
+   # List origin pools
+   f5 get origin-pools
+   ```
+
+### 2. Service Mesh Setup
+
+The service mesh provides secure service-to-service communication within the API Marketplace.
+
+#### Basic Installation
+
+1. **Install Istio Service Mesh**
+   ```bash
+   # Download Istio
+   curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.16.1 sh -
+   cd istio-1.16.1
+   
+   # Add istioctl to your path
+   export PATH=$PWD/bin:$PATH
+   
+   # Create namespace for Istio
+   kubectl create namespace istio-system
+   
+   # Install Istio with default profile
+   istioctl install --set profile=default -y
+   
+   # Enable automatic sidecar injection in default namespace
    kubectl label namespace default istio-injection=enabled
    ```
 
-2. **Install Service Mesh Control Plane**
+2. **Verify Installation**
    ```bash
-   # Example using Istio as the service mesh implementation
-   istioctl install --set profile=default -y
-   
-   # Verify installation
+   # Check that all Istio components are running
    kubectl get pods -n istio-system
+   
+   # Verify Istio CRDs are installed
+   kubectl get crds | grep istio
    ```
 
-3. **Configure Mesh Settings**
+#### Basic Configuration
+
+1. **Create Gateway for External Access**
    ```yaml
-   # Example mesh configuration
-   apiVersion: install.istio.io/v1alpha1
-   kind: IstioOperator
+   # gateway.yaml - Apply with: kubectl apply -f gateway.yaml
+   apiVersion: networking.istio.io/v1alpha3
+   kind: Gateway
+   metadata:
+     name: api-gateway
+     namespace: default
    spec:
-     profile: default
-     components:
-       egressGateways:
-       - name: istio-egressgateway
-         enabled: true
-       ingressGateways:
-       - name: istio-ingressgateway
-         enabled: true
-     values:
-       global:
-         proxy:
-           accessLogFile: "/dev/stdout"
-         meshID: healthcare-mesh
-         multiCluster:
-           clusterName: primary
+     selector:
+       istio: ingressgateway
+     servers:
+     - port:
+         number: 80
+         name: http
+         protocol: HTTP
+       hosts:
+       - "*"
+     - port:
+         number: 443
+         name: https
+         protocol: HTTPS
+       hosts:
+       - "*"
+       tls:
+         mode: SIMPLE
+         credentialName: api-cert # Reference to Kubernetes secret
    ```
 
-#### Service Communication Configuration
-
-1. **Configure Service Discovery**
-   - Set up service registry integration
-   - Configure DNS for service discovery
-   - Implement service entry resources for external services
-
-2. **Implement Traffic Management**
+2. **Create a Basic Virtual Service**
    ```yaml
-   # Example virtual service configuration
+   # virtual-service.yaml - Apply with: kubectl apply -f virtual-service.yaml
    apiVersion: networking.istio.io/v1alpha3
    kind: VirtualService
    metadata:
-     name: patient-service
+     name: api-routes
+     namespace: default
    spec:
      hosts:
-     - patient-service
+     - "*"
+     gateways:
+     - api-gateway
      http:
-     - route:
+     - match:
+       - uri:
+           prefix: /api/v1/patients
+       route:
        - destination:
            host: patient-service
-           subset: v1
-         weight: 90
+           port:
+             number: 8080
+     - match:
+       - uri:
+           prefix: /api/v1/medications
+       route:
        - destination:
-           host: patient-service
-           subset: v2
-         weight: 10
+           host: medication-service
+           port:
+             number: 8080
    ```
 
-3. **Set Up Resilience Patterns**
+3. **Enable mTLS for Service Communication**
    ```yaml
-   # Example destination rule with circuit breaker
-   apiVersion: networking.istio.io/v1alpha3
-   kind: DestinationRule
-   metadata:
-     name: patient-service
-   spec:
-     host: patient-service
-     trafficPolicy:
-       connectionPool:
-         http:
-           http1MaxPendingRequests: 1
-           maxRequestsPerConnection: 1
-         tcp:
-           maxConnections: 100
-       outlierDetection:
-         consecutive5xxErrors: 5
-         interval: 30s
-         baseEjectionTime: 30s
-     subsets:
-     - name: v1
-       labels:
-         version: v1
-     - name: v2
-       labels:
-         version: v2
-   ```
-
-#### Security Configuration
-
-1. **Enable Mutual TLS**
-   ```yaml
-   # Enable mTLS for the entire mesh
+   # mtls.yaml - Apply with: kubectl apply -f mtls.yaml
    apiVersion: security.istio.io/v1beta1
    kind: PeerAuthentication
    metadata:
      name: default
-     namespace: istio-system
+     namespace: default
    spec:
      mtls:
        mode: STRICT
    ```
 
-2. **Configure Authorization Policies**
-   ```yaml
-   # Example authorization policy
-   apiVersion: security.istio.io/v1beta1
-   kind: AuthorizationPolicy
-   metadata:
-     name: patient-service-policy
-     namespace: default
-   spec:
-     selector:
-       matchLabels:
-         app: patient-service
-     rules:
-     - from:
-       - source:
-           principals: ["cluster.local/ns/default/sa/clinical-service"]
-       to:
-       - operation:
-           methods: ["GET"]
-           paths: ["/api/patients/*"]
-     - from:
-       - source:
-           principals: ["cluster.local/ns/default/sa/admin-service"]
-       to:
-       - operation:
-           methods: ["GET", "POST", "PUT", "DELETE"]
-           paths: ["/api/patients/*"]
-   ```
-
-3. **Set Up Certificate Management**
-   - Configure certificate authority integration
-   - Set up certificate rotation policies
-   - Implement certificate monitoring
-
-#### Observability Setup
-
-1. **Install Monitoring Tools**
+4. **Install Basic Monitoring**
    ```bash
-   # Install Prometheus for metrics collection
-   kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/prometheus.yaml
+   # Install Prometheus, Grafana, and Kiali
+   kubectl apply -f istio-1.16.1/samples/addons/prometheus.yaml
+   kubectl apply -f istio-1.16.1/samples/addons/grafana.yaml
+   kubectl apply -f istio-1.16.1/samples/addons/kiali.yaml
    
-   # Install Grafana for visualization
-   kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/grafana.yaml
-   
-   # Install Jaeger for distributed tracing
-   kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/jaeger.yaml
-   
-   # Install Kiali for service mesh visualization
-   kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/kiali.yaml
+   # Access the Kiali dashboard
+   istioctl dashboard kiali
    ```
 
-2. **Configure Distributed Tracing**
-   - Set up trace sampling rates
-   - Configure trace propagation headers
-   - Implement custom span attributes for healthcare context
+### 3. Mulesoft Anypoint Platform Setup
 
-3. **Set Up Dashboards and Alerts**
-   - Configure service health dashboards
-   - Set up performance monitoring dashboards
-   - Implement alerting for service issues
+Mulesoft Anypoint Platform provides API integration capabilities for the API Marketplace.
 
-### 3. Mulesoft Anypoint Platform Configuration
-
-#### Environment Setup
+#### Basic Installation
 
 1. **Access Anypoint Platform**
-   - Navigate to Anypoint Platform (https://anypoint.mulesoft.com)
-   - Log in with your administrator credentials
-   - Create or select your organization
+   ```bash
+   # Install Anypoint CLI
+   npm install -g anypoint-cli
+   
+   # Log in to Anypoint Platform
+   anypoint-cli login --username your-username --password your-password
+   
+   # Verify organization access
+   anypoint-cli account:organization:list
+   ```
 
-2. **Configure Environments**
-   - Set up Development, QA, and Production environments
-   - Configure environment-specific settings
-   - Set up environment permissions
+2. **Set Up Environments**
+   ```bash
+   # Create environments
+   anypoint-cli account:environment:create "Development" --org "your-org-id"
+   anypoint-cli account:environment:create "Production" --org "your-org-id"
+   
+   # List environments
+   anypoint-cli account:environment:list --org "your-org-id"
+   ```
 
-3. **Configure API Manager**
-   - Set up API Manager policies
-   - Configure client applications
-   - Set up API alerts and notifications
+#### API Manager Configuration
 
-#### API-Led Connectivity Implementation
+1. **Create API Project**
+   ```bash
+   # Create a new Mule project
+   anypoint-cli runtime:project:new --artifactId healthcare-api --groupId com.healthcare
+   
+   # Navigate to the project directory
+   cd healthcare-api
+   ```
 
-1. **Create System APIs**
+2. **Configure a Basic API**
    ```xml
-   <!-- Example Mule configuration for EHR System API -->
-   <mule xmlns="http://www.mulesoft.org/schema/mule/core">
+   <!-- config.xml -->
+   <mule xmlns="http://www.mulesoft.org/schema/mule/core"
+         xmlns:http="http://www.mulesoft.org/schema/mule/http"
+         xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+                          http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+                          http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+     
      <http:listener-config name="HTTP_Listener_config">
        <http:listener-connection host="0.0.0.0" port="8081" />
      </http:listener-config>
      
-     <flow name="ehr-system-api-main">
-       <http:listener config-ref="HTTP_Listener_config" path="/api/v1/patients" />
+     <flow name="patient-api">
+       <http:listener config-ref="HTTP_Listener_config" path="/api/patients"/>
        <ee:transform>
          <ee:message>
            <ee:set-payload><![CDATA[
              %dw 2.0
              output application/json
              ---
-             {
-               "resourceType": "Bundle",
-               "type": "searchset",
-               "entry": [
-                 {
-                   "resource": {
-                     "resourceType": "Patient",
-                     "id": "123",
-                     "name": [{
-                       "family": "Smith",
-                       "given": ["John"]
-                     }]
-                   }
-                 }
-               ]
-             }
-           ]]></ee:set-payload>
-         </ee:message>
-       </ee:transform>
-     </flow>
-   </mule>
-   ```
-
-2. **Implement Process APIs**
-   - Create APIs for orchestrating business processes
-   - Implement error handling and retries
-   - Configure data transformations
-   - Set up transaction management
-
-3. **Develop Experience APIs**
-   - Create channel-specific APIs
-   - Implement response formatting
-   - Configure caching strategies
-   - Set up rate limiting
-
-#### Healthcare Integration Configuration
-
-1. **Configure FHIR Integration**
-   ```xml
-   <!-- Example Mule configuration for FHIR integration -->
-   <mule xmlns="http://www.mulesoft.org/schema/mule/core">
-     <http:listener-config name="HTTP_Listener_config">
-       <http:listener-connection host="0.0.0.0" port="8082" />
-     </http:listener-config>
-     
-     <flow name="fhir-patient-flow">
-       <http:listener config-ref="HTTP_Listener_config" path="/fhir/Patient" />
-       <ee:transform>
-         <ee:message>
-           <ee:set-payload><![CDATA[
-             %dw 2.0
-             output application/fhir+json
-             ---
-             {
-               "resourceType": "Patient",
-               "id": vars.patientId,
-               "meta": {
-                 "versionId": "1",
-                 "lastUpdated": now()
+             [
+               {
+                 "id": "1",
+                 "name": "John Smith",
+                 "dateOfBirth": "1980-01-01"
                },
-               "name": [{
-                 "family": payload.lastName,
-                 "given": [payload.firstName]
-               }]
-             }
+               {
+                 "id": "2",
+                 "name": "Jane Doe",
+                 "dateOfBirth": "1985-05-15"
+               }
+             ]
            ]]></ee:set-payload>
          </ee:message>
        </ee:transform>
-       <http:request method="POST" url="${aidbox.url}/fhir/Patient" />
      </flow>
+     
    </mule>
    ```
 
-2. **Set Up HL7 v2 Processing**
-   - Configure HL7 message parsing
-   - Implement message validation
-   - Set up message transformation to FHIR
-   - Configure error handling for HL7 messages
+3. **Deploy the API**
+   ```bash
+   # Package the application
+   mvn clean package
+   
+   # Deploy to CloudHub (Mulesoft's managed runtime)
+   anypoint-cli runtime:deploy --artifact target/healthcare-api-1.0.0-SNAPSHOT-mule-application.jar \
+     --applicationName healthcare-api \
+     --environment Development \
+     --runtime 4.4.0 \
+     --workers 1 \
+     --workerType MICRO
+   ```
 
-3. **Implement Healthcare Connectors**
-   - Configure EHR system connectors
-   - Set up lab system integration
-   - Implement pharmacy system connectors
-   - Configure imaging system integration
+4. **Register API in API Manager**
+   ```bash
+   # Create API in API Manager
+   anypoint-cli api-mgr:api:create \
+     --name "Healthcare API" \
+     --version "v1" \
+     --asset-id healthcare-api \
+     --runtime-version 4.4.0 \
+     --implementation-type mule4 \
+     --endpoint-uri https://healthcare-api.us-e2.cloudhub.io
+   
+   # Apply a basic security policy
+   anypoint-cli api-mgr:policy:apply \
+     --policy-id "client-id-enforcement" \
+     --api-id "your-api-id" \
+     --config '{"credentialsOrigin":"httpHeader","clientIdExpression":"#[attributes.headers[\"client_id\"]]"}' 
+   ```
 
-#### API Governance Implementation
+### 4. Basic Integration Testing
 
-1. **Configure API Lifecycle Management**
-   - Set up API versioning policies
-   - Configure API deprecation processes
-   - Implement API documentation standards
-   - Set up API testing frameworks
+Verify that all components are working together properly.
 
-2. **Implement Security Policies**
-   - Configure OAuth 2.0 policy
-   - Set up JWT validation
-   - Implement IP whitelisting
-   - Configure rate limiting
+1. **Test F5 Distributed Cloud Connectivity**
+   ```bash
+   # Test the API gateway endpoint
+   curl -v https://api.healthcare-org.com/api/v1/health
+   ```
 
-3. **Set Up Monitoring and Analytics**
-   - Configure API analytics
-   - Set up SLA monitoring
-   - Implement custom dashboards
-   - Configure alerting for API issues
+2. **Test Service Mesh Routing**
+   ```bash
+   # Deploy a test service
+   kubectl apply -f - <<EOF
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: test-service
+     labels:
+       app: test-service
+   spec:
+     replicas: 1
+     selector:
+       matchLabels:
+         app: test-service
+     template:
+       metadata:
+         labels:
+           app: test-service
+       spec:
+         containers:
+         - name: test-service
+           image: hashicorp/http-echo
+           args:
+             - "-text=hello from test service"
+           ports:
+             - containerPort: 5678
+   ---
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: test-service
+   spec:
+     selector:
+       app: test-service
+     ports:
+     - port: 8080
+       targetPort: 5678
+   EOF
+   
+   # Create a virtual service for the test service
+   kubectl apply -f - <<EOF
+   apiVersion: networking.istio.io/v1alpha3
+   kind: VirtualService
+   metadata:
+     name: test-service-route
+   spec:
+     hosts:
+     - "*"
+     gateways:
+     - api-gateway
+     http:
+     - match:
+       - uri:
+           prefix: /test
+       route:
+       - destination:
+           host: test-service
+           port:
+             number: 8080
+   EOF
+   
+   # Test the route
+   curl -v https://api.healthcare-org.com/test
+   ```
 
-### 4. Integration Between Components
-
-#### F5 and Service Mesh Integration
-
-1. **Configure F5 as External Gateway**
-   - Set up F5 as the entry point to the service mesh
-   - Configure traffic routing to mesh ingress gateway
-   - Implement consistent security policies
-
-2. **Implement End-to-End Authentication**
-   - Configure authentication token propagation
-   - Set up identity propagation between layers
-   - Implement authorization policy consistency
-
-#### Mulesoft and Service Mesh Integration
-
-1. **Deploy Mulesoft Runtime in Mesh**
-   - Configure Mulesoft runtime with service mesh sidecar
-   - Set up service discovery for Mulesoft services
-   - Implement consistent traffic management
-
-2. **Configure Mutual Authentication**
-   - Set up mTLS between Mulesoft and mesh services
-   - Configure certificate management
-   - Implement identity verification
-
-#### F5 and Mulesoft Integration
-
-1. **Configure API Gateway Chain**
-   - Set up F5 as edge gateway
-   - Configure Mulesoft as API management layer
-   - Implement consistent policy enforcement
-
-2. **Set Up Monitoring Integration**
-   - Configure end-to-end request tracing
-   - Implement consolidated logging
-   - Set up unified dashboards
-
-## Implementation Examples
-
-### API Gateway Pattern Implementation
-
-```yaml
-# F5 Distributed Cloud configuration for API Gateway pattern
-apiVersion: api.volterra.io/v1
-kind: HttpLoadBalancer
-metadata:
-  name: healthcare-api-gateway
-  namespace: default
-spec:
-  domains:
-  - api.healthcare-org.com
-  https_auto_cert:
-    add_hsts: true
-    http_redirect: true
-    no_mtls: {}
-  default_route_pools:
-  - pool:
-      name: mulesoft-api-pool
-      namespace: default
-    weight: 1
-  routes:
-  - match:
-      path:
-        prefix: /api/v1/patients
-    route:
-      cors_policy:
-        allow_origins:
-          - origin: "*"
-        allow_methods: ["GET", "POST", "PUT", "DELETE"]
-      response_headers:
-        headers_to_add:
-        - name: X-API-Version
-          value: v1
-  waf:
-    enable: true
-    use_default_waf_config: true
-  app_firewall:
-    enable: true
-    use_default_app_firewall: true
-  bot_defense:
-    policy:
-      protected_app_endpoints:
-      - path:
-          prefix: /api
-        protocol: HTTPS
-        bot_defense_action: DETECT_ONLY
-```
-
-### Service Mesh Traffic Management Example
-
-```yaml
-# Service mesh configuration for canary deployment
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: patient-service
-spec:
-  hosts:
-  - patient-service
-  http:
-  - match:
-    - headers:
-        x-canary:
-          exact: "true"
-    route:
-    - destination:
-        host: patient-service
-        subset: v2
-  - route:
-    - destination:
-        host: patient-service
-        subset: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-  name: patient-service
-spec:
-  host: patient-service
-  subsets:
-  - name: v1
-    labels:
-      version: v1
-  - name: v2
-    labels:
-      version: v2
-```
-
-### Mulesoft FHIR Integration Example
-
-```xml
-<!-- Mulesoft FHIR integration example -->
-<mule xmlns="http://www.mulesoft.org/schema/mule/core">
-  <http:listener-config name="HTTP_Listener_config">
-    <http:listener-connection host="0.0.0.0" port="8082" />
-  </http:listener-config>
-  
-  <http:request-config name="FHIR_Server_config">
-    <http:request-connection host="${fhir.server.host}" port="${fhir.server.port}" />
-  </http:request-config>
-  
-  <flow name="get-patient-flow">
-    <http:listener config-ref="HTTP_Listener_config" path="/api/patients/{id}" />
-    <set-variable variableName="patientId" value="#[attributes.uriParams.id]" />
-    
-    <http:request method="GET" config-ref="FHIR_Server_config" path="/fhir/Patient/#[vars.patientId]">
-      <http:headers>
-        <![CDATA[
-          #[{
-            'Authorization': 'Bearer ' ++ vars.accessToken,
-            'Accept': 'application/fhir+json'
-          }]
-        ]]>
-      </http:headers>
-    </http:request>
-    
-    <ee:transform>
-      <ee:message>
-        <ee:set-payload><![CDATA[
-          %dw 2.0
-          output application/json
-          ---
-          {
-            id: payload.id,
-            name: {
-              firstName: payload.name[0].given[0] default "",
-              lastName: payload.name[0].family default ""
-            },
-            birthDate: payload.birthDate,
-            gender: payload.gender
-          }
-        ]]></ee:set-payload>
-      </ee:message>
-    </ee:transform>
-    
-    <error-handler>
-      <on-error-propagate type="HTTP:NOT_FOUND">
-        <ee:transform>
-          <ee:message>
-            <ee:set-payload><![CDATA[
-              %dw 2.0
-              output application/json
-              ---
-              {
-                error: "Patient not found",
-                status: 404,
-                patientId: vars.patientId
-              }
-            ]]></ee:set-payload>
-          </ee:message>
-          <ee:variables>
-            <ee:set-variable variableName="httpStatus">404</ee:set-variable>
-          </ee:variables>
-        </ee:transform>
-      </on-error-propagate>
-    </error-handler>
-  </flow>
-</mule>
-```
-
-## Deployment Considerations
-
-### Production Checklist
-
-- **High Availability**: Ensure all components are deployed in a highly available configuration
-- **Disaster Recovery**: Implement cross-region failover capabilities
-- **Scalability**: Configure auto-scaling for all components
-- **Monitoring**: Set up comprehensive monitoring and alerting
-- **Backup and Restore**: Implement regular backups of configuration and data
-- **Documentation**: Maintain up-to-date documentation of all configurations
-- **Security Review**: Conduct security review of the entire integration platform
-
-### Healthcare Compliance
-
-- **PHI Protection**: Ensure all PHI is properly protected in transit and at rest
-- **Audit Logging**: Implement comprehensive audit logging for compliance
-- **Access Controls**: Verify appropriate access controls are in place
-- **Data Retention**: Configure appropriate data retention policies
-- **Breach Response**: Establish procedures for security breach response
-- **Compliance Validation**: Validate compliance with relevant regulations (HIPAA, HITRUST, etc.)
+3. **Test Mulesoft API**
+   ```bash
+   # Test the Mulesoft API
+   curl -v https://healthcare-api.us-e2.cloudhub.io/api/patients
+   ```
 
 ## Troubleshooting
 
-### Common Issues
+### Common Issues and Solutions
 
-1. **Connectivity Problems**
-   - Verify network connectivity between components
-   - Check DNS resolution for all services
-   - Validate TLS certificate configuration
-   - Inspect firewall and security group settings
+1. **F5 Distributed Cloud Connectivity Issues**
+   ```bash
+   # Check F5 Distributed Cloud status
+   f5 status
+   
+   # Verify HTTP Load Balancer configuration
+   f5 get http-loadbalancers healthcare-api-gateway -o yaml
+   
+   # Test endpoint connectivity
+   curl -v https://api.healthcare-org.com/health
+   ```
 
-2. **Authentication Issues**
-   - Verify OAuth token configuration
-   - Check certificate validity for mTLS
-   - Validate identity provider integration
-   - Inspect authorization policies
+2. **Service Mesh Issues**
+   ```bash
+   # Check Istio components
+   kubectl get pods -n istio-system
+   
+   # Verify virtual service configuration
+   kubectl get virtualservices -o yaml
+   
+   # Check service mesh proxy logs
+   kubectl logs deployment/your-service -c istio-proxy
+   ```
 
-3. **Performance Concerns**
-   - Monitor resource utilization across components
-   - Check for bottlenecks in the integration flow
-   - Validate caching configuration
-   - Inspect connection pooling settings
+3. **Mulesoft Connectivity Issues**
+   ```bash
+   # Check Mulesoft application status
+   anypoint-cli runtime:application:describe healthcare-api
+   
+   # View application logs
+   anypoint-cli runtime:application:logs healthcare-api
+   
+   # Test API connectivity
+   curl -v https://healthcare-api.us-e2.cloudhub.io/api/patients
+   ```
 
 ## Next Steps
 
-- [F5 Distributed Cloud Configuration](../02-core-functionality/f5-distributed-cloud-configuration.md): Detailed configuration guide
-- [Service Mesh Implementation](../02-core-functionality/service-mesh-implementation.md): In-depth service mesh setup
-- [Mulesoft Integration Patterns](../02-core-functionality/mulesoft-integration-patterns.md): Detailed integration patterns
-- [API Governance Framework](../03-advanced-patterns/api-governance-framework.md): Comprehensive governance approach
+Now that you have completed the basic setup of the API Marketplace, you can:
+
+1. Configure additional API endpoints and services
+2. Implement advanced security policies
+3. Set up monitoring and alerting
+4. Integrate with the Security and Access Framework
+5. Explore advanced service mesh patterns
+
+Refer to the following documentation for more detailed information:
+
+- [F5 Distributed Cloud Configuration](../02-core-functionality/f5-distributed-cloud-configuration.md)
+- [Service Mesh Implementation](../02-core-functionality/service-mesh-implementation.md)
+- [Mulesoft Integration Patterns](../02-core-functionality/mulesoft-integration-patterns.md)
+- [API Governance Framework](../03-advanced-patterns/api-governance-framework.md)
 
 ## Resources
 

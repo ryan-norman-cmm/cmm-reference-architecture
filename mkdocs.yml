@@ -44,25 +44,6 @@ nav:
         - Disaster Recovery: architecture/core_components/api-marketplace/04-operations/disaster-recovery.md
       - Case Studies:
         - Healthcare Integration: architecture/core_components/api-marketplace/05-case-studies/healthcare-integration.md
-    - Integration Engine (Mulesoft):
-      - Getting Started:
-        - Overview: architecture/core_components/integration-engine/01-getting-started/overview.md
-        - Benefits Overview: architecture/core_components/integration-engine/01-getting-started/benefits-overview.md
-        - Setup Guide: architecture/core_components/integration-engine/01-getting-started/setup-guide.md
-      - Core Functionality:
-        - API-Led Connectivity: architecture/core_components/integration-engine/02-core-functionality/api-led-connectivity.md
-        - Healthcare Connectors: architecture/core_components/integration-engine/02-core-functionality/healthcare-connectors.md
-        - Healthcare Transformations: architecture/core_components/integration-engine/02-core-functionality/healthcare-transformations.md
-        - Error Handling: architecture/core_components/integration-engine/02-core-functionality/error-handling.md
-      - Advanced Patterns:
-        - Integration Patterns: architecture/core_components/integration-engine/03-advanced-patterns/integration-patterns.md
-        - Event-Driven Architecture: architecture/core_components/integration-engine/03-advanced-patterns/event-driven-architecture.md
-        - Batch Processing: architecture/core_components/integration-engine/03-advanced-patterns/batch-processing.md
-      - Operations:
-        - Monitoring: architecture/core_components/integration-engine/04-operations/monitoring.md
-        - Deployment: architecture/core_components/integration-engine/04-operations/deployment.md
-      - Case Studies:
-        - Healthcare Integration: architecture/core_components/integration-engine/05-case-studies/healthcare-integration.md
     - Design Component Library:
       - Getting Started:
         - Overview: architecture/core_components/design-component-library/01-getting-started/overview.md
@@ -117,7 +98,24 @@ nav:
         - Load Testing: architecture/core_components/fhir-server/05-operations/load-testing.md
       - Case Studies:
         - Modernization Case Studies: architecture/core_components/fhir-server/06-case-studies/modernization-case-studies.md
-    - Event Broker: architecture/event-broker-documentation.md
+    - Event Broker:
+      - Getting Started:
+        - Overview: architecture/core_components/event-broker/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/event-broker/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/event-broker/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - Event Schemas: architecture/core_components/event-broker/02-core-functionality/event-schemas.md
+        - Topic Design: architecture/core_components/event-broker/02-core-functionality/topic-design.md
+        - Connectors: architecture/core_components/event-broker/02-core-functionality/connectors.md
+        - Monitoring: architecture/core_components/event-broker/02-core-functionality/monitoring.md
+      - Advanced Patterns:
+        - Stream Processing: architecture/core_components/event-broker/03-advanced-patterns/stream-processing.md
+        - Event Sourcing: architecture/core_components/event-broker/03-advanced-patterns/event-sourcing.md
+        - CQRS: architecture/core_components/event-broker/03-advanced-patterns/cqrs.md
+      - Healthcare Integration:
+        - Clinical Events: architecture/core_components/event-broker/04-healthcare-integration/clinical-events.md
+        - HL7 Integration: architecture/core_components/event-broker/04-healthcare-integration/hl7-integration.md
+        - FHIR Events: architecture/core_components/event-broker/04-healthcare-integration/fhir-events.md
     - Federated Graph API:
       - Getting Started:
         - Overview: architecture/core_components/federated-graph-api/01-getting-started/overview.md
