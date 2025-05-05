@@ -2,15 +2,28 @@
 
 ## Introduction
 
-Securing your Federated Graph API is essential for protecting sensitive healthcare data. This guide explains how to implement authentication and authorization for your GraphQL API, covering OAuth 2.0 authentication flows, JWT validation, Role-Based Access Control (RBAC), and field-level authorization. By implementing these security patterns, you can ensure that only authorized users can access the appropriate data.
+Securing your Federated Graph API is essential for protecting sensitive healthcare data. This guide explains how to implement authentication and authorization for your GraphQL API, covering OAuth 2.0 authentication flows with Okta, JWT validation, Role-Based Access Control (RBAC), and field-level authorization. By implementing these security patterns, you can ensure that only authorized users can access the appropriate data.
+
+For our implementation, we use Okta as the primary identity provider, with Azure Key Vault for secure storage of client secrets and credentials. This approach provides enterprise-grade security with features like conditional access policies, multi-factor authentication, and comprehensive audit logging.
 
 ### Quick Start
 
-1. Set up an OAuth 2.0 provider (like Auth0, Okta, or Keycloak)
-2. Configure your GraphQL gateway to validate JWTs
-3. Implement a directive-based authorization system
-4. Define roles and permissions for your API
-5. Apply field-level security to protect sensitive data
+1. Set up Okta as your identity provider
+   - Register your application in the Okta Developer Console
+   - Configure groups and app roles for different user types (admin, practitioner, patient)
+   - Set up API scopes and authorization servers
+2. Store client secrets and credentials in Azure Key Vault
+   - Use Managed Identities for secure access to Key Vault
+3. Configure your GraphQL gateway to validate Okta JWTs
+   - Use Okta JWT Verifier for Node.js for token validation
+   - Implement proper JWKS endpoint caching
+4. Implement a directive-based authorization system
+   - Create directives for role and permission checks
+   - Use Application Insights to track authorization decisions
+5. Define roles and permissions aligned with Okta groups and claims
+6. Integrate with Aidbox FHIR server for healthcare data access control
+   - Map Okta identities to Aidbox users and roles
+   - Implement SMART on FHIR scopes for fine-grained access control
 
 ### Related Components
 
@@ -19,53 +32,311 @@ Securing your Federated Graph API is essential for protecting sensitive healthca
 - [Legacy System Integration](legacy-integration.md): Secure access to legacy systems
 - [Data Access Control](../04-data-management/access-control.md): Advanced access control patterns
 
-## OAuth 2.0 Authentication Flows
+## OAuth 2.0 Authentication with Okta
 
-OAuth 2.0 is the industry standard for API authentication. This section explains how to implement different OAuth flows for your GraphQL API.
+Okta implements the OAuth 2.0 and OpenID Connect standards, providing enterprise-grade identity management for your GraphQL API. This section explains how to implement different authentication flows using Okta and the Okta Auth JavaScript SDK.
 
-### Authorization Code Flow
+### Authorization Code Flow with PKCE
 
-The Authorization Code flow is recommended for server-side applications and provides the highest security.
+The Authorization Code flow with PKCE (Proof Key for Code Exchange) is recommended for web applications and provides the highest security. Okta fully supports this flow for both single-page applications and server-side web apps.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Client
-    participant AuthServer as OAuth Server
+    participant Okta
+    participant KeyVault as Azure Key Vault
     participant API as GraphQL API
+    participant Aidbox as Aidbox FHIR Server
     
     User->>Client: Access application
-    Client->>AuthServer: Redirect to login
-    AuthServer->>User: Present login form
-    User->>AuthServer: Enter credentials
-    AuthServer->>Client: Authorization code
-    Client->>AuthServer: Exchange code for tokens
-    AuthServer->>Client: Access & refresh tokens
+    Client->>Client: Generate code_verifier and code_challenge
+    Client->>Okta: Redirect to login with code_challenge
+    Okta->>User: Present Okta login form
+    User->>Okta: Enter credentials + MFA if required
+    Okta->>Client: Authorization code
+    Client->>KeyVault: Get client secret (server-side only)
+    KeyVault->>Client: Client secret
+    Client->>Okta: Exchange code + code_verifier for tokens
+    Okta->>Client: ID token, access token & refresh token
     Client->>API: Request with access token
-    API->>API: Validate token
-    API->>Client: Protected data
+    API->>API: Validate Okta token
+    API->>Aidbox: Forward request with token
+    Aidbox->>Aidbox: Apply SMART on FHIR access controls
+    Aidbox->>API: Return authorized data
+    API->>Client: Protected healthcare data
+```
+
+#### Implementation with Okta SDK for Node.js
+
+```typescript
+import { OktaAuth } from '@okta/okta-auth-js';
+import { DefaultAzureCredential } from '@azure/identity';
+import { SecretClient } from '@azure/keyvault-secrets';
+import * as express from 'express';
+import * as crypto from 'crypto';
+import * as appInsights from 'applicationinsights';
+
+// Initialize Application Insights for monitoring
+appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+  .setAutoCollectExceptions(true)
+  .start();
+
+// Define interfaces for type safety
+interface AuthConfig {
+  clientId: string;
+  clientSecret: string;
+  issuer: string;
+  redirectUri: string;
+  scopes: string[];
+}
+
+// Define SMART on FHIR scopes for Aidbox integration
+const SMART_SCOPES = {
+  PATIENT_READ: 'patient/*.read',
+  PATIENT_WRITE: 'patient/*.write',
+  LAUNCH: 'launch',
+  OPENID: 'openid',
+  PROFILE: 'profile',
+  OFFLINE_ACCESS: 'offline_access'
+};
+
+// Get client secret from Azure Key Vault using Managed Identity
+async function getClientSecretFromKeyVault(): Promise<string> {
+  try {
+    const credential = new DefaultAzureCredential();
+    const keyVaultUrl = process.env.KEY_VAULT_URL || '';
+    const secretClient = new SecretClient(keyVaultUrl, credential);
+    const secret = await secretClient.getSecret('okta-client-secret');
+    return secret.value || '';
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error fetching client secret from Key Vault:', error);
+    throw error;
+  }
+}
+
+// Initialize Okta Auth client
+async function initializeOktaAuth(): Promise<OktaAuth> {
+  // Get client secret securely from Key Vault
+  const clientSecret = await getClientSecretFromKeyVault();
+  
+  const config = {
+    clientId: process.env.OKTA_CLIENT_ID || '',
+    clientSecret,
+    issuer: `https://${process.env.OKTA_DOMAIN}/oauth2/default`,
+    redirectUri: process.env.REDIRECT_URI,
+    scopes: ['openid', 'profile', 'email', SMART_SCOPES.PATIENT_READ],
+    pkce: true
+  };
+  
+  return new OktaAuth(config);
+}
+
+// Set up authentication routes
+export function setupAuthRoutes(app: express.Application) {
+  // Initialize Okta Auth
+  let oktaAuth: OktaAuth;
+  initializeOktaAuth().then(client => {
+    oktaAuth = client;
+  });
+  
+  // Login route
+  app.get('/login', (req, res) => {
+    // Generate PKCE code verifier and challenge
+    const codeVerifier = crypto.randomBytes(32).toString('base64url');
+    const codeChallenge = crypto.createHash('sha256')
+      .update(codeVerifier).digest('base64url');
+    
+    // Save code verifier in session for later use
+    req.session.codeVerifier = codeVerifier;
+    
+    // Determine required scopes based on user role/context
+    const scopes = ['openid', 'profile', 'email'];
+    
+    // Add SMART on FHIR scopes for Aidbox integration if needed
+    if (req.query.fhirAccess === 'true') {
+      scopes.push(SMART_SCOPES.PATIENT_READ);
+      if (req.query.writeAccess === 'true') {
+        scopes.push(SMART_SCOPES.PATIENT_WRITE);
+      }
+    }
+    
+    // Create authorization URL with PKCE
+    const authUrl = oktaAuth.getAuthorizationUrl({
+      responseType: ['code'],
+      state: crypto.randomBytes(16).toString('hex'),
+      scopes,
+      codeChallenge,
+      codeChallengeMethod: 'S256'
+    });
+    
+    // Track login attempt
+    appInsights.defaultClient.trackEvent({
+      name: 'LoginAttempt',
+      properties: {
+        scopes: scopes.join(' '),
+        hasFhirAccess: scopes.includes(SMART_SCOPES.PATIENT_READ).toString()
+      }
+    });
+    
+    res.redirect(authUrl);
+  });
+  
+  // Handle redirect with auth code
+  app.get('/callback', async (req, res) => {
+    try {
+      // Exchange auth code for tokens using the code verifier
+      const tokenResponse = await oktaAuth.token.getWithRedirect({
+        code: req.query.code as string,
+        codeVerifier: req.session.codeVerifier
+      });
+      
+      // Save tokens in session or secure cookie
+      req.session.accessToken = tokenResponse.tokens.accessToken?.accessToken;
+      req.session.idToken = tokenResponse.tokens.idToken?.idToken;
+      req.session.refreshToken = tokenResponse.tokens.refreshToken?.refreshToken;
+      
+      // Extract user info from ID token
+      const userInfo = await oktaAuth.token.getUserInfo(tokenResponse.tokens.accessToken?.accessToken);
+      req.session.user = userInfo;
+      
+      // Track successful authentication
+      appInsights.defaultClient.trackEvent({
+        name: 'LoginSuccess',
+        properties: {
+          userId: userInfo.sub,
+          hasFhirAccess: tokenResponse.tokens.accessToken?.claims.scp?.includes(SMART_SCOPES.PATIENT_READ).toString() || 'false'
+        }
+      });
+      
+      // If FHIR scopes were requested, set up Aidbox session
+      if (tokenResponse.tokens.accessToken?.claims.scp?.includes(SMART_SCOPES.PATIENT_READ)) {
+        await setupAidboxSession(req.session.accessToken, userInfo);
+      }
+      
+      // Redirect to application
+      res.redirect('/app');
+    } catch (error) {
+      appInsights.defaultClient.trackException({exception: error});
+      console.error('Error acquiring token:', error);
+      res.status(500).send('Error completing authentication');
+    }
+  });
+}
+
+// Set up Aidbox session with Okta token
+async function setupAidboxSession(accessToken: string, userInfo: any): Promise<void> {
+  try {
+    // Create or update Aidbox user based on Okta identity
+    const aidboxUser = {
+      resourceType: 'User',
+      id: `okta-${userInfo.sub}`,
+      name: {
+        given: [userInfo.given_name],
+        family: userInfo.family_name
+      },
+      telecom: [{
+        system: 'email',
+        value: userInfo.email
+      }],
+      // Map Okta groups to Aidbox roles
+      extension: [{
+        url: 'http://example.org/fhir/StructureDefinition/okta-groups',
+        valueString: JSON.stringify(userInfo.groups || [])
+      }]
+    };
+    
+    // Call Aidbox API to create/update user
+    const response = await fetch(`${process.env.AIDBOX_URL}/User/${aidboxUser.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(aidboxUser)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to set up Aidbox session: ${response.statusText}`);
+    }
+    
+    // Track successful Aidbox integration
+    appInsights.defaultClient.trackEvent({
+      name: 'AidboxSessionCreated',
+      properties: {
+        userId: userInfo.sub,
+        aidboxUserId: aidboxUser.id
+      }
+    });
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error setting up Aidbox session:', error);
+    throw error;
+  }
+}
 ```
 
 ### Client Credentials Flow
 
-The Client Credentials flow is used for service-to-service authentication when no user is involved.
+The Client Credentials flow is used for service-to-service authentication when no user is involved. This is commonly used for background services, APIs, and daemon applications that need to access resources without user interaction.
+
+#### Okta Implementation for Service-to-Service Authentication
 
 ```typescript
-// Example: Client credentials flow implementation
-async function getServiceToken() {
-  const tokenEndpoint = 'https://auth.example.com/oauth/token';
-  
-  const params = new URLSearchParams();
-  params.append('grant_type', 'client_credentials');
-  params.append('client_id', process.env.CLIENT_ID);
-  params.append('client_secret', process.env.CLIENT_SECRET);
-  params.append('audience', process.env.API_AUDIENCE);
-  
+import { OktaClient } from '@okta/okta-sdk-nodejs';
+import { DefaultAzureCredential } from '@azure/identity';
+import { SecretClient } from '@azure/keyvault-secrets';
+import * as appInsights from 'applicationinsights';
+
+// Initialize Application Insights for monitoring
+appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+  .setAutoCollectExceptions(true)
+  .start();
+
+// Get client credentials from Azure Key Vault using Managed Identity
+async function getClientCredentialsFromKeyVault(): Promise<{clientId: string, clientSecret: string}> {
   try {
-    const response = await fetch(tokenEndpoint, {
+    const credential = new DefaultAzureCredential();
+    const keyVaultUrl = process.env.KEY_VAULT_URL || '';
+    const secretClient = new SecretClient(keyVaultUrl, credential);
+    
+    // Get client ID and secret in parallel
+    const [clientIdSecret, clientSecretSecret] = await Promise.all([
+      secretClient.getSecret('okta-service-client-id'),
+      secretClient.getSecret('okta-service-client-secret')
+    ]);
+    
+    return {
+      clientId: clientIdSecret.value || '',
+      clientSecret: clientSecretSecret.value || ''
+    };
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error fetching credentials from Key Vault:', error);
+    throw error;
+  }
+}
+
+// Get service-to-service access token from Okta
+async function getServiceToken(): Promise<string> {
+  try {
+    // Get credentials securely from Key Vault
+    const { clientId, clientSecret } = await getClientCredentialsFromKeyVault();
+    
+    // Prepare token request parameters
+    const params = new URLSearchParams();
+    params.append('grant_type', 'client_credentials');
+    params.append('client_id', clientId);
+    params.append('client_secret', clientSecret);
+    params.append('scope', 'fhir.read fhir.write');
+    
+    // Request token from Okta token endpoint
+    const response = await fetch(`https://${process.env.OKTA_DOMAIN}/oauth2/default/v1/token`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
       },
       body: params
     });
@@ -75,50 +346,398 @@ async function getServiceToken() {
     }
     
     const data = await response.json();
+    
+    // Track successful token acquisition
+    appInsights.defaultClient.trackEvent({
+      name: 'ServiceTokenAcquired',
+      properties: {
+        clientId,
+        tokenType: 'client_credentials',
+        scopes: 'fhir.read fhir.write'
+      }
+    });
+    
     return data.access_token;
   } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
     console.error('Error getting service token:', error);
+    throw error;
+  }
+}
+
+// Example: Integrating with Aidbox FHIR server using service token
+async function syncDataWithAidbox() {
+  try {
+    // Get service token from Okta
+    const token = await getServiceToken();
+    
+    // Use token to access Aidbox FHIR API
+    const response = await fetch(`${process.env.AIDBOX_URL}/Patient?_count=100`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/fhir+json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Aidbox API error: ${response.statusText}`);
+    }
+    
+    const patients = await response.json();
+    
+    // Process patient data
+    console.log(`Retrieved ${patients.entry?.length || 0} patients from Aidbox`);
+    
+    // Track successful Aidbox integration
+    appInsights.defaultClient.trackEvent({
+      name: 'AidboxDataSync',
+      properties: {
+        patientCount: (patients.entry?.length || 0).toString(),
+        syncType: 'background'
+      }
+    });
+    
+    return patients;
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error syncing data with Aidbox:', error);
+    throw error;
+  }
+}
+
+// Example: Using service token with GraphQL API
+async function queryGraphQLAPI() {
+  try {
+    const token = await getServiceToken();
+    
+    const response = await fetch(`${process.env.GRAPHQL_API_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        query: `
+          query GetPatientSummary {
+            patients(first: 10) {
+              edges {
+                node {
+                  id
+                  name {
+                    given
+                    family
+                  }
+                  birthDate
+                }
+              }
+            }
+          }
+        `
+      })
+    });
+    
+    return await response.json();
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error querying GraphQL API:', error);
     throw error;
   }
 }
 ```
 
-### SMART on FHIR Authentication
+#### Containerized Deployment with Aidbox Integration
 
-For healthcare applications, SMART on FHIR extends OAuth 2.0 with healthcare-specific scopes and contexts.
+When deploying services that use client credentials flow in AKS with Aidbox FHIR server integration:
+
+```yaml
+# kubernetes-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-sync-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-sync-service
+  template:
+    metadata:
+      labels:
+        app: data-sync-service
+    spec:
+      containers:
+      - name: data-sync-service
+        image: acr.azurecr.io/data-sync-service:v1.0.0
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: OKTA_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: okta-credentials
+              key: domain
+        - name: AIDBOX_URL
+          valueFrom:
+            configMapRef:
+              name: service-endpoints
+              key: aidbox-url
+        - name: GRAPHQL_API_URL
+          valueFrom:
+            configMapRef:
+              name: service-endpoints
+              key: graphql-api-url
+        - name: KEY_VAULT_URL
+          valueFrom:
+            secretKeyRef:
+              name: azure-credentials
+              key: key-vault-url
+        - name: APPINSIGHTS_INSTRUMENTATIONKEY
+          valueFrom:
+            secretKeyRef:
+              name: azure-credentials
+              key: appinsights-key
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 60
+      # Use Azure Workload Identity for secure Key Vault access
+      serviceAccountName: data-sync-service-sa
+```
+```
+
+### SMART on FHIR Authentication with Aidbox
+
+For healthcare applications, SMART on FHIR extends OAuth 2.0 with healthcare-specific scopes and contexts. Our implementation uses Okta as the identity provider and Aidbox as the FHIR server, providing a robust, standards-compliant solution for healthcare data access.
+
+#### Aidbox FHIR Server Integration with Okta
 
 ```typescript
-// Example: SMART on FHIR authentication configuration
-const smartAuthConfig = {
-  // SMART on FHIR authorization server
-  authorizationEndpoint: 'https://auth.example.com/authorize',
-  tokenEndpoint: 'https://auth.example.com/token',
-  // Required scopes for the application
-  scope: 'launch patient/*.read openid profile',
-  // Client registration details
-  clientId: 'your-client-id',
-  redirectUri: 'https://app.example.com/callback',
-  // SMART launch context
-  iss: 'https://ehr.example.com',
-  launch: 'launch-token-from-ehr'
+import { OktaAuth } from '@okta/okta-auth-js';
+import * as appInsights from 'applicationinsights';
+import * as crypto from 'crypto';
+
+// Initialize Application Insights for monitoring
+appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+  .setAutoCollectExceptions(true)
+  .start();
+
+// Define SMART on FHIR scopes for Aidbox integration
+const SMART_SCOPES = {
+  PATIENT_READ: 'patient/*.read',
+  PATIENT_WRITE: 'patient/*.write',
+  LAUNCH: 'launch',
+  OPENID: 'openid',
+  PROFILE: 'profile',
+  OFFLINE_ACCESS: 'offline_access'
 };
 
-// Construct the authorization URL
-function getSmartAuthUrl(state) {
-  const params = new URLSearchParams({
-    response_type: 'code',
-    client_id: smartAuthConfig.clientId,
-    redirect_uri: smartAuthConfig.redirectUri,
-    scope: smartAuthConfig.scope,
-    state: state,
-    aud: smartAuthConfig.iss
-  });
+// SMART on FHIR configuration for Aidbox integration
+interface SmartOnFhirConfig {
+  clientId: string;
+  redirectUri: string;
+  oktaDomain: string;
+  aidboxUrl: string;
+  scopes: string[];
+  launchContext?: {
+    patient?: string;
+    encounter?: string;
+    practitioner?: string;
+  };
+}
+
+// Get SMART on FHIR configuration
+async function getSmartOnFhirConfig(): Promise<SmartOnFhirConfig> {
+  // In a real application, you might load this from configuration or environment variables
+  return {
+    clientId: process.env.OKTA_CLIENT_ID || '',
+    redirectUri: process.env.REDIRECT_URI || '',
+    oktaDomain: process.env.OKTA_DOMAIN || '',
+    aidboxUrl: process.env.AIDBOX_URL || '',
+    scopes: [
+      SMART_SCOPES.OPENID,
+      SMART_SCOPES.PROFILE,
+      SMART_SCOPES.PATIENT_READ,
+      SMART_SCOPES.LAUNCH
+    ]
+  };
+}
+
+// Initialize Okta Auth with SMART on FHIR scopes
+async function initializeOktaAuthForSmart(): Promise<OktaAuth> {
+  const config = await getSmartOnFhirConfig();
   
-  if (smartAuthConfig.launch) {
-    params.append('launch', smartAuthConfig.launch);
+  return new OktaAuth({
+    clientId: config.clientId,
+    issuer: `https://${config.oktaDomain}/oauth2/default`,
+    redirectUri: config.redirectUri,
+    scopes: config.scopes,
+    pkce: true
+  });
+}
+
+// Get SMART on FHIR authorization URL with launch context
+async function getSmartAuthUrl(launchContext?: any): Promise<string> {
+  const config = await getSmartOnFhirConfig();
+  const oktaAuth = await initializeOktaAuthForSmart();
+  
+  // Generate PKCE code verifier and challenge
+  const codeVerifier = crypto.randomBytes(32).toString('base64url');
+  const codeChallenge = crypto.createHash('sha256')
+    .update(codeVerifier).digest('base64url');
+  
+  // Store code verifier for later use (in session or other secure storage)
+  // This is just an example - in a real app, you'd store this securely
+  global.codeVerifier = codeVerifier;
+  
+  // Create authorization parameters
+  const authParams = {
+    responseType: ['code'],
+    state: crypto.randomBytes(16).toString('hex'),
+    scopes: config.scopes,
+    codeChallenge,
+    codeChallengeMethod: 'S256'
+  };
+  
+  // Add launch context if provided
+  if (launchContext) {
+    if (launchContext.patient) {
+      authParams.state += `;patient=${launchContext.patient}`;
+    }
+    if (launchContext.encounter) {
+      authParams.state += `;encounter=${launchContext.encounter}`;
+    }
   }
   
-  return `${smartAuthConfig.authorizationEndpoint}?${params.toString()}`;
+  // Track SMART auth attempt
+  appInsights.defaultClient.trackEvent({
+    name: 'SmartAuthAttempt',
+    properties: {
+      scopes: config.scopes.join(' '),
+      hasLaunchContext: !!launchContext
+    }
+  });
+  
+  return oktaAuth.getAuthorizationUrl(authParams);
+}
+
+// Process SMART on FHIR callback and set up Aidbox session
+async function handleSmartCallback(code: string, state: string): Promise<any> {
+  try {
+    const oktaAuth = await initializeOktaAuthForSmart();
+    const config = await getSmartOnFhirConfig();
+    
+    // Exchange code for tokens
+    const tokenResponse = await oktaAuth.token.getWithoutRedirect({
+      code,
+      codeVerifier: global.codeVerifier // Retrieve from secure storage
+    });
+    
+    // Extract launch context from state if present
+    const launchContext: any = {};
+    if (state.includes(';')) {
+      const stateParts = state.split(';');
+      stateParts.slice(1).forEach(part => {
+        const [key, value] = part.split('=');
+        if (key && value) {
+          launchContext[key] = value;
+        }
+      });
+    }
+    
+    // Get user info from ID token
+    const userInfo = await oktaAuth.token.getUserInfo(tokenResponse.tokens.accessToken?.accessToken);
+    
+    // Set up Aidbox session with SMART context
+    await setupAidboxSmartSession(
+      tokenResponse.tokens.accessToken?.accessToken || '',
+      userInfo,
+      launchContext
+    );
+    
+    // Track successful SMART authentication
+    appInsights.defaultClient.trackEvent({
+      name: 'SmartAuthSuccess',
+      properties: {
+        userId: userInfo.sub,
+        hasPatientContext: !!launchContext.patient,
+        scopes: tokenResponse.tokens.accessToken?.claims.scp?.join(' ') || ''
+      }
+    });
+    
+    return {
+      tokens: tokenResponse.tokens,
+      userInfo,
+      launchContext
+    };
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error handling SMART callback:', error);
+    throw error;
+  }
+}
+
+// Set up Aidbox session with SMART context
+async function setupAidboxSmartSession(accessToken: string, userInfo: any, launchContext: any): Promise<void> {
+  try {
+    const config = await getSmartOnFhirConfig();
+    
+    // Create SMART session in Aidbox
+    const smartSession = {
+      resourceType: 'SmartSession',
+      id: `okta-${userInfo.sub}`,
+      user: {
+        resourceType: 'User',
+        id: `okta-${userInfo.sub}`,
+        name: {
+          given: [userInfo.given_name],
+          family: userInfo.family_name
+        }
+      },
+      context: {
+        patient: launchContext.patient,
+        encounter: launchContext.encounter,
+        practitioner: userInfo.groups?.includes('practitioners') ? `okta-${userInfo.sub}` : undefined
+      },
+      scopes: userInfo.scp || []
+    };
+    
+    // Call Aidbox API to create/update SMART session
+    const response = await fetch(`${config.aidboxUrl}/SmartSession/${smartSession.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(smartSession)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to set up Aidbox SMART session: ${response.statusText}`);
+    }
+    
+    // Track successful Aidbox SMART session setup
+    appInsights.defaultClient.trackEvent({
+      name: 'AidboxSmartSessionCreated',
+      properties: {
+        userId: userInfo.sub,
+        patientContext: launchContext.patient || 'none'
+      }
+    });
+  } catch (error) {
+    appInsights.defaultClient.trackException({exception: error});
+    console.error('Error setting up Aidbox SMART session:', error);
+    throw error;
+  }
 }
 ```
 

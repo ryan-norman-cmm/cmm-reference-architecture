@@ -58,36 +58,65 @@ graph TD
 
 Below is a simplified example of wrapping a RESTful patient API as a GraphQL subgraph using Apollo Server and RESTDataSource.
 
-```javascript
-// patientAPI.js
-const { RESTDataSource } = require('apollo-datasource-rest');
+```typescript
+// patientAPI.ts
+import { RESTDataSource } from 'apollo-datasource-rest';
+
+// Define TypeScript interfaces for our data models
+interface Patient {
+  id: string;
+  mrn: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  gender: string;
+  address?: PatientAddress;
+}
+
+interface PatientAddress {
+  line1: string;
+  line2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+
+interface PatientSearchParams {
+  name?: string;
+  mrn?: string;
+  birthDate?: string;
+  limit?: number;
+  offset?: number;
+}
 
 class PatientAPI extends RESTDataSource {
   constructor() {
     super();
+    // Configure for Azure App Service or AKS-hosted legacy API
+    // Use Key Vault for secure storage of connection strings in production
     this.baseURL = process.env.PATIENT_API_URL || 'https://legacy.example.com/api/';
   }
 
   // Fetch a single patient by ID
-  async getPatientById(id) {
+  async getPatientById(id: string): Promise<Patient> {
     try {
-      return await this.get(`patients/${id}`);
+      return await this.get<Patient>(`patients/${id}`);
     } catch (error) {
-      this.handleError(error);
+      return this.handleError(error);
     }
   }
 
   // Fetch all patients (with optional query params)
-  async getPatients(params = {}) {
+  async getPatients(params: PatientSearchParams = {}): Promise<Patient[]> {
     try {
-      return await this.get('patients', params);
+      return await this.get<Patient[]>('patients', params);
     } catch (error) {
-      this.handleError(error);
+      return this.handleError(error);
     }
   }
 
   // Error handling for REST calls
-  handleError(error) {
+  handleError(error: any): never {
     if (error.extensions?.response?.status === 404) {
       throw new Error('Patient not found');
     }
@@ -95,39 +124,65 @@ class PatientAPI extends RESTDataSource {
   }
 }
 
-module.exports = PatientAPI;
+export default PatientAPI;
 ```
 
-```javascript
-// schema.js
-const { gql } = require('apollo-server');
+```typescript
+// schema.ts
+import { gql } from 'apollo-server';
 
+// Define the GraphQL schema with federation directives
 const typeDefs = gql`
-  type Patient @key(fields: "id") {
-    id: ID!
-    name: String!
-    birthDate: String
-    gender: String
+  extend type Query {
+    patient(id: ID!): Patient
+    patients(limit: Int, offset: Int): PatientConnection!
   }
 
-  type Query {
-    patient(id: ID!): Patient
-    patients: [Patient!]!
+  type Patient @key(fields: "id") {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    birthDate: String
+    gender: String
+    address: PatientAddress
+  }
+
+  type PatientAddress {
+    line1: String!
+    line2: String
+    city: String!
+    state: String!
+    postalCode: String!
+  }
+
+  type PatientConnection {
+    items: [Patient!]!
+    totalCount: Int!
   }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;
 ```
 
-```javascript
-// resolvers.js
-const resolvers = {
+```typescript
+// resolvers.ts
+import { IResolvers } from 'apollo-server';
+import { Patient } from './types';
+
+interface DataSources {
+  patientAPI: {
+    getPatientById(id: string): Promise<Patient>;
+    getPatients(params?: any): Promise<Patient[]>;
+  };
+}
+
+const resolvers: IResolvers = {
   Query: {
-    patient: async (_, { id }, { dataSources }) => {
+    patient: async (_, { id }, { dataSources }: { dataSources: DataSources }) => {
       return dataSources.patientAPI.getPatientById(id);
     },
-    patients: async (_, __, { dataSources }) => {
-      return dataSources.patientAPI.getPatients();
+    patients: async (_, { limit, offset }, { dataSources }: { dataSources: DataSources }) => {
+      return dataSources.patientAPI.getPatients({ limit, offset });
     },
   },
   Patient: {
@@ -190,6 +245,108 @@ query {
 
 By following this approach, you can progressively modernize your API layer, provide a unified data access point, and ensure robust error handling for legacy system integration.
 
+### Azure Deployment Considerations
+
+When deploying your legacy system integration subgraphs to Azure, consider the following best practices:
+
+1. **Azure Key Vault Integration**: Store sensitive connection strings and API keys in Azure Key Vault rather than environment variables or configuration files.
+   ```typescript
+   // Using Azure Key Vault with @azure/identity and @azure/keyvault-secrets
+   import { DefaultAzureCredential } from '@azure/identity';
+   import { SecretClient } from '@azure/keyvault-secrets';
+   
+   // Initialize Key Vault client once during application startup
+   const credential = new DefaultAzureCredential();
+   const keyVaultUrl = process.env.KEY_VAULT_URL;
+   const secretClient = new SecretClient(keyVaultUrl, credential);
+   
+   // Fetch secret when needed
+   async function getPatientApiUrl() {
+     const secret = await secretClient.getSecret('patient-api-url');
+     return secret.value;
+   }
+   ```
+
+2. **Container Configuration**: For AKS deployments, use Kubernetes ConfigMaps and Secrets to manage environment-specific configurations.
+   ```yaml
+   # kubernetes-config.yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: legacy-api-config
+   data:
+     PATIENT_API_URL: "https://legacy-api.example.com/api/v1"
+     TIMEOUT_MS: "5000"
+   ---
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: patient-subgraph
+   spec:
+     replicas: 2
+     template:
+       spec:
+         containers:
+         - name: patient-subgraph
+           image: acr.azurecr.io/patient-subgraph:v1.0.0
+           envFrom:
+           - configMapRef:
+               name: legacy-api-config
+   ```
+
+3. **Health Checks**: Implement robust health checks to ensure your subgraph can detect and report when legacy systems are unavailable.
+   ```typescript
+   // health.ts
+   import express from 'express';
+   
+   export async function healthCheck(req: express.Request, res: express.Response) {
+     try {
+       // Check connection to legacy system
+       await testLegacyConnection();
+       res.status(200).json({ status: 'healthy' });
+     } catch (error) {
+       res.status(503).json({ status: 'unhealthy', error: error.message });
+     }
+   }
+   ```
+
+4. **Monitoring and Logging**: Configure Application Insights for comprehensive monitoring and logging.
+   ```typescript
+   // app.ts
+   import * as appInsights from 'applicationinsights';
+   
+   // Initialize Application Insights
+   appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+     .setAutoDependencyCorrelation(true)
+     .setAutoCollectRequests(true)
+     .setAutoCollectPerformance(true)
+     .setAutoCollectExceptions(true)
+     .setAutoCollectDependencies(true)
+     .start();
+   ```
+
+5. **Circuit Breakers**: Implement circuit breakers to prevent cascading failures when legacy systems are unstable.
+   ```typescript
+   // Using Opossum for circuit breaking
+   import CircuitBreaker from 'opossum';
+   
+   const breaker = new CircuitBreaker(async (id) => {
+     return await legacyApiCall(id);
+   }, {
+     timeout: 3000,             // If function takes longer than 3 seconds, trigger a failure
+     errorThresholdPercentage: 50, // When 50% of requests fail, open the circuit
+     resetTimeout: 30000       // After 30 seconds, try again
+   });
+   
+   breaker.on('open', () => {
+     console.log('Circuit breaker opened - legacy system appears to be down');
+     // Log to Application Insights
+     appInsights.defaultClient.trackEvent({name: 'CircuitBreakerOpened'});
+   });
+   ```
+
+By implementing these Azure-specific patterns, you can ensure your legacy system integrations are robust, secure, and maintainable in a cloud-native environment.
+
 ## Database-Direct Subgraphs
 
 ### Overview
@@ -251,41 +408,14 @@ const typeDefs = gql`
   }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;
 ```
 
-```javascript
-// resolvers.js
-const pool = require('./db');
-
-const resolvers = {
-  Query: {
-    billingRecord: async (_, { id }) => {
-      try {
-        const result = await pool.query('SELECT * FROM billing WHERE id = $1', [id]);
-        if (result.rows.length === 0) return null;
-        return result.rows[0];
-      } catch (error) {
-        console.error('Database error:', error);
-        throw new Error('Failed to fetch billing record');
-      }
-    },
-    billingRecords: async (_, { patientId }) => {
-      try {
-        const result = await pool.query('SELECT * FROM billing WHERE patient_id = $1', [patientId]);
-        return result.rows;
-      } catch (error) {
-        console.error('Database error:', error);
-        throw new Error('Failed to fetch billing records');
-      }
-    },
-  },
-  BillingRecord: {
-    __resolveReference: async (reference) => {
-      try {
-        const result = await pool.query('SELECT * FROM billing WHERE id = $1', [reference.id]);
-        return result.rows[0] || null;
-      } catch (error) {
+```typescript
+// server.ts
+import { ApolloServer } from 'apollo-server';
+import typeDefs from './schema';
+import resolvers from './resolvers';
         return null;
       }
     },
@@ -485,4 +615,3 @@ Integrating legacy systems into a federated GraphQL API enables organizations to
 - Document integration patterns and edge cases to support ongoing maintenance and onboarding.
 
 By following these patterns and best practices, you can bridge the gap between legacy and modern systems, accelerate digital transformation, and deliver real-time, unified data access for healthcare and beyond.
-
