@@ -221,13 +221,28 @@ Write in a voice that balances technical precision with accessibility:
 - Document container health checks and readiness probes
 - Explain multi-stage build patterns for optimized container images
 
+### Technology Choices
+- Use Managed Azure Postgres for any relational database needs
+- Use MongoDB Atlas for any document storage needs
+- Use Azure Blob Storage for any file storage needs
+- Use Azure Key Vault for any secrets management needs
+- Use DAPR when appropriate for integrating with services
+- Use Health Samurai Aidbox for any FHIR Server needs
+- Use Confluent Kafka for any event streaming and queue needs
+- Use Apollo for any GraphQL needs
+- Use Okta as our identity provider
+- Include Azure CLI commands for common operations
+- Provide Terraform templates for infrastructure provisioning
+- Document GitHub Actions CI/CD pipeline configurations
+- Provide guidance on application insight and monitoring using Open Telemetry (OTEL)
+
 ### Azure Integration
-- Document Azure-specific implementations for all platform components
+- Document Azure-specific implementations for all platform components where another is not listed
 - Highlight Azure PaaS services used (App Service, AKS, Azure Functions, etc.)
 - Include Azure CLI commands for common operations
 - Provide Terraform templates for infrastructure provisioning
 - Document GitHub Actions CI/CD pipeline configurations
-- Include guidance on DataDog integration and observability using Open Telemetry
+- Provide guidance on application insight and monitoring using Open Telemetry (OTEL)
 - Detail Azure-specific security configurations and best practices
 - Provide cost optimization guidance for Azure resources
 

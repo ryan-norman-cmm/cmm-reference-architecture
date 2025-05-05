@@ -5,6 +5,63 @@ nav:
   - Home: index.md
   - Principles: architecture/principles.md
   - Core Components:
+    - Identity Provider (Okta):
+      - Getting Started:
+        - Overview: architecture/core_components/identity-provider/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/identity-provider/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/identity-provider/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - Authentication Flows: architecture/core_components/identity-provider/02-core-functionality/authentication-flows.md
+        - User Management: architecture/core_components/identity-provider/02-core-functionality/user-management.md
+        - Integration Patterns: architecture/core_components/identity-provider/02-core-functionality/integration-patterns.md
+        - Authorization Policies: architecture/core_components/identity-provider/02-core-functionality/authorization-policies.md
+      - Advanced Patterns:
+        - Advanced Security: architecture/core_components/identity-provider/03-advanced-patterns/advanced-security.md
+        - Custom Authentication: architecture/core_components/identity-provider/03-advanced-patterns/custom-authentication.md
+        - Federation: architecture/core_components/identity-provider/03-advanced-patterns/federation.md
+      - Operations:
+        - Monitoring: architecture/core_components/identity-provider/04-operations/monitoring.md
+        - Deployment: architecture/core_components/identity-provider/04-operations/deployment.md
+      - Case Studies:
+        - Healthcare Implementation: architecture/core_components/identity-provider/05-case-studies/healthcare-implementation.md
+    - Integration Engine (Mulesoft):
+      - Getting Started:
+        - Overview: architecture/core_components/integration-engine/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/integration-engine/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/integration-engine/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - API-Led Connectivity: architecture/core_components/integration-engine/02-core-functionality/api-led-connectivity.md
+        - Healthcare Connectors: architecture/core_components/integration-engine/02-core-functionality/healthcare-connectors.md
+        - Healthcare Transformations: architecture/core_components/integration-engine/02-core-functionality/healthcare-transformations.md
+        - Error Handling: architecture/core_components/integration-engine/02-core-functionality/error-handling.md
+      - Advanced Patterns:
+        - Integration Patterns: architecture/core_components/integration-engine/03-advanced-patterns/integration-patterns.md
+        - Event-Driven Architecture: architecture/core_components/integration-engine/03-advanced-patterns/event-driven-architecture.md
+        - Batch Processing: architecture/core_components/integration-engine/03-advanced-patterns/batch-processing.md
+      - Operations:
+        - Monitoring: architecture/core_components/integration-engine/04-operations/monitoring.md
+        - Deployment: architecture/core_components/integration-engine/04-operations/deployment.md
+      - Case Studies:
+        - Healthcare Integration: architecture/core_components/integration-engine/05-case-studies/healthcare-integration.md
+    - Design Component Library:
+      - Getting Started:
+        - Overview: architecture/core_components/design-component-library/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/design-component-library/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/design-component-library/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - Component Usage: architecture/core_components/design-component-library/02-core-functionality/component-usage.md
+        - Component Catalog: architecture/core_components/design-component-library/02-core-functionality/component-catalog.md
+        - Healthcare Components: architecture/core_components/design-component-library/02-core-functionality/healthcare-components.md
+        - Authentication Components: architecture/core_components/design-component-library/02-core-functionality/authentication-components.md
+      - Advanced Patterns:
+        - Accessibility: architecture/core_components/design-component-library/03-advanced-patterns/accessibility.md
+        - Theming: architecture/core_components/design-component-library/03-advanced-patterns/theming.md
+        - Performance: architecture/core_components/design-component-library/03-advanced-patterns/performance.md
+      - Operations:
+        - Contribution Guidelines: architecture/core_components/design-component-library/04-operations/contribution-guidelines.md
+        - Publishing: architecture/core_components/design-component-library/04-operations/publishing.md
+      - Case Studies:
+        - Healthcare UI: architecture/core_components/design-component-library/05-case-studies/healthcare-ui.md
     - FHIR Server:
       - Getting Started:
         - Overview: architecture/core_components/fhir-server/01-getting-started/overview.md
