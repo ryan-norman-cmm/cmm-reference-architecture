@@ -5,25 +5,45 @@ nav:
   - Home: index.md
   - Principles: architecture/principles.md
   - Core Components:
-    - Identity Provider (Okta):
+    - Security and Access Framework:
       - Getting Started:
-        - Overview: architecture/core_components/identity-provider/01-getting-started/overview.md
-        - Benefits Overview: architecture/core_components/identity-provider/01-getting-started/benefits-overview.md
-        - Setup Guide: architecture/core_components/identity-provider/01-getting-started/setup-guide.md
+        - Overview: architecture/core_components/security-and-access-framework/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/security-and-access-framework/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/security-and-access-framework/01-getting-started/setup-guide.md
       - Core Functionality:
-        - Authentication Flows: architecture/core_components/identity-provider/02-core-functionality/authentication-flows.md
-        - User Management: architecture/core_components/identity-provider/02-core-functionality/user-management.md
-        - Integration Patterns: architecture/core_components/identity-provider/02-core-functionality/integration-patterns.md
-        - Authorization Policies: architecture/core_components/identity-provider/02-core-functionality/authorization-policies.md
+        - Authentication Flows: architecture/core_components/security-and-access-framework/02-core-functionality/authentication-flows.md
+        - User Management: architecture/core_components/security-and-access-framework/02-core-functionality/user-management.md
+        - Integration Patterns: architecture/core_components/security-and-access-framework/02-core-functionality/integration-patterns.md
+        - Authorization Policies: architecture/core_components/security-and-access-framework/02-core-functionality/authorization-policies.md
       - Advanced Patterns:
-        - Advanced Security: architecture/core_components/identity-provider/03-advanced-patterns/advanced-security.md
-        - Custom Authentication: architecture/core_components/identity-provider/03-advanced-patterns/custom-authentication.md
-        - Federation: architecture/core_components/identity-provider/03-advanced-patterns/federation.md
+        - Advanced Security: architecture/core_components/security-and-access-framework/03-advanced-patterns/advanced-security.md
+        - Custom Authentication: architecture/core_components/security-and-access-framework/03-advanced-patterns/custom-authentication.md
+        - Federation: architecture/core_components/security-and-access-framework/03-advanced-patterns/federation.md
       - Operations:
-        - Monitoring: architecture/core_components/identity-provider/04-operations/monitoring.md
-        - Deployment: architecture/core_components/identity-provider/04-operations/deployment.md
+        - Monitoring: architecture/core_components/security-and-access-framework/04-operations/monitoring.md
+        - Deployment: architecture/core_components/security-and-access-framework/04-operations/deployment.md
       - Case Studies:
-        - Healthcare Implementation: architecture/core_components/identity-provider/05-case-studies/healthcare-implementation.md
+        - Healthcare Implementation: architecture/core_components/security-and-access-framework/05-case-studies/healthcare-implementation.md
+    - API Marketplace:
+      - Getting Started:
+        - Overview: architecture/core_components/api-marketplace/01-getting-started/overview.md
+        - Benefits Overview: architecture/core_components/api-marketplace/01-getting-started/benefits-overview.md
+        - Setup Guide: architecture/core_components/api-marketplace/01-getting-started/setup-guide.md
+      - Core Functionality:
+        - F5 Distributed Cloud Configuration: architecture/core_components/api-marketplace/02-core-functionality/f5-distributed-cloud-configuration.md
+        - Service Mesh Implementation: architecture/core_components/api-marketplace/02-core-functionality/service-mesh-implementation.md
+        - Mulesoft Integration Patterns: architecture/core_components/api-marketplace/02-core-functionality/mulesoft-integration-patterns.md
+        - API Governance: architecture/core_components/api-marketplace/02-core-functionality/api-governance.md
+      - Advanced Patterns:
+        - Multi-Cloud Integration: architecture/core_components/api-marketplace/03-advanced-patterns/multi-cloud-integration.md
+        - Zero Trust Architecture: architecture/core_components/api-marketplace/03-advanced-patterns/zero-trust-architecture.md
+        - API Federation: architecture/core_components/api-marketplace/03-advanced-patterns/api-federation.md
+      - Operations:
+        - Monitoring and Observability: architecture/core_components/api-marketplace/04-operations/monitoring-observability.md
+        - Security Operations: architecture/core_components/api-marketplace/04-operations/security-operations.md
+        - Disaster Recovery: architecture/core_components/api-marketplace/04-operations/disaster-recovery.md
+      - Case Studies:
+        - Healthcare Integration: architecture/core_components/api-marketplace/05-case-studies/healthcare-integration.md
     - Integration Engine (Mulesoft):
       - Getting Started:
         - Overview: architecture/core_components/integration-engine/01-getting-started/overview.md

@@ -21,6 +21,56 @@ Our modern platform leverages healthcare standards like FHIR to create a unified
 
 ## Core Platform Components
 
+### Security and Access Framework
+Our comprehensive security solution combines Role-Based Access Control (RBAC), OAuth 2.0, OpenID Connect, and federated identity providers with Okta as the primary IDP. This framework provides robust authentication, authorization, and access control across all platform components.
+
+**Key Capabilities:**
+- Multi-factor authentication and single sign-on
+- Role-based and policy-based access control
+- SMART on FHIR authentication flows
+- Zero Trust security architecture
+- Healthcare-specific compliance controls
+
+```javascript
+// Example: OAuth 2.0 token request for API access
+POST /oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&
+code=AUTH_CODE&
+client_id=CLIENT_ID&
+redirect_uri=https://app.example.com/callback
+```
+
+[Security and Access Framework Documentation →](/architecture/core_components/security-and-access-framework/01-getting-started/overview/)
+
+### API Marketplace
+Our API Marketplace provides a comprehensive approach to API management combining F5 Distributed Cloud App Connect for universal ingress, service mesh for internal communication, and Mulesoft for API integration and management.
+
+**Key Capabilities:**
+- Universal API gateway with multi-cloud support
+- Zero Trust API security
+- Service mesh for internal service communication
+- Healthcare-specific API patterns and transformations
+- Comprehensive API lifecycle management
+
+```yaml
+# Example: API definition in the marketplace
+apiVersion: api.marketplace.healthcare.org/v1
+kind: APIProduct
+metadata:
+  name: medication-management-api
+spec:
+  version: v1
+  description: "Medication management capabilities"
+  endpoints:
+    - path: /api/v1/medications
+      operations: [GET, POST]
+      scopes: [read:medications, write:medications]
+```
+
+[API Marketplace Documentation →](/architecture/core_components/api-marketplace/01-getting-started/overview/)
+
 ### FHIR Server
 Our FHIR-compliant data repository serves as the canonical source for healthcare information, supporting standardized resource models with complete tagging for security, compliance, and data lineage. The server also provides comprehensive interoperability capabilities through FHIR APIs and robust support for FHIR Implementation Guides, enabling standards-based exchange with healthcare ecosystem partners.
 
@@ -32,7 +82,7 @@ GET /fhir/Patient/123456
 Accept: application/fhir+json
 ```
 
-[FHIR Server Documentation →](link)
+[FHIR Server Documentation →](/architecture/core_components/fhir-server/01-getting-started/overview/)
 
 ### Federated Graph API
 The unified API layer exposes capabilities across all systems through a coherent GraphQL interface, enabling product teams to efficiently access data and services while maintaining service boundaries.
@@ -51,7 +101,37 @@ query {
 }
 ```
 
-[Federated Graph API Documentation →](link)
+[Federated Graph API Documentation →](/architecture/core_components/federated-graph-api/01-getting-started/overview/)
+
+### Design Component Library
+Our comprehensive UI component library combines Radix UI primitives and Material-UI components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
+
+**Key Capabilities:**
+- Accessible, WCAG 2.1 AA compliant components
+- Healthcare-specific UI patterns
+- Consistent design language and tokens
+- Comprehensive documentation and examples
+- Automated testing and quality assurance
+
+```jsx
+// Example: Using a clinical component
+import { PatientBanner } from '@healthcare/clinical';
+
+function PatientView({ patientId }) {
+  return (
+    <div className="p-4">
+      <PatientBanner 
+        patientId={patientId}
+        showAllergies={true}
+        compact={false}
+      />
+      {/* Additional patient information */}
+    </div>
+  );
+}
+```
+
+[Design Component Library Documentation →](/architecture/core_components/design-component-library/01-getting-started/overview/)
 
 ### Event Broker
 Our platform uses Confluent Kafka to implement a robust event broker, enabling real-time data processing, system decoupling, and comprehensive visibility into the patient journey.
