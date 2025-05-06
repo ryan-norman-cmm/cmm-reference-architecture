@@ -1,0 +1,206 @@
+name: Documentation Standards Check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/architecture/core_components/**/*.md'
+
+jobs:
+  docs-check:
+    name: Check Documentation Standards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install -g markdownlint-cli
+
+      - name: Run documentation structure check
+        run: |
+          echo "Checking documentation structure..."
+          
+          # Define required files for each tier
+          GETTING_STARTED_FILES=("overview.md" "key-concepts.md" "architecture.md")
+          CORE_FUNCTIONALITY_FILES=("core-apis.md" "data-model.md" "integration-points.md")
+          ADVANCED_PATTERNS_FILES=("advanced-use-cases.md" "extension-points.md" "customization.md")
+          GOVERNANCE_COMPLIANCE_FILES=("access-controls.md" "data-governance.md" "audit-compliance.md" "regulatory-compliance.md")
+          OPERATIONS_FILES=("deployment.md" "monitoring.md" "scaling.md" "troubleshooting.md" "maintenance.md")
+          
+          # Get list of components
+          COMPONENTS=$(find docs/architecture/core_components -mindepth 1 -maxdepth 1 -type d -not -path "*/\.*" | sort)
+          
+          # Initialize error flag
+          HAS_ERRORS=0
+          
+          # Check each component
+          for COMPONENT in $COMPONENTS; do
+            COMPONENT_NAME=$(basename "$COMPONENT")
+            echo "\nChecking component: $COMPONENT_NAME"
+            
+            # Check tier directories exist
+            for TIER in "01-getting-started" "02-core-functionality" "03-advanced-patterns" "04-governance-compliance" "05-operations"; do
+              if [ ! -d "$COMPONENT/$TIER" ]; then
+                echo "❌ Missing tier directory: $TIER"
+                HAS_ERRORS=1
+              else
+                echo "✅ Tier directory exists: $TIER"
+              fi
+            done
+            
+            # Check required files in 01-getting-started
+            for FILE in "${GETTING_STARTED_FILES[@]}"; do
+              if [ ! -f "$COMPONENT/01-getting-started/$FILE" ]; then
+                echo "❌ Missing required file: 01-getting-started/$FILE"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required file exists: 01-getting-started/$FILE"
+              fi
+            done
+            
+            # Check required files in 02-core-functionality
+            for FILE in "${CORE_FUNCTIONALITY_FILES[@]}"; do
+              if [ ! -f "$COMPONENT/02-core-functionality/$FILE" ]; then
+                echo "❌ Missing required file: 02-core-functionality/$FILE"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required file exists: 02-core-functionality/$FILE"
+              fi
+            done
+            
+            # Check required files in 03-advanced-patterns
+            for FILE in "${ADVANCED_PATTERNS_FILES[@]}"; do
+              if [ ! -f "$COMPONENT/03-advanced-patterns/$FILE" ]; then
+                echo "❌ Missing required file: 03-advanced-patterns/$FILE"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required file exists: 03-advanced-patterns/$FILE"
+              fi
+            done
+            
+            # Check required files in 04-governance-compliance
+            for FILE in "${GOVERNANCE_COMPLIANCE_FILES[@]}"; do
+              if [ ! -f "$COMPONENT/04-governance-compliance/$FILE" ]; then
+                echo "❌ Missing required file: 04-governance-compliance/$FILE"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required file exists: 04-governance-compliance/$FILE"
+              fi
+            done
+            
+            # Check required files in 05-operations
+            for FILE in "${OPERATIONS_FILES[@]}"; do
+              if [ ! -f "$COMPONENT/05-operations/$FILE" ]; then
+                echo "❌ Missing required file: 05-operations/$FILE"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required file exists: 05-operations/$FILE"
+              fi
+            done
+          done
+          
+          # Exit with error if any issues were found
+          if [ $HAS_ERRORS -eq 1 ]; then
+            echo "\n❌ Documentation structure check failed. Please ensure all components follow the documentation standardization plan."
+            exit 1
+          else
+            echo "\n✅ Documentation structure check passed."
+          fi
+
+      - name: Run markdown lint
+        run: markdownlint 'docs/architecture/core_components/**/*.md' --config .markdownlint.json
+
+      - name: Check for required sections
+        run: |
+          echo "Checking for required sections in documentation files..."
+          
+          # Define required sections for different document types
+          OVERVIEW_SECTIONS=("Introduction" "Key Features" "Architecture Overview" "Integration Points" "Use Cases" "Getting Started")
+          ARCHITECTURE_SECTIONS=("Overview" "Architecture Diagram" "Core Components" "Data Flow" "Integration Points" "Design Decisions")
+          API_SECTIONS=("Introduction" "API Overview" "Endpoints" "Authentication" "Request/Response Examples" "Error Handling")
+          
+          # Initialize error flag
+          HAS_ERRORS=0
+          
+          # Check overview.md files
+          for FILE in $(find docs/architecture/core_components -name "overview.md"); do
+            echo "\nChecking sections in: $FILE"
+            for SECTION in "${OVERVIEW_SECTIONS[@]}"; do
+              if ! grep -q "^## $SECTION" "$FILE"; then
+                echo "❌ Missing required section: $SECTION"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required section exists: $SECTION"
+              fi
+            done
+          done
+          
+          # Check architecture.md files
+          for FILE in $(find docs/architecture/core_components -name "architecture.md"); do
+            echo "\nChecking sections in: $FILE"
+            for SECTION in "${ARCHITECTURE_SECTIONS[@]}"; do
+              if ! grep -q "^## $SECTION" "$FILE"; then
+                echo "❌ Missing required section: $SECTION"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required section exists: $SECTION"
+              fi
+            done
+          done
+          
+          # Check core-apis.md files
+          for FILE in $(find docs/architecture/core_components -name "core-apis.md"); do
+            echo "\nChecking sections in: $FILE"
+            for SECTION in "${API_SECTIONS[@]}"; do
+              if ! grep -q "^## $SECTION" "$FILE"; then
+                echo "❌ Missing required section: $SECTION"
+                HAS_ERRORS=1
+              else
+                echo "✅ Required section exists: $SECTION"
+              fi
+            done
+          done
+          
+          # Exit with error if any issues were found
+          if [ $HAS_ERRORS -eq 1 ]; then
+            echo "\n❌ Documentation section check failed. Please ensure all documents include the required sections."
+            exit 1
+          else
+            echo "\n✅ Documentation section check passed."
+          fi
+
+      - name: Check for code examples
+        run: |
+          echo "Checking for code examples in documentation files..."
+          
+          # Define files that should have code examples
+          CODE_EXAMPLE_FILES=("core-apis.md" "data-model.md" "integration-points.md" "extension-points.md" "customization.md")
+          
+          # Initialize error flag
+          HAS_ERRORS=0
+          
+          # Check each file type
+          for FILE_TYPE in "${CODE_EXAMPLE_FILES[@]}"; do
+            for FILE in $(find docs/architecture/core_components -name "$FILE_TYPE"); do
+              echo "\nChecking code examples in: $FILE"
+              if ! grep -q '```typescript' "$FILE"; then
+                echo "❌ Missing TypeScript code examples"
+                HAS_ERRORS=1
+              else
+                echo "✅ Contains TypeScript code examples"
+              fi
+            done
+          done
+          
+          # Exit with error if any issues were found
+          if [ $HAS_ERRORS -eq 1 ]; then
+            echo "\n❌ Code example check failed. Please ensure all technical documentation includes TypeScript code examples."
+            exit 1
+          else
+            echo "\n✅ Code example check passed."
+          fi
