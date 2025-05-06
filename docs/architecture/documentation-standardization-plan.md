@@ -65,6 +65,8 @@ Each document should follow this general structure:
 6. **Conclusion**: Summary of key points
 7. **Related Resources**: Links to related documentation
 
+NOTE: Section titles should not reference the technology unless it is the primary focus of the section
+
 ### Content Focus and Avoiding Redundancy
 
 To ensure documentation is focused and minimizes redundancy:
@@ -199,7 +201,7 @@ Reference architecture documentation should be reserved for system-wide architec
 - Ensure code examples are complete and runnable when possible
 - **Use TypeScript for all web and Node.js related code examples**
 - Use the vendor's preferred language only when TypeScript is not available
-- When showing examples for paid services (e.g., Confluent Kafka, Azure, Aidbox, Apollo GraphOS, Okta), leverage vendor-specific features that reduce operational overhead
+- When showing examples for paid services (e.g., Confluent Kafka, Azure, Aidbox, MuleSoft, Apollo GraphOS, Okta), leverage vendor-specific features that reduce operational overhead
 - Include error handling, monitoring, and observability in code examples
 
 ### Diagrams
@@ -945,8 +947,8 @@ All `regulatory-compliance.md` files must include:
 
 1. **Regulatory Framework**: Overview of relevant regulations
 2. **HIPAA Compliance**: How HIPAA requirements are addressed
-3. **GDPR Compliance**: How GDPR requirements are addressed
-4. **Other Regulations**: How other relevant regulations are addressed
+3. **SOC2 Compliance**: How SOC2 requirements are addressed
+4. **Sarbanes-Oxley (SOX) Compliance**: How SOX requirements are addressed
 5. **Implementation Examples**: Code examples showing implementation
 6. **Compliance Monitoring**: How compliance is monitored and reported
 
@@ -990,7 +992,16 @@ All `regulatory-compliance.md` files must include:
 - [ ] No content that belongs in other documents
 - [ ] Follows the "should include/should not include" guidelines
 
-## Documentation Governance
+## Documentation Creation and Maintenance Process
+
+### File Creation and Update Process
+
+1. **Outline-First Approach**
+   - Create an outline for the entire file before adding content
+   - Generate one section at a time when creating or updating files
+   - Add, remove, or update sections incrementally
+   - Ensure each section is complete before moving to the next
+   - Maintain consistency between sections throughout the process
 
 ### Ongoing Maintenance Process
 

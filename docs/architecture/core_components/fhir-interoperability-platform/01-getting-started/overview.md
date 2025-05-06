@@ -2,7 +2,9 @@
 
 ## Introduction
 
-The FHIR Interoperability Platform is a core component of the healthcare modernization architecture, providing standardized storage, access, and exchange of healthcare data using the HL7 FHIR (Fast Healthcare Interoperability Resources) standard. This platform goes beyond a simple FHIR server to provide a comprehensive interoperability solution with robust APIs, data persistence, role-based access control, subscription capabilities, and implementation guide support.
+The FHIR Interoperability Platform is a core component of the CMM Technology Platform, providing standardized storage, access, and exchange of healthcare data using the HL7 FHIR (Fast Healthcare Interoperability Resources) standard. Built with TypeScript and modern cloud-native technologies, this platform delivers a comprehensive interoperability solution with robust APIs, scalable data persistence, role-based access control, real-time subscription capabilities, and implementation guide support.
+
+Our implementation leverages TypeScript for type safety, containerized microservices for scalability, and cloud-native patterns for resilience. The platform supports FHIR R4 (v4.0.1) with a focus on healthcare data interoperability in distributed cloud environments.
 
 ### Quick Start
 

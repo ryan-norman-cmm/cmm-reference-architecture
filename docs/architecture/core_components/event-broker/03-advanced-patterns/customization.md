@@ -1107,6 +1107,7 @@ async function startHealthcareAnalytics() {
 
 // Execute the streams application
 startHealthcareAnalytics();
+```
 
 ### ksqlDB Customization with Confluent Cloud
 
@@ -1328,6 +1329,7 @@ CREATE STREAM department_los_metrics AS
   WINDOW TUMBLING (SIZE 7 DAYS)
   GROUP BY department, admission_type, discharge_disposition
   EMIT CHANGES;
+```
 
 ## Monitoring Customization
 
