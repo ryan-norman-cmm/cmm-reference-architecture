@@ -4,45 +4,67 @@
 
 Schema Registry Management provides governance for event schemas within the Event Broker ecosystem, ensuring data quality, compatibility, and evolution. This document outlines the policies, procedures, and best practices for managing schemas in healthcare environments, focusing on maintaining data integrity while enabling controlled schema evolution.
 
-## Schema Registry Architecture
+## Confluent Cloud Schema Registry Architecture
 
-The Schema Registry serves as the central repository for all event schemas, providing validation and compatibility checking for producers and consumers:
+Confluent Cloud Schema Registry serves as the central repository for all event schemas, providing validation, compatibility checking, and governance for producers and consumers in a fully-managed cloud environment:
 
 ```mermaid
 flowchart TB
-    subgraph "Event Broker"
-        Kafka["Kafka Cluster"]
-    end
-    
-    subgraph "Schema Registry"
-        Registry["Schema Registry"]
-        Storage["Schema Storage"]
-        REST["REST API"]
+    subgraph "Confluent Cloud"
+        Kafka["Confluent Cloud Kafka"]
+        subgraph "Schema Registry"
+            Registry["Confluent Schema Registry"]
+            Storage["Schema Storage"]
+            REST["REST API"]
+            Gov["Stream Governance"]
+        end
     end
     
     subgraph "Producers"
-        Producer1["Producer 1"]
-        Producer2["Producer 2"]
+        Producer1["TypeScript Producer"]
+        Producer2["TypeScript Producer"]
     end
     
     subgraph "Consumers"
-        Consumer1["Consumer 1"]
-        Consumer2["Consumer 2"]
+        Consumer1["TypeScript Consumer"]
+        Consumer2["TypeScript Consumer"]
     end
     
-    Producer1 -->|1. Register/Fetch Schema| REST
-    Producer2 -->|1. Register/Fetch Schema| REST
+    Producer1 -->|1. Register/Fetch Schema with API Key| REST
+    Producer2 -->|1. Register/Fetch Schema with API Key| REST
     REST <-->|2. Store/Retrieve| Storage
+    Gov -->|3. Apply Governance Rules| REST
     
-    Producer1 -->|3. Send Events with Schema ID| Kafka
-    Producer2 -->|3. Send Events with Schema ID| Kafka
+    Producer1 -->|4. Send Events with Schema ID + Auth| Kafka
+    Producer2 -->|4. Send Events with Schema ID + Auth| Kafka
     
-    Kafka -->|4. Consume Events with Schema ID| Consumer1
-    Kafka -->|4. Consume Events with Schema ID| Consumer2
+    Kafka -->|5. Consume Events with Schema ID| Consumer1
+    Kafka -->|5. Consume Events with Schema ID| Consumer2
     
-    Consumer1 -->|5. Fetch Schema| REST
-    Consumer2 -->|5. Fetch Schema| REST
+    Consumer1 -->|6. Fetch Schema with API Key| REST
+    Consumer2 -->|6. Fetch Schema with API Key| REST
+    
+    subgraph "Schema Lifecycle Management"
+        SchemaUI["Confluent Cloud UI"]
+        TagCatalog["Business Metadata & Tags"]
+        Lineage["Data Lineage"]
+    end
+    
+    SchemaUI -->|Manage Schemas| REST
+    TagCatalog -->|Enrich Schemas| REST
+    REST -->|Track| Lineage
 ```
+
+Key differences with Confluent Cloud Schema Registry:
+
+1. **Fully Managed Service**: No infrastructure to maintain or scale
+2. **Global Availability**: Multi-region deployment with high availability
+3. **Stream Governance**: Advanced schema management with business metadata
+4. **API Key Authentication**: Secure access control with API keys
+5. **Schema Evolution Rules**: Automated compatibility enforcement
+6. **Schema Sharing**: Cross-environment schema reuse
+7. **Schema Lifecycle Management**: UI-based schema management
+8. **Data Lineage**: Track schema usage across applications
 
 ## Schema Governance Principles
 
@@ -271,25 +293,202 @@ All new schemas and schema changes require approval through the following workfl
    - Documentation is published
    - Producers and consumers are notified
 
-### Schema Registration API
-
 ```bash
-# Register a new schema
-curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
-  --data '{"schema": "{\"type\":\"record\",\"name\":\"PatientAdmittedEvent\",\"namespace\":\"com.healthcare.events.clinical.patient\",\"doc\":\"Event emitted when a patient is admitted\",\"fields\":[{\"name\":\"eventId\",\"type\":\"string\"}]}"}' \
-  http://schema-registry:8081/subjects/clinical.patient.admitted-value/versions
+# Configure Confluent CLI with API keys
+confluent login --save
 
-# Get a specific version of a schema
-curl -X GET http://schema-registry:8081/subjects/clinical.patient.admitted-value/versions/1
+# List all subjects in Confluent Cloud Schema Registry
+confluent schema-registry subject list
+
+# Register a new schema
+confluent schema-registry schema register --subject clinical.patient.admitted-value \
+  --schema ./schemas/patient-admitted.avsc --type AVRO
+
+# Get a specific schema version
+confluent schema-registry schema get --subject clinical.patient.admitted-value \
+  --version 1
 
 # List all versions of a schema
-curl -X GET http://schema-registry:8081/subjects/clinical.patient.admitted-value/versions
+confluent schema-registry subject describe clinical.patient.admitted-value
 
 # Check compatibility of a new schema version
-curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
-  --data '{"schema": "{\"type\":\"record\",\"name\":\"PatientAdmittedEvent\",\"namespace\":\"com.healthcare.events.clinical.patient\",\"doc\":\"Event emitted when a patient is admitted\",\"fields\":[{\"name\":\"eventId\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"long\"}]}"}' \
-  http://schema-registry:8081/compatibility/subjects/clinical.patient.admitted-value/versions/latest
+confluent schema-registry schema validate --subject clinical.patient.admitted-value \
+  --schema ./schemas/patient-admitted-v2.avsc --type AVRO
+
+# Set global default compatibility
+confluent schema-registry cluster config update --compatibility BACKWARD
+
+# Set subject-specific compatibility
+confluent schema-registry subject update clinical.patient.admitted-value \
+  --compatibility FULL
 ```
+
+#### Using TypeScript with Confluent Cloud Schema Registry
+
+```typescript
+import { SchemaRegistry, SchemaType } from '@kafkajs/confluent-schema-registry';
+
+// Configure Schema Registry client for Confluent Cloud
+const schemaRegistry = new SchemaRegistry({
+  host: 'https://schema-registry.confluent.cloud',
+  auth: {
+    username: '${SCHEMA_REGISTRY_KEY}',
+    password: '${SCHEMA_REGISTRY_SECRET}'
+  }
+});
+
+// Register a new schema
+async function registerSchema() {
+  const schema = {
+    type: 'record',
+    namespace: 'com.healthcare.events.clinical.patient',
+    name: 'AdmittedEvent',
+    doc: 'Event emitted when a patient is admitted to a facility',
+    fields: [
+      {
+        name: 'eventId',
+        type: 'string',
+        doc: 'Unique identifier for this event instance'
+      },
+      // Additional fields...
+    ]
+  };
+
+  try {
+    const { id } = await schemaRegistry.register({
+      type: SchemaType.AVRO,
+      schema: JSON.stringify(schema),
+      subject: 'clinical.patient.admitted-value'
+    });
+    console.log(`Schema registered with ID: ${id}`);
+    return id;
+  } catch (error) {
+    console.error('Failed to register schema:', error);
+    throw error;
+  }
+}
+
+// Get a specific schema version
+async function getSchema(subject: string, version: number = -1) {
+  try {
+    if (version === -1) {
+      // Get latest version
+      return await schemaRegistry.getLatestSchemaId(subject);
+    } else {
+      // Get specific version
+      return await schemaRegistry.getSchema(version);
+    }
+  } catch (error) {
+    console.error(`Failed to get schema for ${subject}:`, error);
+    throw error;
+  }
+}
+
+// Check compatibility of a new schema
+async function checkCompatibility(subject: string, schema: any) {
+  try {
+    const isCompatible = await schemaRegistry.isCompatible({
+      subject,
+      version: 'latest',
+      schema: JSON.stringify(schema)
+    });
+    
+    console.log(`Schema compatibility check result: ${isCompatible}`);
+    return isCompatible;
+  } catch (error) {
+    console.error('Compatibility check failed:', error);
+    throw error;
+  }
+}
+
+// Set compatibility level
+async function setCompatibility(subject: string, compatibility: string) {
+  try {
+    await schemaRegistry.updateCompatibility({
+      subject,
+      compatibility // 'BACKWARD', 'FORWARD', 'FULL', 'NONE'
+    });
+    console.log(`Compatibility for ${subject} set to ${compatibility}`);
+  } catch (error) {
+    console.error(`Failed to set compatibility for ${subject}:`, error);
+    throw error;
+  }
+}
+```
+
+#### Stream Governance Features in Confluent Cloud
+
+Confluent Cloud Schema Registry provides additional Stream Governance features:
+
+1. **Business Metadata**: Add business context to schemas
+   ```typescript
+   // Add business metadata to a schema
+   async function addBusinessMetadata(subject: string) {
+     try {
+       // Using Confluent Cloud REST API with authentication
+       const response = await fetch(
+         `https://schema-registry.confluent.cloud/catalog/v1/business-metadata/schemas/${subject}`,
+         {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+             'Authorization': 'Basic ' + btoa(`${SCHEMA_REGISTRY_KEY}:${SCHEMA_REGISTRY_SECRET}`)
+           },
+           body: JSON.stringify({
+             properties: {
+               'data.owner': 'Clinical Systems Team',
+               'data.classification': 'PHI',
+               'data.retention.period': '7 years',
+               'data.domain': 'Clinical',
+               'data.criticality': 'High'
+             }
+           })
+         }
+       );
+       
+       const result = await response.json();
+       console.log('Business metadata added:', result);
+     } catch (error) {
+       console.error('Failed to add business metadata:', error);
+       throw error;
+     }
+   }
+   ```
+
+2. **Data Lineage**: Track schema usage across applications
+   ```typescript
+   // Lineage is automatically tracked in Confluent Cloud
+   // Access through Confluent Cloud Console UI
+   ```
+
+3. **Schema Tagging**: Organize schemas with tags
+   ```typescript
+   // Add tags to a schema
+   async function addTags(subject: string, tags: string[]) {
+     try {
+       // Using Confluent Cloud REST API with authentication
+       const response = await fetch(
+         `https://schema-registry.confluent.cloud/catalog/v1/tags/schemas/${subject}`,
+         {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+             'Authorization': 'Basic ' + btoa(`${SCHEMA_REGISTRY_KEY}:${SCHEMA_REGISTRY_SECRET}`)
+           },
+           body: JSON.stringify({
+             tags: tags.map(tag => ({ name: tag }))
+           })
+         }
+       );
+       
+       const result = await response.json();
+       console.log('Tags added:', result);
+     } catch (error) {
+       console.error('Failed to add tags:', error);
+       throw error;
+     }
+   }
+   ```
 
 ## Schema Versioning and Evolution
 
@@ -426,46 +625,122 @@ This schema defines the event emitted when a patient is admitted to a healthcare
 - Billing System (billing@example.com)
 ```
 
-## Schema Registry Security
+## Confluent Cloud Schema Registry Security
 
-### Authentication and Authorization
+### API Key Authentication and Role-Based Access Control
 
-The Schema Registry must implement:
+Confluent Cloud Schema Registry implements a comprehensive security model:
 
-1. **Authentication**: All clients must authenticate
-   ```properties
-   # Schema Registry security configuration
-   authentication.method=BASIC
-   authentication.realm=SchemaRegistry
-   authentication.roles=SCHEMA_REGISTRY_ADMIN,SCHEMA_REGISTRY_USER,SCHEMA_REGISTRY_READ_ONLY
-   ```
-
-2. **Authorization**: Role-based access control
-   ```properties
-   # Schema Registry authorization configuration
-   authorizer.class.name=io.confluent.kafka.schemaregistry.security.authorizer.SchemaRegistryAuthorizer
-   ```
-
-3. **Access Control Rules**:
-   ```
-   # Grant admin access
-   schema-registry-security-plugin principal.roles=admin:SCHEMA_REGISTRY_ADMIN
+1. **API Key Authentication**: Secure access using API keys
+   ```typescript
+   // Configure Schema Registry client with API key authentication
+   import { SchemaRegistry } from '@kafkajs/confluent-schema-registry';
    
-   # Grant write access to specific teams
-   schema-registry-security-plugin principal.roles=clinical-team:SCHEMA_REGISTRY_USER
-   
-   # Grant read-only access
-   schema-registry-security-plugin principal.roles=analytics-team:SCHEMA_REGISTRY_READ_ONLY
+   const schemaRegistry = new SchemaRegistry({
+     host: 'https://schema-registry.confluent.cloud',
+     auth: {
+       username: '${SCHEMA_REGISTRY_KEY}', // API Key
+       password: '${SCHEMA_REGISTRY_SECRET}' // API Secret
+     }
+   });
    ```
 
-### Schema Registry API Security
+2. **Role-Based Access Control**: Granular permissions through Confluent Cloud IAM
+   ```bash
+   # Using Confluent CLI to manage access
+   
+   # Create a service account for schema registry access
+   confluent iam service-account create schema-registry-app --description "Schema Registry Application"
+   
+   # Create an API key for the service account
+   confluent api-key create --service-account schema-registry-app --resource schema-registry
+   
+   # Assign role bindings
+   confluent iam rbac role-binding create --principal User:schema-registry-app \
+     --role ResourceOwner --resource Subject:clinical.patient.admitted-value
+   ```
 
-```bash
-# Secure Schema Registry API calls
-curl -X GET --user clinical-team:password \
-  -H "Content-Type: application/vnd.schemaregistry.v1+json" \
-  https://schema-registry:8081/subjects/clinical.patient.admitted-value/versions/latest
+3. **Granular Access Control**: Control access at the subject level
+   ```bash
+   # Grant read-only access to specific subjects
+   confluent iam rbac role-binding create --principal User:analytics-team \
+     --role DeveloperRead --resource Subject:clinical.patient.admitted-value
+   
+   # Grant write access to specific subjects
+   confluent iam rbac role-binding create --principal User:clinical-team \
+     --role DeveloperWrite --resource Subject:clinical.patient.admitted-value
+   ```
+
+### Schema Registry API Security with TypeScript
+
+```typescript
+// Secure Schema Registry API calls with TypeScript
+import axios from 'axios';
+
+// Function to securely access Schema Registry
+async function getSchemaVersion(subject: string, version: string = 'latest') {
+  try {
+    // Create basic auth header from API key and secret
+    const auth = Buffer.from(`${process.env.SCHEMA_REGISTRY_KEY}:${process.env.SCHEMA_REGISTRY_SECRET}`).toString('base64');
+    
+    const response = await axios({
+      method: 'GET',
+      url: `https://schema-registry.confluent.cloud/subjects/${subject}/versions/${version}`,
+      headers: {
+        'Content-Type': 'application/vnd.schemaregistry.v1+json',
+        'Authorization': `Basic ${auth}`
+      }
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error(`Error accessing schema registry: ${error.message}`);
+    if (error.response) {
+      console.error(`Status: ${error.response.status}, Data: ${JSON.stringify(error.response.data)}`);
+    }
+    throw error;
+  }
+}
+
+// Example usage
+async function main() {
+  try {
+    const schema = await getSchemaVersion('clinical.patient.admitted-value');
+    console.log('Retrieved schema:', schema);
+  } catch (error) {
+    console.error('Failed to retrieve schema:', error);
+  }
+}
 ```
+
+### Advanced Security Features in Confluent Cloud
+
+1. **Private Networking**: Secure Schema Registry access with private networking
+   ```bash
+   # Configure private networking for Schema Registry
+   confluent network private-link create schema-registry \
+     --cloud aws --region us-west-2
+   ```
+
+2. **Audit Logging**: Track all Schema Registry access and changes
+   ```bash
+   # Enable audit logging for Schema Registry
+   confluent audit-log create --resource schema-registry \
+     --destination-topic security.schema-registry.audit
+   ```
+
+3. **IP Filtering**: Restrict Schema Registry access by IP address
+   ```bash
+   # Configure IP filtering for Schema Registry
+   confluent network ip-filter create --service schema-registry \
+     --cidr 192.168.1.0/24 --description "Corporate Network"
+   ```
+
+4. **Encryption**: All data in transit is encrypted with TLS 1.2+
+   ```typescript
+   // TLS is automatically enabled for all Confluent Cloud connections
+   // No additional configuration required
+   ```
 
 ## Compliance and Audit
 
