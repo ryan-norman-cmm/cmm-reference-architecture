@@ -1,0 +1,20 @@
+{
+  "default": true,
+  "line-length": false,
+  "no-duplicate-header": {
+    "allow_different_nesting": true
+  },
+  "no-inline-html": false,
+  "first-header-h1": true,
+  "header-style": {
+    "style": "atx"
+  },
+  "ul-style": {
+    "style": "dash"
+  },
+  "no-trailing-spaces": true,
+  "no-hard-tabs": true,
+  "no-reversed-links": true,
+  "no-multiple-blanks": true,
+  "fenced-code-language": true
+}
