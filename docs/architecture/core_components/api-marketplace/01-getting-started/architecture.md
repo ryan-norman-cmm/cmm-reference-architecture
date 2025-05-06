@@ -161,6 +161,18 @@ The API Marketplace uses an API Gateway to provide a unified entry point for all
 - Rate limiting
 - Monitoring and analytics
 
+### Service Mesh with Voltmesh
+
+The API Marketplace leverages Voltmesh as its service mesh solution to connect legacy systems that are not part of the modern technology platform. This approach enables:
+
+- Seamless integration between modern and legacy systems
+- Consistent security policies across heterogeneous environments
+- Traffic management and load balancing for legacy applications
+- Observability for legacy system interactions
+- Gradual migration path from legacy to modern architecture
+
+Voltmesh provides the necessary infrastructure to bridge the gap between legacy on-premises solutions and cloud-native components, allowing for a hybrid architecture during the transition period.
+
 ### CQRS Pattern
 
 The Command Query Responsibility Segregation (CQRS) pattern is used to separate read and write operations. This enables:
@@ -179,11 +191,11 @@ The API Marketplace uses the following technology stack:
 | API | Node.js, Express, GraphQL, REST |
 | Service | Node.js, TypeScript, NestJS |
 | Data | MongoDB, PostgreSQL, Redis, Elasticsearch |
-| Infrastructure | Docker, Kubernetes, Terraform |
+| Infrastructure | Kubernetes, Docker, Voltmesh, Azure Cloud Services, Terraform |
 
 ## Integration Architecture
 
-The API Marketplace integrates with other components of the CMM Technology Platform:
+The API Marketplace integrates with other components of the CMM Technology Platform and legacy systems:
 
 ```mermaid
 graph LR
@@ -191,6 +203,11 @@ graph LR
     A --> C[[Event Broker]]
     A --> D[[FHIR Interoperability Platform]]
     A --> E[[Federated Graph API]]
+    A --> F[Voltmesh Service Mesh]
+    F --> G[Legacy Systems]
+    subgraph "On-Premises Legacy Environment"
+    G
+    end
 ```
 
 ### Integration with Security and Access Framework
@@ -225,6 +242,24 @@ The API Marketplace integrates with the FHIR Interoperability Platform for:
 - Healthcare data categorization
 
 The integration uses RESTful APIs and FHIR-specific metadata.
+
+### Integration with Legacy Systems via Voltmesh
+
+The API Marketplace uses Voltmesh service mesh to integrate with legacy systems that are not part of the modern technology platform:
+
+- **Transparent Connectivity**: Voltmesh provides a transparent connectivity layer between cloud-native services and on-premises legacy applications
+
+- **Protocol Translation**: Converts between modern protocols (gRPC, HTTP/2) and legacy protocols used by existing systems
+
+- **Traffic Management**: Intelligent routing and load balancing for traffic between modern and legacy components
+
+- **Security Controls**: Consistent security policies applied across both modern and legacy environments
+
+- **Observability**: End-to-end monitoring and tracing that includes legacy system interactions
+
+- **Gradual Migration**: Enables incremental modernization by allowing legacy systems to be replaced piece by piece while maintaining connectivity
+
+This integration approach allows the API Marketplace to serve as a unified gateway for all APIs, regardless of whether they are implemented in modern microservices or legacy systems.
 
 ## Scalability and Performance
 
