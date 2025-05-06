@@ -463,6 +463,94 @@ Compliance with documentation standards is measured and tracked:
    - Each component is assessed for compliance with these standards
    - The tracking document is updated monthly
 
+## US Regulatory Compliance Documentation
+
+### Overview
+
+All core components must include comprehensive documentation of compliance with key United States regulations. This section outlines the specific documentation requirements for HIPAA, Sarbanes-Oxley (SOX), and US privacy regulations.
+
+### HIPAA Compliance Documentation Requirements
+
+All components that process, store, or transmit Protected Health Information (PHI) must document the following in their regulatory-compliance.md file:
+
+1. **Technical Safeguards Implementation**
+   - Access Controls: Authentication mechanisms, authorization frameworks, and automatic logoff
+   - Audit Controls: Logging mechanisms, audit trail implementation, and log review procedures
+   - Integrity Controls: Mechanisms to prevent unauthorized alteration or destruction of PHI
+   - Transmission Security: Encryption methods, integrity verification, and secure transmission protocols
+
+2. **Administrative Safeguards Support**
+   - Risk Analysis: How the component supports risk assessment and management
+   - Security Personnel: Integration with security management structure
+   - Information Access Management: Access authorization and establishment workflows
+   - Contingency Plan: Data backup, disaster recovery, and emergency mode operation
+
+3. **Breach Notification Support**
+   - Breach Detection: Mechanisms for identifying unauthorized access or disclosure
+   - Breach Investigation: Tools for determining scope and impact of breaches
+   - Notification Workflows: Processes for managing breach notifications
+
+### Sarbanes-Oxley (SOX) Compliance Documentation Requirements
+
+All components that support financial reporting processes must document the following in their regulatory-compliance.md file:
+
+1. **Internal Controls Documentation**
+   - Control Objectives: Clear statements of what each control is designed to achieve
+   - Control Activities: Detailed descriptions of how controls are implemented
+   - Control Testing: Methods for testing control effectiveness
+   - Evidence Collection: Mechanisms for collecting and preserving control evidence
+
+2. **IT General Controls (ITGCs)**
+   - Change Management: Processes for managing changes to the component
+   - Access Security: Controls over who can access the component and what they can do
+   - Computer Operations: Controls over system processing and data management
+   - Program Development: Controls over development and implementation of new functionality
+
+3. **Segregation of Duties**
+   - Role Definitions: Clear definitions of roles and responsibilities
+   - Conflicting Duties: Identification of duties that should be separated
+   - Enforcement Mechanisms: How segregation of duties is enforced
+
+### US Privacy Regulations Documentation Requirements
+
+All components that process personal information must document the following in their regulatory-compliance.md file:
+
+1. **Data Subject Rights Management**
+   - Right to Know/Access: How data subject access requests are processed
+   - Right to Delete: How deletion requests are handled, including exceptions
+   - Right to Opt-Out: How sale/sharing opt-out preferences are managed
+   - Right to Correct: How correction requests are processed
+   - Right to Data Portability: How data is provided in a portable format
+
+2. **Privacy Notice and Consent Management**
+   - Notice Delivery: How privacy notices are delivered to users
+   - Consent Collection: How consent is collected and recorded
+   - Preference Management: How privacy preferences are managed
+
+3. **Data Inventory and Classification**
+   - Data Mapping: How personal data flows are documented
+   - Data Classification: How data is classified according to privacy regulations
+   - Retention Management: How data retention policies are implemented
+
+### Cross-Regulation Documentation Requirements
+
+All components must document the following common elements across regulations:
+
+1. **Regulatory Requirements Mapping**
+   - Clear mapping between regulatory requirements and component features
+   - Traceability from requirements to implementation
+   - Compliance gap analysis and remediation plans
+
+2. **Compliance Monitoring and Reporting**
+   - Monitoring mechanisms for compliance status
+   - Reporting capabilities for regulatory requirements
+   - Metrics for measuring compliance effectiveness
+
+3. **Implementation Examples**
+   - Code examples demonstrating compliance features
+   - Configuration examples for compliance settings
+   - Integration examples with compliance frameworks
+
 ## Deployable Objects Documentation
 
 ### Overview
@@ -563,13 +651,14 @@ All components must include the following documentation, with clear content boun
   - *Should not include*: Access controls (covered in access-controls.md), general data concepts
   
 - **audit-compliance.md**
-  - *Should include*: IT general controls (ITGCs), audit framework, event types, data collection, log protection, control objectives and activities, segregation of duties, change management controls, system access controls, and IT operations controls
+  - *Should include*: IT general controls (ITGCs) key to SOC2, audit framework, event types, data collection, log protection, control objectives and activities, segregation of duties, change management controls, system access controls, and IT operations controls
   - *Should not include*: Access controls implementation details (covered in access-controls.md), general security concepts
   - *Must emphasize*: Documentation of IT general controls that support financial reporting and regulatory compliance
   
 - **regulatory-compliance.md**
-  - *Should include*: Regulatory framework, HIPAA/GDPR implementation, compliance monitoring
-  - *Should not include*: General security concepts, implementation details not related to compliance
+  - *Should include*: Regulatory framework focused on HIPAA, Sarbanes-Oxley (SOX), and United States privacy regulations (CCPA, CPRA, state privacy laws), compliance requirements mapping, technical controls implementation, compliance monitoring, and reporting
+  - *Should not include*: General security concepts, implementation details not related to compliance, non-US regulations unless specifically relevant
+  - *Must emphasize*: Specific technical and administrative safeguards required for HIPAA compliance, internal controls documentation for SOX 404, and data subject rights management for US privacy regulations
   
 - **versioning-policy.md**
   - *Should include*: Semantic versioning, API versioning, schema versioning, breaking changes policy
