@@ -664,13 +664,13 @@ const alertsConfig = {
       name: 'Bundle Size Increase',
       condition: 'bundleSize > previousBundleSize * 1.1', // 10% increase
       severity: 'warning',
-      channels: ['slack', 'email'],
+      channels: ['teams', 'email'],
     },
     {
       name: 'Render Time Degradation',
       condition: 'averageRenderTime > previousAverageRenderTime * 1.2', // 20% increase
       severity: 'warning',
-      channels: ['slack'],
+      channels: ['teams'],
     },
   ],
   errors: [
@@ -678,13 +678,13 @@ const alertsConfig = {
       name: 'Error Spike',
       condition: 'errorRate > previousErrorRate * 2', // 100% increase
       severity: 'critical',
-      channels: ['slack', 'email', 'pager'],
+      channels: ['teams', 'email', 'pager'],
     },
     {
       name: 'Consistent Errors',
       condition: 'errorCount > 10 && errorComponent === sameComponent', // Same component has >10 errors
       severity: 'high',
-      channels: ['slack', 'email'],
+      channels: ['teams', 'email'],
     },
   ],
   accessibility: [
@@ -692,13 +692,13 @@ const alertsConfig = {
       name: 'Accessibility Regression',
       condition: 'a11yScore < previousA11yScore', // Any decrease in accessibility score
       severity: 'high',
-      channels: ['slack', 'email'],
+      channels: ['teams', 'email'],
     },
     {
       name: 'Critical Accessibility Issue',
       condition: 'a11yIssue.severity === "critical"', // Critical accessibility issue
       severity: 'critical',
-      channels: ['slack', 'email', 'pager'],
+      channels: ['teams', 'email', 'pager'],
     },
   ],
 };

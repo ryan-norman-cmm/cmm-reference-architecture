@@ -448,7 +448,7 @@ Specialized testing for healthcare compliance:
 ### Communication Channels
 
 - **Design System Website**: Primary source of documentation
-- **Team Slack Channel**: Day-to-day communication
+- **Team Microsoft Teams Channel**: Day-to-day communication
 - **Monthly Newsletter**: Updates on changes and roadmap
 - **Quarterly Meetings**: Broader updates for all stakeholders
 - **Training Sessions**: Education on new features and best practices

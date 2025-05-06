@@ -163,7 +163,7 @@ All topics must be registered in the central Topic Registry with complete metada
   "owner": {
     "team": "patient-management",
     "email": "patient-team@example.com",
-    "slack": "#patient-management"
+    "teams": "#patient-management"
   },
   "dataClassification": "PHI",
   "retentionPolicy": {

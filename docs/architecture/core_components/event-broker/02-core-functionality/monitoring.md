@@ -518,12 +518,12 @@ receivers:
 - name: 'healthcare-oncall'
   pagerduty_configs:
   - service_key: '<healthcare-pagerduty-key>'
-  slack_configs:
+  teams_configs:
   - channel: '#healthcare-alerts'
     send_resolved: true
 
 - name: 'infrastructure-team'
-  slack_configs:
+  teams_configs:
   - channel: '#kafka-alerts'
     send_resolved: true
 ```

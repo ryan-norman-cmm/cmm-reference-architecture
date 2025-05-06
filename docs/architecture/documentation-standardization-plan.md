@@ -75,6 +75,17 @@ To ensure documentation is focused and minimizes redundancy:
 4. **Appropriate Detail Level**: Match the detail level to the document's purpose and audience
 5. **Consistent Terminology**: Use consistent terminology across all documents
 
+### Communication and Documentation
+
+### Communication Platform Standards
+
+All documentation must reference Microsoft Teams as the standard communication platform:
+
+- Use "Microsoft Teams channel" instead of "Slack channel" in all documentation
+- Use "teams_configs" instead of "slack_configs" in all monitoring configurations
+- Use "teams" instead of "slack" in notification channel references
+- Use the "teams" field instead of "slack" in team contact information
+
 ### What Should and Should Not Be Included
 
 The following guidelines help determine what content belongs in each document:
