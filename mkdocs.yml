@@ -83,13 +83,14 @@ nav:
         - GraphQL Integration: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/graphql-integration.md
         - Event Processing: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/event-processing.md
         - Bulk Data Operations: architecture/core_components/fhir-interoperability-platform/03-advanced-patterns/bulk-data-operations.md
-      - Data Management:
-        - Data Tagging: architecture/core_components/fhir-interoperability-platform/04-data-management/data-tagging.md
-        - Entitlement Management: architecture/core_components/fhir-interoperability-platform/04-data-management/entitlement-management.md
-        - Patient Matching: architecture/core_components/fhir-interoperability-platform/04-data-management/patient-matching.md
-        - Golden Records: architecture/core_components/fhir-interoperability-platform/04-data-management/golden-records.md
-        - Identity Linking: architecture/core_components/fhir-interoperability-platform/04-data-management/identity-linking.md
-        - Consent Management: architecture/core_components/fhir-interoperability-platform/04-data-management/consent-management.md
+      - Governance & Compliance:
+        - Resource Governance: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/resource-governance.md
+        - Data Tagging: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/data-tagging.md
+        - Entitlement Management: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/entitlement-management.md
+        - Patient Matching: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/patient-matching.md
+        - Golden Records: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/golden-records.md
+        - Identity Linking: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/identity-linking.md
+        - Consent Management: architecture/core_components/fhir-interoperability-platform/04-governance-compliance/consent-management.md
       - Operations:
         - Server Monitoring: architecture/core_components/fhir-interoperability-platform/05-operations/server-monitoring.md
         - Performance Tuning: architecture/core_components/fhir-interoperability-platform/05-operations/performance-tuning.md
@@ -114,10 +115,19 @@ nav:
         - Stream Processing: architecture/core_components/event-broker/03-advanced-patterns/stream-processing.md
         - Event Sourcing: architecture/core_components/event-broker/03-advanced-patterns/event-sourcing.md
         - CQRS: architecture/core_components/event-broker/03-advanced-patterns/cqrs.md
-      - Healthcare Integration:
-        - Clinical Events: architecture/core_components/event-broker/04-healthcare-integration/clinical-events.md
-        - HL7 Integration: architecture/core_components/event-broker/04-healthcare-integration/hl7-integration.md
-        - FHIR Events: architecture/core_components/event-broker/04-healthcare-integration/fhir-events.md
+      - Governance & Compliance:
+        - Topic Governance: architecture/core_components/event-broker/04-governance-compliance/topic-governance.md
+        - Schema Registry Management: architecture/core_components/event-broker/04-governance-compliance/schema-registry-management.md
+        - Access Control Policies: architecture/core_components/event-broker/04-governance-compliance/access-control-policies.md
+        - Data Retention & Archiving: architecture/core_components/event-broker/04-governance-compliance/data-retention-archiving.md
+      - Operations:
+        - Security: architecture/core_components/event-broker/05-operations/security.md
+        - Disaster Recovery: architecture/core_components/event-broker/05-operations/disaster-recovery.md
+        - Performance Tuning: architecture/core_components/event-broker/05-operations/performance-tuning.md
+        - Scaling: architecture/core_components/event-broker/05-operations/scaling.md
+      - Case Studies:
+        - Clinical Data Integration: architecture/core_components/event-broker/06-case-studies/clinical-data-integration.md
+
     - Federated Graph API:
       - Getting Started:
         - Overview: architecture/core_components/federated-graph-api/01-getting-started/overview.md
@@ -135,9 +145,9 @@ nav:
         - Schema Federation: architecture/core_components/federated-graph-api/03-advanced-patterns/schema-federation.md
         - Custom Directives: architecture/core_components/federated-graph-api/03-advanced-patterns/custom-directives.md
         - Subscriptions: architecture/core_components/federated-graph-api/03-advanced-patterns/subscriptions.md
-      - Data Management:
-        - Access Control: architecture/core_components/federated-graph-api/04-data-management/access-control.md
-        - Schema Governance: architecture/core_components/federated-graph-api/04-data-management/schema-governance.md
+      - Governance & Compliance:
+        - Access Control: architecture/core_components/federated-graph-api/04-governance-compliance/access-control.md
+        - Schema Governance: architecture/core_components/federated-graph-api/04-governance-compliance/schema-governance.md
       - Operations:
         - Monitoring: architecture/core_components/federated-graph-api/05-operations/monitoring.md
         - Performance Tuning: architecture/core_components/federated-graph-api/05-operations/performance-tuning.md

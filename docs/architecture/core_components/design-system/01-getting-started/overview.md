@@ -2,7 +2,9 @@
 
 ## Introduction
 
-The Design System is a comprehensive suite of UI components, design patterns, and development tools that enable consistent, accessible, and high-quality user interfaces across all CMM applications. Our implementation combines several modern frontend technologies including Storybook, Tailwind CSS, React, Radix UI, Material-UI (MUI), Artifactory, and GitHub Actions to create a robust design system that accelerates development while maintaining design consistency and code quality.
+The CMM Reference Architecture Design System is a comprehensive suite of UI components, design patterns, and development tools that enable consistent, accessible, and user-friendly healthcare applications. While ShadCN forms the technical foundation for our UI components, the design system encompasses much more, including design principles, tokens, patterns, and healthcare-specific guidelines.
+
+Our design system ensures a cohesive user experience across all touchpoints while addressing the unique requirements of healthcare environments, accelerating development while maintaining design consistency and code quality.
 
 ## Key Concepts
 
@@ -22,27 +24,38 @@ Our Design System leverages several key technologies:
 
 - **React**: Component-based JavaScript library for building user interfaces
 - **Tailwind CSS**: Utility-first CSS framework for rapid UI development
-- **Radix UI**: Unstyled, accessible component primitives for building robust UI components
-- **Material-UI (MUI)**: Comprehensive React UI framework with pre-built components following Material Design
+- **ShadCN**: Collection of reusable components built with Radix UI and Tailwind CSS
 - **Storybook**: Development environment for UI components with documentation
 - **Artifactory**: Repository manager for storing and distributing component packages
 - **GitHub Actions**: CI/CD automation for testing, building, and publishing components
+
+## Key Features
+
+- **Design Principles**: Clear guidelines that inform all design decisions
+- **Design Tokens**: Standardized values for colors, typography, spacing, and more
+- **Accessibility Standards**: Compliance with WCAG 2.1 AA standards and healthcare-specific accessibility requirements
+- **Component Library**: A comprehensive set of UI components built with ShadCN
+- **Pattern Library**: Common interaction patterns and layouts for healthcare applications
+- **Healthcare-Specific Guidelines**: Specialized patterns for clinical workflows, patient information display, and regulatory compliance
+- **Responsive Framework**: Adaptable designs that work across all device sizes and contexts
+- **Documentation**: Comprehensive guides for designers and developers
 
 ## Architecture Overview
 
 ```mermaid
 flowchart TB
     subgraph Design System
+        DesignPrinciples[Design Principles]
         DesignTokens[Design Tokens]
         CoreComponents[Core Components]
         CompositeComponents[Composite Components]
         Patterns[UI Patterns]
         Templates[Page Templates]
+        HealthcareGuidelines[Healthcare Guidelines]
     end
     
     subgraph Component Libraries
-        RadixUI[Radix UI Primitives]
-        MUI[Material-UI Components]
+        ShadCN[ShadCN Components]
         CustomComponents[Custom Healthcare Components]
     end
     
@@ -65,13 +78,14 @@ flowchart TB
         AdminPortals[Admin Portals]
     end
     
+    DesignPrinciples --> DesignTokens
     DesignTokens --> CoreComponents
     CoreComponents --> CompositeComponents
     CompositeComponents --> Patterns
     Patterns --> Templates
+    HealthcareGuidelines --> Patterns
     
-    RadixUI --> CoreComponents
-    MUI --> CoreComponents
+    ShadCN --> CoreComponents
     CoreComponents --> CustomComponents
     
     Design System --> Storybook
@@ -85,76 +99,80 @@ flowchart TB
     Design System -.-> Applications
 ```
 
-## Key Features
+## Core Elements of the Design System
 
-### Component Hierarchy
+### 1. Design Principles
 
-Our Design System is organized in a hierarchical structure:
+Fundamental guidelines that inform all design decisions:
 
-- **Design Tokens**: Fundamental design values (colors, spacing, typography, etc.)
-- **Foundation Components**:
-  - **Radix UI Primitives**: Unstyled, accessible component primitives (dialog, dropdown, etc.)
-  - **Material-UI Base**: Adaptable MUI components with our design tokens
-- **Core Components**: Basic UI elements (buttons, inputs, typography, etc.)
-- **Composite Components**: Combinations of core components (forms, cards, etc.)
-- **Healthcare-Specific Components**: Specialized clinical components (patient banner, vital signs, etc.)
-- **Patterns**: Common UI patterns (navigation, layouts, etc.)
-- **Templates**: Pre-built page structures for common scenarios
+- **Clarity**: Information is presented clearly and efficiently
+- **Consistency**: Patterns and interactions are consistent throughout the system
+- **Accessibility**: Designs are usable by all people, including those with disabilities
+- **Efficiency**: Workflows are optimized for healthcare professionals' needs
+- **Trust**: Design builds confidence through reliability and accuracy
 
-### Storybook Integration
+### 2. Design Tokens
 
-Storybook serves as the primary development and documentation environment:
+Standardized values that ensure visual consistency:
 
-- Interactive component playground
-- Comprehensive documentation
-- Accessibility testing
-- Responsive design testing
-- Visual regression testing
-- Component state management
+- **Color System**: Primary, secondary, and semantic colors with accessible contrast ratios
+- **Typography**: Font families, sizes, weights, and line heights
+- **Spacing**: Consistent spacing units for margins, padding, and layout
+- **Elevation**: Shadow values for creating depth
+- **Border Radius**: Consistent rounding of corners
+- **Animation**: Standard timing functions and durations
 
-### Component Library Organization
+### 3. Component Library
 
-Our component library combines Radix UI primitives and Material-UI components with custom healthcare-specific components:
+Our component library is organized in a hierarchical structure:
 
-#### Radix UI Integration
+#### Core Components
+- Buttons, Typography, Icons, Inputs
 
-Radix UI provides unstyled, accessible component primitives that serve as the foundation for many of our components:
+#### Layout Components
+- Cards, Containers, Grids, Dividers
 
-- **Accessibility-First**: Built with ARIA compliance from the ground up
-- **Unstyled Components**: Complete styling flexibility with Tailwind CSS
-- **Composable Primitives**: Highly adaptable low-level building blocks
-- **Stateful Logic**: Robust interaction handling without styling opinions
-- **Keyboard Navigation**: First-class keyboard support for all components
+#### Navigation Components
+- Tabs, Breadcrumbs, Menus, Pagination
 
-#### Material-UI Integration
+#### Feedback Components
+- Alerts, Toasts, Progress indicators, Skeletons
 
-Material-UI provides comprehensive, well-tested components that we adapt to our healthcare design system:
+#### Data Display Components
+- Tables, Lists, Charts, Calendars
 
-- **Rich Component Ecosystem**: Extensive library of pre-built components
-- **Theming System**: Customized to match our design tokens
-- **Advanced Components**: Complex components like data grids and date pickers
-- **Responsive Layouts**: Grid and container systems for adaptive interfaces
-- **Performance Optimized**: Efficient rendering for complex healthcare UIs
+#### Healthcare-Specific Components
+- Patient banners, Vital sign displays, Clinical timelines, Medication lists
 
-### Tailwind CSS Implementation
+### 4. Pattern Library
 
-Tailwind CSS is configured specifically for healthcare applications:
+Common interaction patterns and layouts for healthcare applications:
 
-- Custom color palette aligned with brand guidelines
-- Extended spacing and sizing scales for medical interfaces
-- Accessibility-focused utility classes
-- Custom components for healthcare-specific UI elements
-- Responsive design utilities for clinical workflows
+- **Form Patterns**: Registration forms, clinical documentation, order entry
+- **Search Patterns**: Patient search, medication search, diagnostic search
+- **Dashboard Patterns**: Clinical dashboards, administrative dashboards
+- **Workflow Patterns**: Clinical workflows, administrative workflows
+- **Data Visualization Patterns**: Lab results, vital trends, population health
 
-### CI/CD with GitHub Actions
+### 5. Healthcare-Specific Guidelines
 
-Automated workflows for quality and delivery:
+Specialized patterns for healthcare applications:
 
-- Automated testing (unit, integration, accessibility)
-- Visual regression testing
-- Documentation generation
-- Package versioning
-- Publishing to Artifactory
+- **Clinical Data Display**: Guidelines for presenting patient information
+- **Alert Hierarchy**: Framework for prioritizing clinical alerts
+- **Privacy Considerations**: Patterns for handling PHI and sensitive information
+- **Regulatory Compliance**: Designs that support HIPAA, 21 CFR Part 11, etc.
+- **Accessibility for Healthcare**: Specialized accessibility considerations for clinical users
+
+### 6. Implementation Resources
+
+Tools and documentation for implementing the design system:
+
+- **Component Documentation**: Detailed usage guidelines and code examples
+- **Design Files**: Figma components and templates
+- **Code Repository**: ShadCN-based component library with healthcare extensions
+- **Integration Examples**: Reference implementations for common scenarios
+- **Contribution Guidelines**: Process for extending and improving the design system
 
 ## Integration Points
 
@@ -184,5 +202,8 @@ To begin working with our Design Component Library:
 ## Next Steps
 
 - [Setup Guide](setup-guide.md): Configure your development environment
-- [Component Catalog](../02-core-functionality/component-catalog.md): Explore available components
-- [Contribution Guidelines](../04-operations/contribution-guidelines.md): Learn how to contribute
+- [Design Principles](../02-core-functionality/design-principles.md): Learn about our design principles
+- [Design Tokens](../02-core-functionality/design-tokens.md): Explore our design tokens
+- [Component Patterns](../02-core-functionality/component-patterns.md): Understand common component patterns
+- [Healthcare Guidelines](../02-core-functionality/healthcare-guidelines.md): Review healthcare-specific guidelines
+- [Implementation Resources](../02-core-functionality/implementation-resources.md): Access implementation resources

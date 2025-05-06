@@ -147,26 +147,33 @@ docs/
 │   ├── principles.md                      # Architectural principles
 │   └── core_components/                   # Core component documentation
 │       ├── component-name/                # Component root folder
-│       │   ├── 01-getting-started/       # Introduction and basic concepts
-│       │   │   ├── overview.md           # Component overview
-│       │   │   ├── benefits-overview.md  # Business benefits
-│       │   │   ├── setup-guide.md        # Installation and configuration
-│       │   │   └── ...
+│       │   ├── 01-getting-started/     # Introduction and basic usage
+│       │   │   ├── overview.md         # Component overview
+│       │   │   ├── setup-guide.md      # Setup instructions
+│       │   │   └── ...                 
 │       │   ├── 02-core-functionality/    # Essential features
 │       │   │   ├── feature-one.md        # Core feature documentation
 │       │   │   ├── feature-two.md        # Core feature documentation
+│       │   │   ├── best-practices.md     # Core feature best practices
 │       │   │   └── ...
-│       │   ├── 03-advanced-patterns/     # Complex usage patterns
+│       │   ├── 03-advanced-patterns/     # Complex usage scenarios
 │       │   │   ├── pattern-one.md        # Advanced usage documentation
 │       │   │   ├── pattern-two.md        # Advanced usage documentation
+│       │   │   ├── best-practices.md     # Advanced usage best practices
 │       │   │   └── ...
-│       │   ├── 04-data-management/       # Data handling specifics
+│       │   ├── 04-governance-compliance/ # Governance and compliance
+│       │   │   ├── access-controls.md    # Access control and security policies
+│       │   │   ├── data-governance.md    # Schema/data governance
+│       │   │   ├── audit-compliance.md   # Audit and compliance
+│       │   │   ├── data-quality.md       # Data quality and validation
+│       │   │   ├── lifecycle-management.md # Lifecycle management
+│       │   │   ├── regulatory-compliance.md # Regulatory considerations
 │       │   │   └── ...
-│       │   ├── 05-operations/            # Operational concerns
-│       │   │   ├── monitoring.md         # Monitoring documentation
-│       │   │   ├── performance-tuning.md # Performance optimization
-│       │   │   └── ...
-│       │   └── 06-case-studies/          # Real-world implementations
+│       │   └── 05-operations/            # Operational concerns
+│       │       ├── monitoring.md         # Monitoring and alerting
+│       │       ├── performance.md        # Performance optimization
+│       │       ├── maintenance.md        # Maintenance and support
+│       │       ├── disaster-recovery.md  # Disaster recovery
 │       │       └── ...
 │       ├── another-component/            # Another component folder
 │       │   └── ...
@@ -334,6 +341,8 @@ Write in a voice that balances technical precision with accessibility:
 
 All core components of the Modern Technology Platform should follow a standardized documentation structure to ensure consistency, improve navigation, and facilitate knowledge transfer. This section outlines the recommended structure and content organization for documenting core components.
 
+NOTE: Ensure all code examples are written in TypeScript/Node.js and include TypeScript-specific patterns for error handling, validation, and API design.
+
 ### Standard Category Organization
 
 Each core component's documentation should be organized into the following categories, presented in order of increasing complexity and specialization:
@@ -358,21 +367,22 @@ Each core component's documentation should be organized into the following categ
    - Custom extensions and configurations
    - Event-driven patterns
 
-x. Insert other sections as needed
+4. **Governance & Compliance**: Management and regulatory aspects
+   - Access control and security policies
+   - Schema/data governance
+   - Audit and compliance
+   - Data quality and validation
+   - Lifecycle management
+   - Regulatory considerations
 
-xx. **Operations**: Deployment and maintenance
+5. **Operations**: Deployment and maintenance
    - Monitoring and alerting
-   - Performance tuning
-   - Scaling strategies
+   - Performance optimization
+   - Maintenance and support
+   - Disaster recovery strategies
    - Backup and recovery
-   - Configuration management
-   - Load testing and capacity planning
-
-xxx. **Case Studies**: Real-world implementations
-   - Success stories
-   - Implementation examples
-   - Lessons learned
-   - Modernization journeys
+   - Security operations
+   - Disaster recovery
 
 ### Document Structure Guidelines
 

@@ -2,18 +2,18 @@
 
 ## Introduction
 
-This guide walks you through the process of setting up the Design Component Library for the CMM Reference Architecture. It covers initial configuration, development environment setup, and best practices for creating and using UI components based on Radix UI and Material-UI (MUI). By following these steps, you'll establish a robust foundation for consistent, accessible, and high-quality user interfaces across all your healthcare applications.
+This guide walks you through the process of setting up the Design Component Library for the CMM Reference Architecture. It covers initial configuration, development environment setup, and best practices for creating and using UI components based on ShadCN. By following these steps, you'll establish a robust foundation for consistent, accessible, and high-quality user interfaces across all your healthcare applications.
 
 ## Prerequisites
 
 Before beginning the Design Component Library setup process, ensure you have:
 
-- Node.js 16.x or later installed
-- npm 8.x or later or Yarn 1.22.x or later
+- Node.js 18.x or later installed
+- npm 8.x or later, Yarn 1.22.x or later, or pnpm 8.x or later
 - Git for version control
 - A GitHub account with access to the organization repositories
 - Basic understanding of React and TypeScript
-- Familiarity with component-based architecture
+- Component-based architecture
 - Understanding of accessibility requirements (WCAG 2.1 AA)
 - Access to Artifactory for package publishing
 
@@ -36,13 +36,20 @@ Before beginning the Design Component Library setup process, ensure you have:
    yarn install
    ```
 
-3. **Install Radix UI and Material-UI**
+3. **Install ShadCN**
    ```bash
-   # Install Radix UI primitives
-   npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-tabs @radix-ui/react-popover @radix-ui/react-select @radix-ui/react-checkbox @radix-ui/react-radio-group @radix-ui/react-tooltip
+   # Add ShadCN CLI
+   npx shadcn-ui@latest init
    
-   # Install Material-UI
-   npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
+   # Follow the CLI prompts with these recommended settings:
+   # - Would you like to use TypeScript? Yes
+   # - Which style would you like to use? Default
+   # - Which color would you like to use as base color? Slate
+   # - Where is your global CSS file? src/styles/globals.css
+   # - Would you like to use CSS variables for colors? Yes
+   # - Where is your tailwind.config.js located? tailwind.config.js
+   # - Configure the import alias for components: @/components
+   # - Configure the import alias for utils: @/lib/utils
    ```
 
 4. **Configure Package Settings**
@@ -81,14 +88,16 @@ Before beginning the Design Component Library setup process, ensure you have:
    │   ├── clinical-portal/     # Clinical portal example
    │   └── patient-app/        # Patient-facing app example
    ├── src/                     # Component source code
-   │   ├── tokens/              # Design tokens
-   │   ├── foundations/         # Foundation components
-   │   │   ├── radix/           # Radix UI adaptations
-   │   │   └── mui/             # Material-UI adaptations
-   │   ├── core/                # Core components
-   │   ├── clinical/            # Clinical-specific components
-   │   ├── admin/               # Admin interface components
-   │   └── patient/             # Patient-facing components
+   │   ├── styles/              # Global styles
+   │   │   └── globals.css      # Global CSS including Tailwind directives
+   │   ├── lib/                 # Utility functions
+   │   │   └── utils.ts         # ShadCN utility functions
+   │   ├── components/          # Component source code
+   │   │   ├── ui/              # ShadCN UI components
+   │   │   ├── clinical/        # Clinical-specific components
+   │   │   ├── admin/           # Admin interface components
+   │   │   └── patient/         # Patient-facing components
+   │   └── registry/            # Component registry for documentation
    ├── .storybook/              # Storybook configuration
    ├── scripts/                 # Build and development scripts
    ├── package.json             # Project dependencies
@@ -96,14 +105,15 @@ Before beginning the Design Component Library setup process, ensure you have:
    ```
 
 2. **Understand Component Categories**
-   - **Design Tokens**: Colors, typography, spacing, etc.
-   - **Foundation Components**:
-     - **Radix UI Adaptations**: Styled Radix primitives with Tailwind
-     - **Material-UI Adaptations**: Themed MUI components
-   - **Core Components**: Buttons, inputs, typography, etc.
-   - **Composite Components**: Forms, cards, dialogs, etc.
-   - **Clinical Components**: Patient banners, vital signs, lab results, etc.
-   - **Layout Components**: Grids, containers, etc.
+   - **ShadCN UI Components**: Pre-styled, accessible components based on Radix UI primitives
+     - **Core Components**: Buttons, inputs, typography, etc.
+     - **Layout Components**: Cards, sheets, dialogs, etc.
+     - **Navigation Components**: Tabs, menus, breadcrumbs, etc.
+     - **Data Display Components**: Tables, calendars, etc.
+   - **Domain-Specific Components**:
+     - **Clinical Components**: Patient banners, vital signs, lab results, etc.
+     - **Admin Components**: Dashboards, settings panels, etc.
+     - **Patient Components**: Appointment booking, health records, etc.
 
 ### 4. Storybook Configuration
 
@@ -128,147 +138,161 @@ Before beginning the Design Component Library setup process, ensure you have:
 
 ### 5. Creating Your First Component
 
-#### Develop a Basic Component
+#### Adding ShadCN Components
 
-1. **Generate Component Scaffolding**
+1. **Add ShadCN Components Using CLI**
    ```bash
-   nx g @nrwl/react:component Button --project=core --export
+   # Add a button component
+   npx shadcn-ui@latest add button
+   
+   # Add other components as needed
+   npx shadcn-ui@latest add dialog
+   npx shadcn-ui@latest add dropdown-menu
+   npx shadcn-ui@latest add tabs
    ```
 
-2. **Implement Component with Tailwind CSS**
+2. **Customize ShadCN Components**
    ```tsx
-   // libs/core/src/lib/button/button.tsx
-   import React from 'react';
+   // src/components/ui/button.tsx
+   import * as React from 'react'
+   import { Slot } from '@radix-ui/react-slot'
+   import { cva, type VariantProps } from 'class-variance-authority'
    
-   export interface ButtonProps {
-     variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
-     size?: 'small' | 'medium' | 'large';
-     disabled?: boolean;
-     children: React.ReactNode;
-     onClick?: () => void;
+   import { cn } from '@/lib/utils'
+   
+   // Customize the button variants to match healthcare design needs
+   const buttonVariants = cva(
+     'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+     {
+       variants: {
+         variant: {
+           default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+           destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+           outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+           secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+           ghost: 'hover:bg-accent hover:text-accent-foreground',
+           link: 'text-primary underline-offset-4 hover:underline',
+           // Add healthcare-specific variants
+           clinical: 'bg-teal-600 text-white hover:bg-teal-700',
+           patient: 'bg-blue-600 text-white hover:bg-blue-700',
+           admin: 'bg-purple-600 text-white hover:bg-purple-700',
+         },
+         size: {
+           default: 'h-10 px-4 py-2',
+           sm: 'h-9 rounded-md px-3',
+           lg: 'h-11 rounded-md px-8',
+           icon: 'h-10 w-10',
+         },
+       },
+       defaultVariants: {
+         variant: 'default',
+         size: 'default',
+       },
+     }
+   )
+   
+   export interface ButtonProps
+     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+       VariantProps<typeof buttonVariants> {
+     asChild?: boolean
    }
    
-   export function Button({
-     variant = 'primary',
-     size = 'medium',
-     disabled = false,
-     children,
-     onClick,
-     ...props
-   }: ButtonProps) {
-     const baseClasses = 'font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2';
-     
-     const variantClasses = {
-       primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-       secondary: 'bg-gray-100 text-gray-800 hover:bg-gray-200 focus:ring-gray-500',
-       tertiary: 'bg-transparent text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
-       danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-     };
-     
-     const sizeClasses = {
-       small: 'py-1 px-3 text-sm',
-       medium: 'py-2 px-4 text-base',
-       large: 'py-3 px-6 text-lg',
-     };
-     
-     const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
-     
-     const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses}`;
-     
-     return (
-       <button
-         className={classes}
-         disabled={disabled}
-         onClick={onClick}
-         {...props}
-       >
-         {children}
-       </button>
-     );
-   }
+   const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+     ({ className, variant, size, asChild = false, ...props }, ref) => {
+       const Comp = asChild ? Slot : 'button'
+       return (
+         <Comp
+           className={cn(buttonVariants({ variant, size, className }))}
+           ref={ref}
+           {...props}
+         />
+       )
+     }
+   )
+   Button.displayName = 'Button'
    
-   export default Button;
+   export { Button, buttonVariants }
    ```
 
 3. **Create Component Story**
    ```tsx
-   // libs/core/src/lib/button/button.stories.tsx
-   import { ComponentStory, ComponentMeta } from '@storybook/react';
+   // src/components/ui/button.stories.tsx
+   import type { Meta, StoryObj } from '@storybook/react';
    import { Button } from './button';
    
-   export default {
-     title: 'Core/Button',
+   const meta: Meta<typeof Button> = {
+     title: 'UI/Button',
      component: Button,
+     tags: ['autodocs'],
      argTypes: {
        variant: {
          control: { type: 'select' },
-         options: ['primary', 'secondary', 'tertiary', 'danger'],
+         options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link', 'clinical', 'patient', 'admin'],
        },
        size: {
          control: { type: 'select' },
-         options: ['small', 'medium', 'large'],
+         options: ['default', 'sm', 'lg', 'icon'],
        },
        disabled: { control: 'boolean' },
        onClick: { action: 'clicked' },
      },
-   } as ComponentMeta<typeof Button>;
-   
-   const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-   
-   export const Primary = Template.bind({});
-   Primary.args = {
-     variant: 'primary',
-     size: 'medium',
-     children: 'Primary Button',
    };
    
-   export const Secondary = Template.bind({});
-   Secondary.args = {
-     variant: 'secondary',
-     size: 'medium',
-     children: 'Secondary Button',
+   export default meta;
+   type Story = StoryObj<typeof Button>;
+   
+   export const Default: Story = {
+     args: {
+       children: 'Default Button',
+     },
    };
    
-   export const Tertiary = Template.bind({});
-   Tertiary.args = {
-     variant: 'tertiary',
-     size: 'medium',
-     children: 'Tertiary Button',
+   export const Secondary: Story = {
+     args: {
+       variant: 'secondary',
+       children: 'Secondary Button',
+     },
    };
    
-   export const Danger = Template.bind({});
-   Danger.args = {
-     variant: 'danger',
-     size: 'medium',
-     children: 'Danger Button',
+   export const Destructive: Story = {
+     args: {
+       variant: 'destructive',
+       children: 'Destructive Button',
+     },
    };
    
-   export const Small = Template.bind({});
-   Small.args = {
-     variant: 'primary',
-     size: 'small',
-     children: 'Small Button',
+   export const Clinical: Story = {
+     args: {
+       variant: 'clinical',
+       children: 'Clinical Button',
+     },
    };
    
-   export const Large = Template.bind({});
-   Large.args = {
-     variant: 'primary',
-     size: 'large',
-     children: 'Large Button',
+   export const Small: Story = {
+     args: {
+       size: 'sm',
+       children: 'Small Button',
+     },
    };
    
-   export const Disabled = Template.bind({});
-   Disabled.args = {
-     variant: 'primary',
-     size: 'medium',
-     disabled: true,
-     children: 'Disabled Button',
+   export const Large: Story = {
+     args: {
+       size: 'lg',
+       children: 'Large Button',
+     },
+   };
+   
+   export const Disabled: Story = {
+     args: {
+       disabled: true,
+       children: 'Disabled Button',
+     },
    };
    ```
 
 4. **Test Component**
    ```tsx
-   // libs/core/src/lib/button/button.spec.tsx
+   // src/components/ui/button.test.tsx
    import { render, screen, fireEvent } from '@testing-library/react';
    import { Button } from './button';
    
@@ -286,20 +310,23 @@ Before beginning the Design Component Library setup process, ensure you have:
      });
      
      it('applies variant classes correctly', () => {
-       const { rerender } = render(<Button variant="primary">Primary</Button>);
-       expect(screen.getByText('Primary')).toHaveClass('bg-blue-600');
+       const { rerender } = render(<Button variant="default">Default</Button>);
+       expect(screen.getByText('Default')).toHaveClass('bg-primary');
        
        rerender(<Button variant="secondary">Secondary</Button>);
-       expect(screen.getByText('Secondary')).toHaveClass('bg-gray-100');
+       expect(screen.getByText('Secondary')).toHaveClass('bg-secondary');
        
-       rerender(<Button variant="danger">Danger</Button>);
-       expect(screen.getByText('Danger')).toHaveClass('bg-red-600');
+       rerender(<Button variant="destructive">Destructive</Button>);
+       expect(screen.getByText('Destructive')).toHaveClass('bg-destructive');
+       
+       rerender(<Button variant="clinical">Clinical</Button>);
+       expect(screen.getByText('Clinical')).toHaveClass('bg-teal-600');
      });
      
      it('disables the button when disabled prop is true', () => {
        render(<Button disabled>Disabled</Button>);
        expect(screen.getByText('Disabled')).toBeDisabled();
-       expect(screen.getByText('Disabled')).toHaveClass('cursor-not-allowed');
+       expect(screen.getByText('Disabled')).toHaveClass('disabled:opacity-50');
      });
    });
    ```
@@ -444,15 +471,265 @@ Before beginning the Design Component Library setup process, ensure you have:
    execSync('nx run-many --target=publish --all', { stdio: 'inherit' });
    ```
 
+### 8. ShadCN Theming for Healthcare Applications
+
+#### Customize ShadCN Theme for Healthcare
+
+1. **Update Global CSS Variables**
+   ```css
+   /* src/styles/globals.css */
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+ 
+   @layer base {
+     :root {
+       --background: 0 0% 100%;
+       --foreground: 222.2 84% 4.9%;
+       
+       --card: 0 0% 100%;
+       --card-foreground: 222.2 84% 4.9%;
+       
+       --popover: 0 0% 100%;
+       --popover-foreground: 222.2 84% 4.9%;
+       
+       --primary: 196 100% 47%; /* Healthcare blue */
+       --primary-foreground: 210 40% 98%;
+       
+       --secondary: 210 40% 96.1%;
+       --secondary-foreground: 222.2 47.4% 11.2%;
+       
+       --muted: 210 40% 96.1%;
+       --muted-foreground: 215.4 16.3% 46.9%;
+       
+       --accent: 210 40% 96.1%;
+       --accent-foreground: 222.2 47.4% 11.2%;
+       
+       --destructive: 0 84.2% 60.2%;
+       --destructive-foreground: 210 40% 98%;
+       
+       --clinical: 175 84% 32%; /* Teal for clinical */
+       --clinical-foreground: 0 0% 100%;
+       
+       --patient: 196 100% 47%; /* Blue for patient-facing */
+       --patient-foreground: 0 0% 100%;
+       
+       --admin: 265 84% 50%; /* Purple for admin */
+       --admin-foreground: 0 0% 100%;
+       
+       --border: 214.3 31.8% 91.4%;
+       --input: 214.3 31.8% 91.4%;
+       --ring: 222.2 84% 4.9%;
+       
+       --radius: 0.5rem;
+     }
+     
+     .dark {
+       --background: 222.2 84% 4.9%;
+       --foreground: 210 40% 98%;
+       
+       --card: 222.2 84% 4.9%;
+       --card-foreground: 210 40% 98%;
+       
+       --popover: 222.2 84% 4.9%;
+       --popover-foreground: 210 40% 98%;
+       
+       --primary: 196 100% 47%;
+       --primary-foreground: 222.2 47.4% 11.2%;
+       
+       --secondary: 217.2 32.6% 17.5%;
+       --secondary-foreground: 210 40% 98%;
+       
+       --muted: 217.2 32.6% 17.5%;
+       --muted-foreground: 215 20.2% 65.1%;
+       
+       --accent: 217.2 32.6% 17.5%;
+       --accent-foreground: 210 40% 98%;
+       
+       --destructive: 0 62.8% 30.6%;
+       --destructive-foreground: 210 40% 98%;
+       
+       --clinical: 175 84% 32%;
+       --clinical-foreground: 0 0% 100%;
+       
+       --patient: 196 100% 47%;
+       --patient-foreground: 0 0% 100%;
+       
+       --admin: 265 84% 50%;
+       --admin-foreground: 0 0% 100%;
+       
+       --border: 217.2 32.6% 17.5%;
+       --input: 217.2 32.6% 17.5%;
+       --ring: 212.7 26.8% 83.9%;
+     }
+   }
+   
+   @layer base {
+     * {
+       @apply border-border;
+     }
+     body {
+       @apply bg-background text-foreground;
+     }
+   }
+   ```
+
+2. **Update Tailwind Configuration**
+   ```js
+   // tailwind.config.js
+   const { fontFamily } = require("tailwindcss/defaultTheme")
+   
+   /** @type {import('tailwindcss').Config} */
+   module.exports = {
+     darkMode: ["class"],
+     content: ["./src/**/*.{js,jsx,ts,tsx}"],
+     theme: {
+       container: {
+         center: true,
+         padding: "2rem",
+         screens: {
+           "2xl": "1400px",
+         },
+       },
+       extend: {
+         colors: {
+           border: "hsl(var(--border))",
+           input: "hsl(var(--input))",
+           ring: "hsl(var(--ring))",
+           background: "hsl(var(--background))",
+           foreground: "hsl(var(--foreground))",
+           primary: {
+             DEFAULT: "hsl(var(--primary))",
+             foreground: "hsl(var(--primary-foreground))",
+           },
+           secondary: {
+             DEFAULT: "hsl(var(--secondary))",
+             foreground: "hsl(var(--secondary-foreground))",
+           },
+           destructive: {
+             DEFAULT: "hsl(var(--destructive))",
+             foreground: "hsl(var(--destructive-foreground))",
+           },
+           muted: {
+             DEFAULT: "hsl(var(--muted))",
+             foreground: "hsl(var(--muted-foreground))",
+           },
+           accent: {
+             DEFAULT: "hsl(var(--accent))",
+             foreground: "hsl(var(--accent-foreground))",
+           },
+           popover: {
+             DEFAULT: "hsl(var(--popover))",
+             foreground: "hsl(var(--popover-foreground))",
+           },
+           card: {
+             DEFAULT: "hsl(var(--card))",
+             foreground: "hsl(var(--card-foreground))",
+           },
+           // Add healthcare-specific colors
+           clinical: {
+             DEFAULT: "hsl(var(--clinical))",
+             foreground: "hsl(var(--clinical-foreground))",
+           },
+           patient: {
+             DEFAULT: "hsl(var(--patient))",
+             foreground: "hsl(var(--patient-foreground))",
+           },
+           admin: {
+             DEFAULT: "hsl(var(--admin))",
+             foreground: "hsl(var(--admin-foreground))",
+           },
+         },
+         borderRadius: {
+           lg: "var(--radius)",
+           md: "calc(var(--radius) - 2px)",
+           sm: "calc(var(--radius) - 4px)",
+         },
+         fontFamily: {
+           sans: ["var(--font-sans)", ...fontFamily.sans],
+         },
+         keyframes: {
+           // Add any custom animations here
+         },
+         animation: {
+           // Add any custom animations here
+         },
+       },
+     },
+     plugins: [require("tailwindcss-animate")],
+   }
+   ```
+
+3. **Creating Healthcare-Specific Components**
+   ```tsx
+   // src/components/clinical/patient-banner.tsx
+   import * as React from 'react'
+   import { Card, CardContent } from '@/components/ui/card'
+   import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+   import { Badge } from '@/components/ui/badge'
+   
+   interface PatientBannerProps {
+     patientId: string
+     className?: string
+   }
+   
+   export function PatientBanner({ patientId, className }: PatientBannerProps) {
+     // In a real implementation, you would fetch patient data based on the ID
+     const patient = {
+       id: patientId,
+       name: 'John Smith',
+       dob: '1980-05-15',
+       mrn: 'MRN12345',
+       gender: 'Male',
+       alerts: ['Allergy: Penicillin', 'Fall Risk'],
+     }
+     
+     return (
+       <Card className={`bg-clinical text-clinical-foreground ${className}`}>
+         <CardContent className="p-4 flex items-center gap-4">
+           <Avatar className="h-16 w-16 border-2 border-white">
+             <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${patient.name}`} />
+             <AvatarFallback>{patient.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+           </Avatar>
+           
+           <div className="flex-1">
+             <div className="flex justify-between">
+               <h2 className="text-xl font-bold">{patient.name}</h2>
+               <div className="text-sm">MRN: {patient.mrn}</div>
+             </div>
+             
+             <div className="flex gap-4 text-sm mt-1">
+               <div>DOB: {new Date(patient.dob).toLocaleDateString()}</div>
+               <div>Gender: {patient.gender}</div>
+               <div>Age: {new Date().getFullYear() - new Date(patient.dob).getFullYear()}</div>
+             </div>
+             
+             <div className="flex gap-2 mt-2">
+               {patient.alerts.map((alert, index) => (
+                 <Badge key={index} variant="outline" className="bg-white/20 text-white border-white">
+                   {alert}
+                 </Badge>
+               ))}
+             </div>
+           </div>
+         </CardContent>
+       </Card>
+     )
+   }
+   ```
+
 ## Implementation Examples
 
-### Using Components in a React Application
+### Using ShadCN Components in a React Application
 
 ```tsx
-// Example: Using components in a React application
+// Example: Using ShadCN components in a React application
 import React from 'react';
-import { Button, Card, TextField } from '@your-org/core';
-import { PatientBanner } from '@your-org/clinical';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { PatientBanner } from '@/components/clinical/patient-banner';
 
 interface PatientFormProps {
   patientId: string;
@@ -482,61 +759,80 @@ export function PatientForm({ patientId, onSubmit }: PatientFormProps) {
       <PatientBanner patientId={patientId} />
       
       <Card className="mt-4">
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <TextField
-              label="First Name"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
+        <CardHeader>
+          <CardTitle>Patient Information</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                <Input
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
             
-            <TextField
-              label="Last Name"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-            
-            <TextField
-              label="Date of Birth"
-              name="dateOfBirth"
-              type="date"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              required
-            />
-            
-            <TextField
-              label="Phone Number"
-              name="phoneNumber"
-              type="tel"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          
-          <div className="mt-6 flex justify-end space-x-4">
-            <Button variant="secondary">Cancel</Button>
-            <Button type="submit">Save Patient</Button>
-          </div>
-        </form>
+            <CardFooter className="mt-6 flex justify-end space-x-4 px-0">
+              <Button variant="outline">Cancel</Button>
+              <Button type="submit" variant="clinical">Save Patient</Button>
+            </CardFooter>
+          </form>
+        </CardContent>
       </Card>
     </div>
   );
 }
 ```
 
-### Creating a Healthcare-Specific Component
+### Creating a Healthcare-Specific Component with ShadCN
 
 ```tsx
 // Example: Creating a healthcare-specific component
-// libs/clinical/src/lib/vital-signs/vital-signs.tsx
+// src/components/clinical/vital-signs.tsx
 import React from 'react';
-import { Card, Text, Icon } from '@your-org/core';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { ArrowDown, ArrowUp, CheckCircle } from 'lucide-react';
 
 export interface VitalSign {
   name: string;
@@ -552,23 +848,24 @@ export interface VitalSign {
 export interface VitalSignsProps {
   vitals: VitalSign[];
   title?: string;
+  className?: string;
 }
 
-export function VitalSigns({ vitals, title = 'Vital Signs' }: VitalSignsProps) {
+export function VitalSigns({ vitals, title = 'Vital Signs', className }: VitalSignsProps) {
   const getStatusColor = (vital: VitalSign) => {
-    if (!vital.normalRange) return 'text-gray-500';
+    if (!vital.normalRange) return 'text-muted-foreground';
     
     if (vital.value < vital.normalRange.min) return 'text-blue-500';
-    if (vital.value > vital.normalRange.max) return 'text-red-500';
+    if (vital.value > vital.normalRange.max) return 'text-destructive';
     return 'text-green-500';
   };
   
   const getStatusIcon = (vital: VitalSign) => {
     if (!vital.normalRange) return null;
     
-    if (vital.value < vital.normalRange.min) return <Icon name="arrow-down" className="ml-1" />;
-    if (vital.value > vital.normalRange.max) return <Icon name="arrow-up" className="ml-1" />;
-    return <Icon name="check-circle" className="ml-1" />;
+    if (vital.value < vital.normalRange.min) return <ArrowDown className="ml-1 h-4 w-4" />;
+    if (vital.value > vital.normalRange.max) return <ArrowUp className="ml-1 h-4 w-4" />;
+    return <CheckCircle className="ml-1 h-4 w-4" />;
   };
   
   const formatTime = (timestamp: string) => {
@@ -576,33 +873,31 @@ export function VitalSigns({ vitals, title = 'Vital Signs' }: VitalSignsProps) {
   };
   
   return (
-    <Card>
-      <div className="p-4">
-        <Text variant="h3" className="mb-4">{title}</Text>
-        
+    <Card className={cn("bg-card", className)}>
+      <CardHeader className="pb-2">
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="space-y-4">
           {vitals.map((vital, index) => (
-            <div key={index} className="flex justify-between items-center border-b pb-2">
+            <div key={index} className="flex justify-between items-center border-b pb-2 last:border-0">
               <div>
-                <Text variant="body-bold">{vital.name}</Text>
-                <Text variant="caption" className="text-gray-500">
+                <p className="font-medium">{vital.name}</p>
+                <p className="text-sm text-muted-foreground">
                   {formatTime(vital.timestamp)}
-                </Text>
+                </p>
               </div>
               
               <div className="flex items-center">
-                <Text 
-                  variant="body-bold" 
-                  className={getStatusColor(vital)}
-                >
+                <p className={cn("font-medium flex items-center", getStatusColor(vital))}>
                   {vital.value} {vital.unit}
                   {getStatusIcon(vital)}
-                </Text>
+                </p>
                 
                 {vital.normalRange && (
-                  <Text variant="caption" className="ml-2 text-gray-500">
+                  <p className="ml-2 text-sm text-muted-foreground">
                     ({vital.normalRange.min}-{vital.normalRange.max})
-                  </Text>
+                  </p>
                 )}
               </div>
             </div>
