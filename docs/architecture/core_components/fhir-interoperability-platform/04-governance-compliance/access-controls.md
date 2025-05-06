@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the access control mechanisms and security policies for the FHIR Interoperability Platform component of the CMM Reference Architecture. As a platform handling sensitive healthcare data, robust access controls and security measures are essential to ensure data protection, regulatory compliance, and appropriate data access.
+This document outlines the access control mechanisms and security policies for the FHIR Interoperability Platform component of the CMM Technology Platform. As a platform handling sensitive healthcare data, robust access controls and security measures are essential to ensure data protection, regulatory compliance, and appropriate data access.
 
 ## Access Control Model
 

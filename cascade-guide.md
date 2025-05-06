@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The CMM Reference Architecture Repository serves as the central knowledge base for CoverMyMeds' Modern Technology Platform, providing comprehensive documentation on healthcare modernization architecture patterns. This repository is designed to be published through Backstage TechDocs, offering standardized guidance on implementing FHIR-based healthcare systems, event-driven architecture, and microservices.
+the CMM Technology Platform Repository serves as the central knowledge base for CoverMyMeds' Modern Technology Platform, providing comprehensive documentation on healthcare modernization architecture patterns. This repository is designed to be published through Backstage TechDocs, offering standardized guidance on implementing FHIR-based healthcare systems, event-driven architecture, and microservices.
 
 ### Quick Start
 

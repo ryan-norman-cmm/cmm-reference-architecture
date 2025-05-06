@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Event Broker is a foundational component of the CMM Reference Architecture, serving as the central nervous system for real-time data exchange and event-driven communication. Our implementation uses Confluent Kafka, a distributed streaming platform that enables high-throughput, fault-tolerant, real-time event processing across the healthcare ecosystem. This document provides an overview of the Event Broker's architecture, key concepts, and implementation considerations for healthcare environments.
+The Event Broker is a foundational component of the CMM Technology Platform, serving as the central nervous system for real-time data exchange and event-driven communication. Our implementation uses Confluent Kafka, a distributed streaming platform that enables high-throughput, fault-tolerant, real-time event processing across the healthcare ecosystem. This document provides an overview of the Event Broker's architecture, key concepts, and implementation considerations for healthcare environments.
 
 ## Key Concepts
 

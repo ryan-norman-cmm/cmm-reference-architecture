@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the regulatory compliance framework for the API Marketplace component of the CMM Reference Architecture. As healthcare organizations increasingly rely on APIs for data exchange and integration, ensuring compliance with relevant regulations and standards is critical for protecting patient data, maintaining privacy, and meeting legal obligations.
+This document outlines the regulatory compliance framework for the API Marketplace component of the CMM Technology Platform. As healthcare organizations increasingly rely on APIs for data exchange and integration, ensuring compliance with relevant regulations and standards is critical for protecting patient data, maintaining privacy, and meeting legal obligations.
 
 ## Healthcare Regulatory Framework
 

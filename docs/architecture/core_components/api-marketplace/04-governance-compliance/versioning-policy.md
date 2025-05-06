@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the versioning policy for the API Marketplace component of the CMM Reference Architecture. It provides detailed guidelines on how versioning is implemented, how backward compatibility is maintained, and how breaking changes are managed. Following this policy ensures a consistent and predictable evolution of the API Marketplace, minimizing disruption for consumers while enabling innovation and improvement.
+This document outlines the versioning policy for the API Marketplace component of the CMM Technology Platform. It provides detailed guidelines on how versioning is implemented, how backward compatibility is maintained, and how breaking changes are managed. Following this policy ensures a consistent and predictable evolution of the API Marketplace, minimizing disruption for consumers while enabling innovation and improvement.
 
 ## Semantic Versioning
 

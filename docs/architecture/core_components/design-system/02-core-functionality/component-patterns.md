@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Component patterns in the CMM Reference Architecture Design System define how UI components should be used together to create consistent, effective user experiences. These patterns address common interaction scenarios in healthcare applications, providing guidance on component composition, behavior, and best practices.
+Component patterns in the CMM Technology Platform Design System define how UI components should be used together to create consistent, effective user experiences. These patterns address common interaction scenarios in healthcare applications, providing guidance on component composition, behavior, and best practices.
 
 ## Form Patterns
 

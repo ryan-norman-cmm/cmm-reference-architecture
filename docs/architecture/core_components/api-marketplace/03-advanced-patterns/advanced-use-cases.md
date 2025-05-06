@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes advanced use cases for the API Marketplace component of the CMM Reference Architecture. These use cases illustrate how the platform can be leveraged in complex scenarios, addressing challenges such as high volume usage, multi-tenant environments, integration with legacy systems, and healthcare-specific data handling.
+This document describes advanced use cases for the API Marketplace component of the CMM Technology Platform. These use cases illustrate how the platform can be leveraged in complex scenarios, addressing challenges such as high volume usage, multi-tenant environments, integration with legacy systems, and healthcare-specific data handling.
 
 ## Advanced Use Case 1: High-Volume API Consumption
 

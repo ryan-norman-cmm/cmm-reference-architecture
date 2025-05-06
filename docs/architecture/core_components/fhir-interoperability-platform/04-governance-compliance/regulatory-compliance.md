@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the regulatory compliance framework for the FHIR Interoperability Platform component of the CMM Reference Architecture. As a platform handling sensitive healthcare data and facilitating interoperability between healthcare systems, compliance with relevant regulations and standards is critical to ensure patient privacy, data security, and legal adherence.
+This document outlines the regulatory compliance framework for the FHIR Interoperability Platform component of the CMM Technology Platform. As a platform handling sensitive healthcare data and facilitating interoperability between healthcare systems, compliance with relevant regulations and standards is critical to ensure patient privacy, data security, and legal adherence.
 
 ## Healthcare Regulatory Framework
 

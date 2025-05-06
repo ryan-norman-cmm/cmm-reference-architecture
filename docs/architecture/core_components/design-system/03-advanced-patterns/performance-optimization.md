@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Performance is a critical aspect of healthcare applications, where efficiency can directly impact clinical workflows and patient care. The CMM Reference Architecture Design System incorporates advanced performance optimization patterns to ensure that applications remain responsive and efficient, even with complex interfaces and large datasets. This document outlines these patterns and provides guidance for implementing them in healthcare applications.
+Performance is a critical aspect of healthcare applications, where efficiency can directly impact clinical workflows and patient care. The CMM Technology Platform Design System incorporates advanced performance optimization patterns to ensure that applications remain responsive and efficient, even with complex interfaces and large datasets. This document outlines these patterns and provides guidance for implementing them in healthcare applications.
 
 ## Core Performance Principles
 
@@ -770,4 +770,4 @@ function checkPerformanceBudgets(metrics) {
 
 Performance optimization is essential for healthcare applications, where responsiveness and efficiency directly impact clinical workflows and patient care. By implementing these advanced patterns, developers can create high-performance applications that provide a smooth user experience even with complex interfaces and large datasets.
 
-The CMM Reference Architecture Design System incorporates these performance optimization patterns to ensure that healthcare applications remain responsive and efficient. By following these guidelines, developers can create applications that meet the demanding performance requirements of healthcare environments.
+The CMM Technology Platform Design System incorporates these performance optimization patterns to ensure that healthcare applications remain responsive and efficient. By following these guidelines, developers can create applications that meet the demanding performance requirements of healthcare environments.

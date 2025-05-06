@@ -113,7 +113,7 @@ These components are designed to work together seamlessly while allowing for fle
 
 ## Integration Points
 
-The FHIR Interoperability Platform integrates with other core components of the CMM Reference Architecture:
+The FHIR Interoperability Platform integrates with other core components of the CMM Technology Platform:
 
 - **Security and Access Framework**: For authentication and authorization
 - **API Marketplace**: For API discovery and management

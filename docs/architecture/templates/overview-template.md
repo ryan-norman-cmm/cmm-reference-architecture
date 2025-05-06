@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Brief description of the component, its purpose, and its role in the CMM Reference Architecture. Focus on the component's business value and high-level functionality.]
+[Brief description of the component, its purpose, and its role in the CMM Technology Platform. Focus on the component's business value and high-level functionality.]
 
 ## Key Features
 
@@ -28,7 +28,7 @@ graph TD
 
 ## Integration Points
 
-[Brief overview of how this component integrates with other components in the CMM Reference Architecture. Include key integration interfaces and protocols.]
+[Brief overview of how this component integrates with other components in the CMM Technology Platform. Include key integration interfaces and protocols.]
 
 ### Integration with [Component 1]
 

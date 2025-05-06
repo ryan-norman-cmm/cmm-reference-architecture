@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the disaster recovery framework for the API Marketplace component of the CMM Reference Architecture. A robust disaster recovery strategy is essential for ensuring business continuity in the face of significant disruptions, data loss, or system failures.
+This document outlines the disaster recovery framework for the API Marketplace component of the CMM Technology Platform. A robust disaster recovery strategy is essential for ensuring business continuity in the face of significant disruptions, data loss, or system failures.
 
 ## Disaster Recovery Strategy
 

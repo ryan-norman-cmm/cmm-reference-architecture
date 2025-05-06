@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes the API discovery functionality of the API Marketplace component in the CMM Reference Architecture. API discovery enables consumers to find, evaluate, and understand APIs available within the organization, promoting API reuse and reducing duplication of effort.
+This document describes the API discovery functionality of the API Marketplace component in the CMM Technology Platform. API discovery enables consumers to find, evaluate, and understand APIs available within the organization, promoting API reuse and reducing duplication of effort.
 
 ## API Discovery Process
 

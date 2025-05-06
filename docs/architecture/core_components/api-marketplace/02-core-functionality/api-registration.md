@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes the API registration functionality of the API Marketplace component in the CMM Reference Architecture. API registration is the process by which API providers publish their APIs to the marketplace, making them discoverable and usable by consumers across the healthcare organization.
+This document describes the API registration functionality of the API Marketplace component in the CMM Technology Platform. API registration is the process by which API providers publish their APIs to the marketplace, making them discoverable and usable by consumers across the healthcare organization.
 
 ## API Registration Process
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Effective maintenance and support are essential for ensuring the long-term success and adoption of the CMM Reference Architecture Design System. This document outlines the strategies, processes, and best practices for maintaining the design system and providing support to its users.
+Effective maintenance and support are essential for ensuring the long-term success and adoption of the CMM Technology Platform Design System. This document outlines the strategies, processes, and best practices for maintaining the design system and providing support to its users.
 
 ## Maintenance Strategy
 
@@ -603,6 +603,6 @@ Specialized prioritization for healthcare-related issues:
 
 ## Conclusion
 
-Effective maintenance and support are critical for the long-term success of the CMM Reference Architecture Design System. By implementing structured processes for updates, support, documentation, and community engagement, the design system can continue to evolve while providing a stable foundation for healthcare applications.
+Effective maintenance and support are critical for the long-term success of the CMM Technology Platform Design System. By implementing structured processes for updates, support, documentation, and community engagement, the design system can continue to evolve while providing a stable foundation for healthcare applications.
 
 Regular reviews and improvements to these processes will ensure they remain effective as the design system and organization evolve.

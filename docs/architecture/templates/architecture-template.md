@@ -83,7 +83,7 @@ sequenceDiagram
 
 ## Integration Architecture
 
-[Description of how the component integrates with other components in the CMM Reference Architecture]
+[Description of how the component integrates with other components in the CMM Technology Platform]
 
 ```mermaid
 graph LR

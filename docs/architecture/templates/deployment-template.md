@@ -6,7 +6,7 @@
 
 ## Deployment Options
 
-[Description of the available deployment options, including containerized deployment, serverless deployment, on-premises deployment, etc.]
+[Description of the available deployment options, including containerized deployment, serverless deployment, etc.]
 
 ### Containerized Deployment
 
@@ -15,10 +15,6 @@
 ### Serverless Deployment
 
 [Details on serverless deployment options, if applicable]
-
-### On-Premises Deployment
-
-[Details on on-premises deployment options]
 
 ## Prerequisites
 

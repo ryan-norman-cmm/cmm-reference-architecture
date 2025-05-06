@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the regulatory compliance framework for the Workflow Orchestration Engine component of the CMM Reference Architecture. As healthcare organizations increasingly rely on automated workflows for clinical, administrative, and research processes, ensuring compliance with relevant regulations and standards is critical for protecting patient data, ensuring patient safety, and meeting legal obligations.
+This document outlines the regulatory compliance framework for the Workflow Orchestration Engine component of the CMM Technology Platform. As healthcare organizations increasingly rely on automated workflows for clinical, administrative, and research processes, ensuring compliance with relevant regulations and standards is critical for protecting patient data, ensuring patient safety, and meeting legal obligations.
 
 ## Healthcare Regulatory Framework
 

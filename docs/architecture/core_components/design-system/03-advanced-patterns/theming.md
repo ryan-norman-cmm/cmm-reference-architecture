@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The CMM Reference Architecture Design System supports comprehensive theming and customization to meet the diverse needs of healthcare organizations. This document outlines the advanced patterns and techniques for customizing the design system while maintaining consistency, accessibility, and performance.
+The CMM Technology Platform Design System supports comprehensive theming and customization to meet the diverse needs of healthcare organizations. This document outlines the advanced patterns and techniques for customizing the design system while maintaining consistency, accessibility, and performance.
 
 ## Theming Architecture
 
@@ -425,4 +425,4 @@ function ThemeSettings() {
 
 ## Conclusion
 
-The theming and customization capabilities of the CMM Reference Architecture Design System provide flexibility while maintaining consistency and accessibility. By following these advanced patterns, organizations can create distinctive visual identities that align with their brand while benefiting from the robust foundation of the design system.
+The theming and customization capabilities of the CMM Technology Platform Design System provide flexibility while maintaining consistency and accessibility. By following these advanced patterns, organizations can create distinctive visual identities that align with their brand while benefiting from the robust foundation of the design system.

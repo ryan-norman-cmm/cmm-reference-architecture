@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the lifecycle management framework for the API Marketplace component of the CMM Reference Architecture. Effective lifecycle management ensures that APIs are properly governed from creation through retirement, maintaining quality, security, and value throughout their lifespan.
+This document outlines the lifecycle management framework for the API Marketplace component of the CMM Technology Platform. Effective lifecycle management ensures that APIs are properly governed from creation through retirement, maintaining quality, security, and value throughout their lifespan.
 
 ## API Lifecycle Overview
 

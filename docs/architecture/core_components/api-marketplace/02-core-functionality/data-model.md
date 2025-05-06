@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes the data model for the API Marketplace component of the CMM Reference Architecture. The data model defines the structure, relationships, and constraints of the data stored and managed by the API Marketplace. Understanding this data model is essential for developers integrating with the API Marketplace, as well as for administrators and operators maintaining the system.
+This document describes the data model for the API Marketplace component of the CMM Technology Platform. The data model defines the structure, relationships, and constraints of the data stored and managed by the API Marketplace. Understanding this data model is essential for developers integrating with the API Marketplace, as well as for administrators and operators maintaining the system.
 
 ## Core Entities
 

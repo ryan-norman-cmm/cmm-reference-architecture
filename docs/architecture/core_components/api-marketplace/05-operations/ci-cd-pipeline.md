@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes the Continuous Integration and Continuous Deployment (CI/CD) pipeline for the API Marketplace component of the CMM Reference Architecture. The CI/CD pipeline automates the building, testing, and deployment processes, ensuring consistent, reliable, and efficient delivery of the API Marketplace component across different environments.
+This document describes the Continuous Integration and Continuous Deployment (CI/CD) pipeline for the API Marketplace component of the CMM Technology Platform. The CI/CD pipeline automates the building, testing, and deployment processes, ensuring consistent, reliable, and efficient delivery of the API Marketplace component across different environments.
 
 ## Pipeline Overview
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The CMM Reference Architecture Design System includes specialized guidelines for healthcare applications to address the unique requirements of clinical environments, patient interactions, and regulatory compliance. These guidelines ensure that our applications not only look consistent but also support the specific needs of healthcare professionals and patients.
+the CMM Technology Platform Design System includes specialized guidelines for healthcare applications to address the unique requirements of clinical environments, patient interactions, and regulatory compliance. These guidelines ensure that our applications not only look consistent but also support the specific needs of healthcare professionals and patients.
 
 ## Clinical Data Display
 
@@ -261,4 +261,4 @@ Common healthcare patterns are documented with examples:
 
 ## Conclusion
 
-These healthcare-specific guidelines ensure that applications built with the CMM Reference Architecture Design System not only look consistent but also address the unique requirements of healthcare environments. By following these guidelines, we can create applications that support safe, efficient, and effective healthcare delivery while meeting regulatory requirements and enhancing the experience for both healthcare professionals and patients.
+These healthcare-specific guidelines ensure that applications built with the CMM Technology Platform Design System not only look consistent but also address the unique requirements of healthcare environments. By following these guidelines, we can create applications that support safe, efficient, and effective healthcare delivery while meeting regulatory requirements and enhancing the experience for both healthcare professionals and patients.

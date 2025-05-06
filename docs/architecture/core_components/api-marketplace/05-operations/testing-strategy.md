@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the testing strategy for the API Marketplace component of the CMM Reference Architecture. It defines the approach to testing, test types, environments, data management, automation, and coverage requirements to ensure the quality, reliability, and security of the API Marketplace component.
+This document outlines the testing strategy for the API Marketplace component of the CMM Technology Platform. It defines the approach to testing, test types, environments, data management, automation, and coverage requirements to ensure the quality, reliability, and security of the API Marketplace component.
 
 ## Testing Approach
 

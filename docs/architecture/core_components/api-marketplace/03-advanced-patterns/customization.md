@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document provides guidelines and examples for customizing the API Marketplace component of the CMM Reference Architecture. Customization enables organizations to tailor the platform’s features, workflows, and user interface to meet specific business and operational requirements.
+This document provides guidelines and examples for customizing the API Marketplace component of the CMM Technology Platform. Customization enables organizations to tailor the platform’s features, workflows, and user interface to meet specific business and operational requirements.
 
 ## Custom User Interfaces
 

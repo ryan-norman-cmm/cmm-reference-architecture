@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Security is a critical aspect of healthcare applications that handle sensitive patient data. The CMM Reference Architecture Design System incorporates security best practices directly into its components and patterns to help developers build secure applications. This document outlines the security standards that guide the design system's development and implementation.
+Security is a critical aspect of healthcare applications that handle sensitive patient data. The CMM Technology Platform Design System incorporates security best practices directly into its components and patterns to help developers build secure applications. This document outlines the security standards that guide the design system's development and implementation.
 
 ## Core Security Principles
 
@@ -296,6 +296,6 @@ Security features to support regulatory compliance:
 
 ## Conclusion
 
-Security is a fundamental aspect of the CMM Reference Architecture Design System. By incorporating security best practices directly into components and patterns, the design system helps developers build secure healthcare applications.
+Security is a fundamental aspect of the CMM Technology Platform Design System. By incorporating security best practices directly into components and patterns, the design system helps developers build secure healthcare applications.
 
 Designers and developers should use this document as a reference when creating or modifying components to ensure they meet security requirements. Regular security reviews and updates to the design system will ensure it remains aligned with evolving security best practices and threats.

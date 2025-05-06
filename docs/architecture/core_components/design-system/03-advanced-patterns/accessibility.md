@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Accessibility is a core principle of the CMM Reference Architecture Design System. Our healthcare applications must be usable by everyone, including people with disabilities and those in various contexts and environments. This document provides comprehensive guidelines for ensuring accessibility across all components and applications.
+Accessibility is a core principle of the CMM Technology Platform Design System. Our healthcare applications must be usable by everyone, including people with disabilities and those in various contexts and environments. This document provides comprehensive guidelines for ensuring accessibility across all components and applications.
 
 ## WCAG Compliance
 

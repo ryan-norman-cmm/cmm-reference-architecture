@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Design tokens are the foundational visual elements that ensure consistency across the CMM Reference Architecture Design System. They represent the smallest visual attributes, such as colors, typography, spacing, and other visual properties that define the look and feel of our healthcare applications.
+Design tokens are the foundational visual elements that ensure consistency across the CMM Technology Platform Design System. They represent the smallest visual attributes, such as colors, typography, spacing, and other visual properties that define the look and feel of our healthcare applications.
 
 By centralizing these values as tokens, we enable consistent implementation across different platforms and technologies while facilitating theme customization and brand alignment.
 

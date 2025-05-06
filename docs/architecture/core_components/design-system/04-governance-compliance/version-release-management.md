@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Effective version control and release management are essential for maintaining a stable, reliable design system that can evolve while supporting existing applications. This document outlines the processes, standards, and best practices for version control and release management of the CMM Reference Architecture Design System.
+Effective version control and release management are essential for maintaining a stable, reliable design system that can evolve while supporting existing applications. This document outlines the processes, standards, and best practices for version control and release management of the CMM Technology Platform Design System.
 
 ## Versioning Strategy
 
@@ -488,6 +488,6 @@ For API changes:
 
 ## Conclusion
 
-Effective version control and release management are essential for maintaining a stable, reliable design system. By following these processes and standards, the CMM Reference Architecture Design System can evolve while supporting existing applications and ensuring a smooth transition for teams adopting new versions.
+Effective version control and release management are essential for maintaining a stable, reliable design system. By following these processes and standards, the CMM Technology Platform Design System can evolve while supporting existing applications and ensuring a smooth transition for teams adopting new versions.
 
 Regular reviews and updates to these processes will ensure they remain effective as the design system and organization evolve.

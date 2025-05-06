@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the data governance framework for the API Marketplace component of the CMM Reference Architecture. Data governance ensures that API data is managed according to organizational policies, industry standards, and regulatory requirements throughout its lifecycle.
+This document outlines the data governance framework for the API Marketplace component of the CMM Technology Platform. Data governance ensures that API data is managed according to organizational policies, industry standards, and regulatory requirements throughout its lifecycle.
 
 ## Data Governance Framework
 

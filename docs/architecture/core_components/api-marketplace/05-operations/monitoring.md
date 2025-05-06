@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the monitoring and alerting framework for the API Marketplace component of the CMM Reference Architecture. Effective monitoring is essential for ensuring the reliability, performance, and security of the API Marketplace, enabling proactive issue detection and resolution.
+This document outlines the monitoring and alerting framework for the API Marketplace component of the CMM Technology Platform. Effective monitoring is essential for ensuring the reliability, performance, and security of the API Marketplace, enabling proactive issue detection and resolution.
 
 ## Monitoring Strategy
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document provides comprehensive instructions for deploying the API Marketplace component of the CMM Reference Architecture. It covers deployment options, prerequisites, step-by-step deployment procedures, configuration, verification, and troubleshooting guidance. This guide is intended for operations teams, DevOps engineers, and system administrators responsible for deploying and maintaining the API Marketplace in various environments.
+This document provides comprehensive instructions for deploying the API Marketplace component of the CMM Technology Platform. It covers deployment options, prerequisites, step-by-step deployment procedures, configuration, verification, and troubleshooting guidance. This guide is intended for operations teams, DevOps engineers, and system administrators responsible for deploying and maintaining the API Marketplace in various environments.
 
 ## Deployment Options
 

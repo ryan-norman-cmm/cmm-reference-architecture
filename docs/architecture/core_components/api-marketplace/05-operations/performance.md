@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the performance optimization framework for the API Marketplace component of the CMM Reference Architecture. Optimizing performance is critical for ensuring a responsive, scalable, and efficient API Marketplace that meets the needs of both API providers and consumers.
+This document outlines the performance optimization framework for the API Marketplace component of the CMM Technology Platform. Optimizing performance is critical for ensuring a responsive, scalable, and efficient API Marketplace that meets the needs of both API providers and consumers.
 
 ## Performance Goals
 

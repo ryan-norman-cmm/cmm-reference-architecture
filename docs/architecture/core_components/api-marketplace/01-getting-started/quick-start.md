@@ -1,4 +1,4 @@
-# API Marketplace Setup Guide
+# API Marketplace Quick Start Guide
 
 ## Introduction
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This guide walks you through the process of setting up the Event Broker for the CMM Reference Architecture. It covers the installation and configuration of Confluent Kafka, the implementation of healthcare-specific event schemas, and the integration with other core components. By following these steps, you'll establish a robust foundation for event-driven healthcare applications that enable real-time data exchange and workflow automation.
+This guide walks you through the process of setting up the Event Broker for the CMM Technology Platform. It covers the installation and configuration of Confluent Kafka, the implementation of healthcare-specific event schemas, and the integration with other core components. By following these steps, you'll establish a robust foundation for event-driven healthcare applications that enable real-time data exchange and workflow automation.
 
 The setup process is organized into logical sections that progress from basic infrastructure setup to advanced configuration. Each section builds upon the previous ones, allowing for incremental implementation and testing. While this guide provides a comprehensive approach, you can adapt it to your specific environment and requirements.
 

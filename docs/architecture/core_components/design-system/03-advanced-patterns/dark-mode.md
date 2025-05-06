@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Dark mode is an essential feature for healthcare applications, particularly for clinical environments with varying lighting conditions and for reducing eye strain during extended use. The CMM Reference Architecture Design System provides a comprehensive dark mode implementation that maintains accessibility, readability, and clinical functionality. This document outlines the patterns and techniques for implementing dark mode in healthcare applications.
+Dark mode is an essential feature for healthcare applications, particularly for clinical environments with varying lighting conditions and for reducing eye strain during extended use. the CMM Technology Platform Design System provides a comprehensive dark mode implementation that maintains accessibility, readability, and clinical functionality. This document outlines the patterns and techniques for implementing dark mode in healthcare applications.
 
 ## Core Implementation
 
@@ -639,6 +639,6 @@ function getLuminance(color) {
 
 ## Conclusion
 
-Dark mode is an essential feature for healthcare applications, particularly in clinical environments with varying lighting conditions. The CMM Reference Architecture Design System provides a comprehensive dark mode implementation that maintains accessibility, readability, and clinical functionality.
+Dark mode is an essential feature for healthcare applications, particularly in clinical environments with varying lighting conditions. The CMM Technology Platform Design System provides a comprehensive dark mode implementation that maintains accessibility, readability, and clinical functionality.
 
 By following these patterns and techniques, developers can create healthcare applications with effective dark mode support that enhances usability across different clinical contexts and reduces eye strain during extended use.

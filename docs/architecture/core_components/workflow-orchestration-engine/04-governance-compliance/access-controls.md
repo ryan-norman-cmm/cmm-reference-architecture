@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the access control mechanisms and security policies for the Workflow Orchestration Engine component of the CMM Reference Architecture. Proper access controls are essential to ensure that only authorized users and systems can create, modify, execute, and monitor workflows within healthcare environments.
+This document outlines the access control mechanisms and security policies for the Workflow Orchestration Engine component of the CMM Technology Platform. Proper access controls are essential to ensure that only authorized users and systems can create, modify, execute, and monitor workflows within healthcare environments.
 
 ## Access Control Model
 

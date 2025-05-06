@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the access control mechanisms and security policies for the API Marketplace component of the CMM Reference Architecture. Proper access controls are essential to ensure that only authorized users and systems can access, publish, and consume APIs within the marketplace.
+This document outlines the access control mechanisms and security policies for the API Marketplace component of the CMM Technology Platform. Proper access controls are essential to ensure that only authorized users and systems can access, publish, and consume APIs within the marketplace.
 
 ## Access Control Model
 

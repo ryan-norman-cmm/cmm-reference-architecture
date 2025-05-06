@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Healthcare applications must function effectively across a wide range of devices and contexts, from large clinical workstations to mobile devices used at the point of care. The CMM Reference Architecture Design System incorporates advanced responsive design patterns to ensure consistent functionality and usability across all devices. This document outlines these patterns and provides guidance for implementing responsive healthcare interfaces.
+Healthcare applications must function effectively across a wide range of devices and contexts, from large clinical workstations to mobile devices used at the point of care. The CMM Technology Platform Design System incorporates advanced responsive design patterns to ensure consistent functionality and usability across all devices. This document outlines these patterns and provides guidance for implementing responsive healthcare interfaces.
 
 ## Core Responsive Principles
 
@@ -815,4 +815,4 @@ describe('ClinicalDashboard Accessibility', () => {
 
 Responsive design is essential for healthcare applications that must function across a wide range of devices and contexts. By implementing these advanced responsive patterns, developers can create interfaces that provide a consistent and effective user experience from large clinical workstations to mobile devices used at the point of care.
 
-The CMM Reference Architecture Design System incorporates these responsive design patterns to ensure that healthcare applications remain usable and effective across all devices. By following these guidelines, developers can create applications that adapt to the diverse needs of healthcare environments.
+The CMM Technology Platform Design System incorporates these responsive design patterns to ensure that healthcare applications remain usable and effective across all devices. By following these guidelines, developers can create applications that adapt to the diverse needs of healthcare environments.

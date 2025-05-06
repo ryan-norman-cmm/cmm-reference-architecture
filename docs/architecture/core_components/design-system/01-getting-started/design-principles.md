@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The design principles of the CMM Reference Architecture Design System serve as the foundation for all design decisions. These principles guide the creation of consistent, accessible, and effective healthcare applications that meet the needs of all users, from patients to healthcare professionals.
+The design principles of the CMM Technology Platform Design System serve as the foundation for all design decisions. These principles guide the creation of consistent, accessible, and effective healthcare applications that meet the needs of all users, from patients to healthcare professionals.
 
 ## Core Principles
 

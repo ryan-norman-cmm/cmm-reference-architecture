@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the regulatory compliance framework for the Event Broker component of the CMM Reference Architecture. As a critical component handling data exchange between healthcare systems, the Event Broker must adhere to various healthcare regulations and standards to ensure data protection, privacy, and secure communication.
+This document outlines the regulatory compliance framework for the Event Broker component of the CMM Technology Platform. As a critical component handling data exchange between healthcare systems, the Event Broker must adhere to various healthcare regulations and standards to ensure data protection, privacy, and secure communication.
 
 ## Healthcare Regulatory Framework
 

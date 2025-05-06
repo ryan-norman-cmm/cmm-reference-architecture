@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the data quality and validation framework for the API Marketplace component of the CMM Reference Architecture. Ensuring high-quality data is essential for the reliability, usability, and trustworthiness of APIs published in the marketplace.
+This document outlines the data quality and validation framework for the API Marketplace component of the CMM Technology Platform. Ensuring high-quality data is essential for the reliability, usability, and trustworthiness of APIs published in the marketplace.
 
 ## Data Quality Framework
 

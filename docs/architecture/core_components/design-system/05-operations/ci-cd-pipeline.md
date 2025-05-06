@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A robust Continuous Integration and Deployment (CI/CD) pipeline is essential for maintaining the quality, reliability, and consistency of the CMM Reference Architecture Design System. This document outlines the CI/CD strategy, tools, and processes used to automate testing, building, and deployment of the design system.
+A robust Continuous Integration and Deployment (CI/CD) pipeline is essential for maintaining the quality, reliability, and consistency of the CMM Technology Platform Design System. This document outlines the CI/CD strategy, tools, and processes used to automate testing, building, and deployment of the design system.
 
 ## CI/CD Strategy
 
@@ -648,6 +648,6 @@ Establishing feedback loops for continuous improvement:
 
 ## Conclusion
 
-A robust CI/CD pipeline is essential for maintaining the quality, reliability, and consistency of the CMM Reference Architecture Design System. By automating testing, building, and deployment processes, the design system can evolve rapidly while maintaining high standards of quality and compliance.
+A robust CI/CD pipeline is essential for maintaining the quality, reliability, and consistency of the CMM Technology Platform Design System. By automating testing, building, and deployment processes, the design system can evolve rapidly while maintaining high standards of quality and compliance.
 
 Regular reviews and improvements to the CI/CD pipeline will ensure it remains effective as the design system and organization evolve.

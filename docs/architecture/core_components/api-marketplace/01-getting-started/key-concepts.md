@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the key concepts and terminology used in the API Marketplace component of the CMM Reference Architecture. Understanding these concepts is essential for effectively using and integrating with the API Marketplace.
+This document outlines the key concepts and terminology used in the API Marketplace component of the CMM Technology Platform. Understanding these concepts is essential for effectively using and integrating with the API Marketplace.
 
 ## Core Concepts
 

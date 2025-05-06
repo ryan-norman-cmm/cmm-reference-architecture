@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Effective monitoring and performance optimization are essential for maintaining a high-quality design system that delivers a seamless experience for both developers and end-users. This document outlines the strategies, tools, and best practices for monitoring and optimizing the performance of the CMM Reference Architecture Design System.
+Effective monitoring and performance optimization are essential for maintaining a high-quality design system that delivers a seamless experience for both developers and end-users. This document outlines the strategies, tools, and best practices for monitoring and optimizing the performance of the CMM Technology Platform Design System.
 
 ## Monitoring Strategy
 
@@ -411,6 +411,6 @@ Balancing performance with healthcare compliance requirements:
 
 ## Conclusion
 
-Effective monitoring and performance optimization are critical for maintaining a high-quality design system that meets the demanding requirements of healthcare applications. By implementing comprehensive monitoring, enforcing performance budgets, and continuously optimizing components, the CMM Reference Architecture Design System can deliver an excellent experience for both developers and end-users.
+Effective monitoring and performance optimization are critical for maintaining a high-quality design system that meets the demanding requirements of healthcare applications. By implementing comprehensive monitoring, enforcing performance budgets, and continuously optimizing components, the CMM Technology Platform Design System can deliver an excellent experience for both developers and end-users.
 
 Regular performance reviews and optimization efforts will ensure the design system remains performant as it evolves and grows.

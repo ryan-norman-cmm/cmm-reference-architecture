@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the data governance framework for the Workflow Orchestration Engine component of the CMM Reference Architecture. Effective data governance ensures that workflow data is managed according to organizational policies, industry standards, and regulatory requirements throughout its lifecycle.
+This document outlines the data governance framework for the Workflow Orchestration Engine component of the CMM Technology Platform. Effective data governance ensures that workflow data is managed according to organizational policies, industry standards, and regulatory requirements throughout its lifecycle.
 
 ## Data Governance Framework
 

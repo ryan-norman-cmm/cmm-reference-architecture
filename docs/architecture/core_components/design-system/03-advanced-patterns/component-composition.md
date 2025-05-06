@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Component composition is a powerful pattern for building complex, flexible, and maintainable user interfaces. The CMM Reference Architecture Design System leverages advanced composition patterns to create a cohesive system that can address the diverse needs of healthcare applications. This document explores these patterns and provides guidance on effectively composing components.
+Component composition is a powerful pattern for building complex, flexible, and maintainable user interfaces. the CMM Technology Platform Design System leverages advanced composition patterns to create a cohesive system that can address the diverse needs of healthcare applications. This document explores these patterns and provides guidance on effectively composing components.
 
 ## Core Composition Patterns
 
@@ -845,4 +845,4 @@ function PatientForm() {
 
 ## Conclusion
 
-Advanced component composition patterns enable the creation of flexible, maintainable, and accessible healthcare interfaces. By leveraging these patterns, developers can build complex applications while maintaining consistency with the design system. The CMM Reference Architecture Design System provides a robust foundation of composable components that can be combined to address the unique requirements of healthcare applications.
+Advanced component composition patterns enable the creation of flexible, maintainable, and accessible healthcare interfaces. By leveraging these patterns, developers can build complex applications while maintaining consistency with the design system. the CMM Technology Platform Design System provides a robust foundation of composable components that can be combined to address the unique requirements of healthcare applications.

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Healthcare applications must adhere to strict regulatory requirements to ensure patient safety, data privacy, and system reliability. The CMM Reference Architecture Design System incorporates compliance considerations directly into its components and patterns to simplify the development of compliant healthcare applications.
+Healthcare applications must adhere to strict regulatory requirements to ensure patient safety, data privacy, and system reliability. The CMM Technology Platform Design System incorporates compliance considerations directly into its components and patterns to simplify the development of compliant healthcare applications.
 
 ## HIPAA Compliance
 
@@ -472,6 +472,6 @@ Maintain comprehensive compliance documentation for the design system:
 
 ## Conclusion
 
-Compliance with healthcare regulations is a critical aspect of the CMM Reference Architecture Design System. By incorporating compliance requirements directly into components and patterns, the design system simplifies the development of compliant healthcare applications.
+Compliance with healthcare regulations is a critical aspect of the CMM Technology Platform Design System. By incorporating compliance requirements directly into components and patterns, the design system simplifies the development of compliant healthcare applications.
 
 Designers and developers should use this document as a reference when creating or modifying components to ensure they meet all relevant compliance requirements. Regular compliance reviews and updates to the design system will ensure it remains aligned with evolving healthcare regulations.

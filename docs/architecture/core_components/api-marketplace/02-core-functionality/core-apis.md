@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document describes the core APIs provided by the API Marketplace component of the CMM Reference Architecture. These APIs enable the registration, discovery, management, and governance of APIs across the healthcare organization. This document focuses on the API interfaces and their usage, rather than implementation details.
+This document describes the core APIs provided by the API Marketplace component of the CMM Technology Platform. These APIs enable the registration, discovery, management, and governance of APIs across the healthcare organization. This document focuses on the API interfaces and their usage, rather than implementation details.
 
 ## API Overview
 

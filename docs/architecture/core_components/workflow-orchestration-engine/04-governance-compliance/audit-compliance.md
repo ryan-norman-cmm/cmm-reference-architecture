@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the audit and compliance framework for the Workflow Orchestration Engine component of the CMM Reference Architecture. Comprehensive audit capabilities and compliance controls are essential for ensuring that the Workflow Orchestration Engine meets organizational policies, industry standards, and regulatory requirements, particularly in healthcare environments.
+This document outlines the audit and compliance framework for the Workflow Orchestration Engine component of the CMM Technology Platform. Comprehensive audit capabilities and compliance controls are essential for ensuring that the Workflow Orchestration Engine meets organizational policies, industry standards, and regulatory requirements, particularly in healthcare environments.
 
 ## Audit Framework
 

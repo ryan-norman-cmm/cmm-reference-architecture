@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the regulatory compliance framework for the Federated Graph API component of the CMM Reference Architecture. As a central integration point for healthcare data and services, the Federated Graph API must adhere to various healthcare regulations and standards to ensure the protection of sensitive data, maintain patient privacy, and support secure interoperability.
+This document outlines the regulatory compliance framework for the Federated Graph API component of the CMM Technology Platform. As a central integration point for healthcare data and services, the Federated Graph API must adhere to various healthcare regulations and standards to ensure the protection of sensitive data, maintain patient privacy, and support secure interoperability.
 
 ## Healthcare Regulatory Framework
 

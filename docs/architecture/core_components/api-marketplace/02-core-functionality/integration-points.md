@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the integration points for the API Marketplace component within the CMM Reference Architecture. It describes how the API Marketplace interacts with other core systems and external services to ensure seamless interoperability.
+This document outlines the integration points for the API Marketplace component within the CMM Technology Platform. It describes how the API Marketplace interacts with other core systems and external services to ensure seamless interoperability.
 
 ## Integration with Security and Access Framework
 

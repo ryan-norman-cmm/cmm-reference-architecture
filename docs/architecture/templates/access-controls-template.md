@@ -233,6 +233,14 @@ async function checkPermission(userId, permission) {
 
 [How these controls support HIPAA compliance.]
 
+### SOC2 Compliance
+
+[How these controls support SOC2 compliance.]
+
+### Sarbanes-Oxley (SOX) Compliance
+
+[How these controls support SOX compliance.]
+
 ### GDPR Compliance
 
 [How these controls support GDPR compliance.]

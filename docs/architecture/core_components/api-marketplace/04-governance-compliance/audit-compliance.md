@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the audit and compliance framework for the API Marketplace component of the CMM Reference Architecture. Comprehensive audit capabilities and compliance controls are essential for ensuring that the API Marketplace meets organizational policies, industry standards, and regulatory requirements.
+This document outlines the audit and compliance framework for the API Marketplace component of the CMM Technology Platform. Comprehensive audit capabilities and compliance controls are essential for ensuring that the API Marketplace meets organizational policies, industry standards, and regulatory requirements.
 
 ## Audit Framework
 

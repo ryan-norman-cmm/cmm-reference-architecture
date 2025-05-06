@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the standardization plan for the CMM Reference Architecture documentation. The goal is to ensure consistency, completeness, and quality across all core components' documentation. This plan defines the structure, standards, and implementation approach to achieve a uniform documentation experience throughout the architecture.
+This document outlines the standardization plan for the CMM Technology Platform documentation. The goal is to ensure consistency, completeness, and quality across all core components' documentation. This plan defines the structure, standards, and implementation approach to achieve a uniform documentation experience throughout the platform.
 
 ## Documentation Structure
 
@@ -99,7 +99,7 @@ Reference architecture documentation should be reserved for system-wide architec
 
 ## Introduction
 
-[Brief description of the component, its purpose, and its role in the CMM Reference Architecture]
+[Brief description of the component, its purpose, and its role in the CMM Technology Platform]
 
 ## Key Features
 
@@ -273,7 +273,7 @@ All components must include the following documentation, with clear content boun
 
 #### 05-operations
 - **deployment.md**
-  - *Should include*: Deployment options, prerequisites, configuration, verification
+  - *Should include*: Cloud-native deployment using container orchestration on major cloud platforms (e.g., AWS, Azure, or GCP). Use Infrastructure as Code for automation but avoid on-premise scenarios.
   - *Should not include*: Development setup (covered in quick-start.md), monitoring details
   
 - **monitoring.md**
@@ -293,7 +293,7 @@ All components must include the following documentation, with clear content boun
   - *Should not include*: Deployment procedures, monitoring details
   
 - **ci-cd-pipeline.md**
-  - *Should include*: Pipeline stages, automation tools, build/deployment process, security controls
+  - *Should include*: High-level CI/CD pipeline details, focusing on automated builds, integrated testing, containerized deployments, and continuous monitoring without delving into detailed technology implementations.
   - *Should not include*: Detailed implementation code, general CI/CD concepts
   
 - **testing-strategy.md**
@@ -783,6 +783,9 @@ graph LR
 ## Pipeline Security
 
 [Description of security controls in the pipeline, including secrets management, access control, and vulnerability scanning]
+
+### Vendor Tooling
+- Leverage vendor-specific solutions such as OpenTelemetry for distributed tracing and metrics collection, Dynatrace for performance monitoring, ELK for general logging, and Splunk for security logging (where applicable). Evaluate and integrate vendor tools as needed to meet operations, governance, and compliance requirements.
 ```
 
 ### Testing Strategy Documentation
@@ -964,8 +967,67 @@ All `regulatory-compliance.md` files must include:
 - [ ] No spelling or grammatical errors
 - [ ] Formatting is consistent
 
+### Content Boundary Validation
+
+- [ ] Document adheres to defined content boundaries
+- [ ] Content is focused on the document's primary purpose
+- [ ] No significant overlap with other documents
+- [ ] Appropriate cross-references to related documents
+- [ ] No content that belongs in other documents
+- [ ] Follows the "should include/should not include" guidelines
+
+## Documentation Governance
+
+### Ongoing Maintenance Process
+
+1. **Documentation Ownership**
+   - Assign clear ownership for each document
+   - Define responsibilities for documentation maintenance
+   - Establish accountability for documentation quality
+   - Create a documentation ownership matrix
+
+2. **Change Management**
+   - Implement version control for all documentation
+   - Establish review and approval process for documentation changes
+   - Define criteria for when documentation updates are required
+   - Track documentation changes alongside code changes
+
+3. **Regular Review Cycle**
+   - Schedule periodic reviews of all documentation
+   - Prioritize reviews based on component criticality and change frequency
+   - Implement a documentation freshness indicator
+   - Automate notifications for documentation due for review
+
+4. **Metrics and Reporting**
+   - Track documentation coverage across components
+   - Measure documentation quality and compliance with standards
+   - Report on documentation gaps and improvement opportunities
+   - Monitor documentation usage and feedback
+
+### Documentation Tooling
+
+1. **Authoring Tools**
+   - Standardize on Markdown for documentation format
+   - Provide templates and snippets for common documentation patterns
+   - Implement linting tools for documentation quality
+   - Support collaborative editing and review
+
+2. **Integration with Development Workflow**
+   - Integrate documentation changes into pull request process
+   - Implement documentation checks in CI/CD pipeline
+   - Automate validation of documentation against standards
+   - Link documentation to related code and artifacts
+
+3. **Publishing and Distribution**
+   - Implement automated documentation publishing
+   - Ensure consistent formatting and presentation
+   - Support search and discovery of documentation
+   - Enable feedback collection from documentation users
+
 ## Conclusion
 
-This documentation standardization plan provides a comprehensive approach to ensuring consistent, high-quality documentation across all components of the CMM Reference Architecture. By following this plan, we will create a unified documentation experience that enhances usability, maintainability, and compliance.
+This documentation standardization plan provides a comprehensive approach to ensuring consistent, high-quality documentation across all components of the CMM Technology Platform. By following this plan, we will create a unified documentation experience that enhances usability, maintainability, and compliance.
 
 The implementation of this plan should be treated as a project with clear phases, responsibilities, and timelines. Regular reviews and updates to the documentation will ensure it remains accurate and valuable as the architecture evolves.
+
+By removing redundant documentation, restructuring misaligned content, and enforcing clear content boundaries, we will create a more maintainable and useful documentation set that better serves the needs of all stakeholders.

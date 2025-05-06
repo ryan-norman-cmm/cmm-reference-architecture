@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the maintenance and support framework for the API Marketplace component of the CMM Reference Architecture. Effective maintenance and support are essential for ensuring the reliability, security, and continued evolution of the API Marketplace.
+This document outlines the maintenance and support framework for the API Marketplace component of the CMM Technology Platform. Effective maintenance and support are essential for ensuring the reliability, security, and continued evolution of the API Marketplace.
 
 ## Maintenance Strategy
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the release lifecycle for the API Marketplace component of the CMM Reference Architecture. It defines the stages, versioning strategy, release planning, change management, approval processes, rollback procedures, and communication strategies for API Marketplace releases.
+This document outlines the release lifecycle for the API Marketplace component of the CMM Technology Platform. It defines the stages, versioning strategy, release planning, change management, approval processes, rollback procedures, and communication strategies for API Marketplace releases.
 
 ## Lifecycle Stages
 

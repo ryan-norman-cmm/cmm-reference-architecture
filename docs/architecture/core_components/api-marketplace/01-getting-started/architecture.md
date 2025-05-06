@@ -183,7 +183,7 @@ The API Marketplace uses the following technology stack:
 
 ## Integration Architecture
 
-The API Marketplace integrates with other components of the CMM Reference Architecture:
+The API Marketplace integrates with other components of the CMM Technology Platform:
 
 ```mermaid
 graph LR

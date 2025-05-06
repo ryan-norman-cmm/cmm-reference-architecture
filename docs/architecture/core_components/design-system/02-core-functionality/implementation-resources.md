@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This section provides comprehensive resources for implementing the CMM Reference Architecture Design System in healthcare applications. These resources include documentation, code examples, design assets, and guidelines to help designers and developers create consistent, accessible, and effective user interfaces.
+This section provides comprehensive resources for implementing the CMM Technology Platform Design System in healthcare applications. These resources include documentation, code examples, design assets, and guidelines to help designers and developers create consistent, accessible, and effective user interfaces.
 
 ## Component Documentation
 
@@ -264,4 +264,4 @@ Upcoming features and improvements:
 
 ## Conclusion
 
-These implementation resources provide comprehensive support for designers and developers working with the CMM Reference Architecture Design System. By leveraging these resources, teams can create consistent, accessible, and effective healthcare applications that meet the unique needs of healthcare professionals and patients.
+These implementation resources provide comprehensive support for designers and developers working with the CMM Technology Platform Design System. By leveraging these resources, teams can create consistent, accessible, and effective healthcare applications that meet the unique needs of healthcare professionals and patients.

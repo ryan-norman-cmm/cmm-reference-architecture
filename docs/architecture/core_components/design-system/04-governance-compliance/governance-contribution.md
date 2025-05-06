@@ -2,7 +2,7 @@
 
 ## Governance Structure
 
-The CMM Reference Architecture Design System is governed by a structured approach that balances centralized oversight with distributed contribution. This structure ensures the design system remains consistent, maintainable, and aligned with organizational goals.
+The CMM Technology Platform Design System is governed by a structured approach that balances centralized oversight with distributed contribution. This structure ensures the design system remains consistent, maintainable, and aligned with organizational goals.
 
 ### Design System Team
 
@@ -481,6 +481,6 @@ The design system's success is measured through the following metrics:
 
 ## Conclusion
 
-These governance and contribution guidelines provide a framework for managing and evolving the CMM Reference Architecture Design System. By following these guidelines, contributors can ensure that the design system remains consistent, high-quality, and aligned with organizational goals.
+These governance and contribution guidelines provide a framework for managing and evolving the CMM Technology Platform Design System. By following these guidelines, contributors can ensure that the design system remains consistent, high-quality, and aligned with organizational goals.
 
 The governance model balances centralized oversight with distributed contribution, enabling the design system to evolve while maintaining consistency and quality. Regular reviews and updates to these guidelines will ensure they remain effective as the design system and organization evolve.

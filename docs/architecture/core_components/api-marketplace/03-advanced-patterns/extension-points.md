@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document outlines the extension points available in the API Marketplace component of the CMM Reference Architecture. These extension points allow organizations to customize and extend the functionality of the API Marketplace to meet specific business requirements and integrate with external systems.
+This document outlines the extension points available in the API Marketplace component of the CMM Technology Platform. These extension points allow organizations to customize and extend the functionality of the API Marketplace to meet specific business requirements and integrate with external systems.
 
 ## Plugin Architecture
 
