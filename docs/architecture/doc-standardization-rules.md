@@ -563,8 +563,9 @@ All components must include the following documentation, with clear content boun
   - *Should not include*: Access controls (covered in access-controls.md), general data concepts
   
 - **audit-compliance.md**
-  - *Should include*: Audit framework, event types, data collection, log protection
-  - *Should not include*: Access controls (covered in access-controls.md), general security concepts
+  - *Should include*: IT general controls (ITGCs), audit framework, event types, data collection, log protection, control objectives and activities, segregation of duties, change management controls, system access controls, and IT operations controls
+  - *Should not include*: Access controls implementation details (covered in access-controls.md), general security concepts
+  - *Must emphasize*: Documentation of IT general controls that support financial reporting and regulatory compliance
   
 - **regulatory-compliance.md**
   - *Should include*: Regulatory framework, HIPAA/GDPR implementation, compliance monitoring
