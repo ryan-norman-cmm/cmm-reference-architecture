@@ -774,112 +774,144 @@ Each component has additional required documentation specific to its functionali
 
 The reference architecture documentation should be maintained separately from component-specific documentation and should focus on system-wide architecture, patterns, and decisions.
 
-- **system-architecture.md**
-  - *Should include*: Overall system architecture, component relationships, data flows
-  - *Should not include*: Component-specific implementation details
-  
-- **design-principles.md**
-  - *Should include*: Architectural principles, patterns, standards, guidelines
-  - *Should not include*: Component-specific implementation details
-  
-- **integration-patterns.md**
-  - *Should include*: System-wide integration patterns, protocols, standards
-  - *Should not include*: Component-specific integration details
-  
-- **security-architecture.md**
-  - *Should include*: System-wide security architecture, controls, patterns
-  - *Should not include*: Component-specific security implementation
-  
-- **compliance-framework.md**
-  - *Should include*: System-wide compliance approach, standards, requirements
-  - *Should not include*: Component-specific compliance implementation
 
-## Implementation Plan
+## Reference Architecture Concepts
 
-### Phase 1: Assessment and Gap Analysis
+### Overview
 
-1. **Inventory Current Documentation**
-   - Create an inventory of existing documentation for each component
-   - Identify gaps compared to the required documentation list
-   - Assess quality and consistency of existing documentation
-   - Flag documentation that doesn't align with the standardization guidelines
+Certain architectural concepts and patterns span multiple core components and should be documented in the reference architecture rather than duplicated across individual component documentation. This section identifies these cross-cutting concerns and provides guidance on how to reference them in component documentation.
 
-2. **Identify Redundant or Misaligned Documentation**
-   - Identify documentation with overlapping content
-   - Detect documentation that violates the content boundaries
-   - Map existing documentation to the standardized structure
-   - Create a list of documents that need to be removed, combined, or restructured
+### Cross-Component Architectural Patterns
 
-3. **Prioritize Documentation Needs**
-   - Identify critical documentation gaps to address first
-   - Prioritize based on user needs and component importance
-   - Prioritize restructuring of misaligned documentation
-   - Create a prioritized backlog of documentation tasks
+The following architectural patterns involve multiple components and should be documented in the reference architecture:
 
-### Phase 2: Template and Standards Development
+1. **Command Query Responsibility Segregation (CQRS)**
+   - *Reference Architecture Documentation*: Detailed pattern description, implementation guidance, and system-wide considerations
+   - *Component Documentation*: Brief mention of CQRS usage with reference to the system-wide pattern documentation
+   - *Affected Components*: API Marketplace, Event Broker, FHIR Interoperability Platform, Workflow Orchestration Engine
 
-1. **Finalize Templates**
-   - Create detailed templates for each document type
-   - Develop style guide and writing standards
-   - Create example documents that demonstrate best practices
+2. **Event-Driven Architecture (EDA)**
+   - *Reference Architecture Documentation*: Overall event flow, event schema standards, reliability patterns, and cross-component choreography
+   - *Component Documentation*: Component-specific event production/consumption with reference to system-wide event standards
+   - *Affected Components*: Event Broker, API Marketplace, FHIR Interoperability Platform, Workflow Orchestration Engine
 
-2. **Establish Review Process**
-   - Define documentation review workflow
-   - Identify reviewers for technical accuracy and style consistency
-   - Create review checklists
+3. **Microservices Architecture**
+   - *Reference Architecture Documentation*: Service boundaries, communication patterns, deployment models, and orchestration
+   - *Component Documentation*: Component-specific service implementation with reference to system-wide microservice standards
+   - *Affected Components*: All core components
 
-### Phase 3: Documentation Restructuring and Updates
+4. **API Gateway Pattern**
+   - *Reference Architecture Documentation*: Gateway architecture, routing rules, cross-cutting concerns (auth, rate limiting, etc.)
+   - *Component Documentation*: Component-specific API exposure with reference to system-wide gateway configuration
+   - *Affected Components*: API Marketplace, FHIR Interoperability Platform, Federated Graph API
 
-1. **Create Missing Documentation**
-   - Assign documentation tasks to appropriate team members
-   - Follow templates and standards
-   - Conduct regular progress reviews
+5. **Circuit Breaker Pattern**
+   - *Reference Architecture Documentation*: Pattern implementation, configuration standards, monitoring, and recovery strategies
+   - *Component Documentation*: Component-specific usage with reference to system-wide resilience patterns
+   - *Affected Components*: All core components
 
-2. **Update Existing Documentation**
-   - Revise existing documentation to follow new standards
-   - Ensure consistency across all documents
-   - Address any gaps in content
+### Legacy and On-Premises Integration Patterns
 
-3. **Remove or Combine Redundant Documentation**
-   - Archive documentation that is being replaced or is obsolete
-   - Extract valuable content from redundant documents before removal
-   - Combine overlapping documentation according to content boundaries
-   - Redirect links from removed documents to their replacements
+Integration with legacy and on-premises systems involves multiple components and should be documented in the reference architecture:
 
-4. **Restructure Misaligned Documentation**
-   - Split documents that cover too many topics
-   - Reorganize content to align with defined content boundaries
-   - Move content to appropriate documents based on the standardization plan
-   - Update cross-references to maintain proper document relationships
+1. **Legacy System Integration**
+   - *Reference Architecture Documentation*: Integration patterns, data transformation, synchronization strategies, and security considerations
+   - *Component Documentation*: Component-specific adapters with reference to system-wide legacy integration patterns
+   - *Affected Components*: API Marketplace, Event Broker, FHIR Interoperability Platform, Workflow Orchestration Engine
 
-### Phase 4: Review and Quality Assurance
+2. **On-Premises Deployment Patterns**
+   - *Reference Architecture Documentation*: Hybrid cloud/on-premises architectures, network considerations, data residency, and synchronization
+   - *Component Documentation*: Component-specific deployment considerations with reference to system-wide hybrid deployment patterns
+   - *Affected Components*: All core components
 
-1. **Technical Review**
-   - Review all documentation for technical accuracy
-   - Ensure code examples are correct and functional
-   - Verify architectural descriptions
+3. **Legacy Authentication Integration**
+   - *Reference Architecture Documentation*: Integration with legacy identity providers, token translation, and federation patterns
+   - *Component Documentation*: Component-specific authentication requirements with reference to system-wide authentication patterns
+   - *Affected Components*: All core components
 
-2. **Style and Consistency Review**
-   - Review for adherence to style guidelines
-   - Ensure consistent terminology
-   - Check formatting and structure
+### Cross-Cutting Technical Concerns
 
-3. **Cross-Reference Check**
-   - Verify links between documents
-   - Ensure consistent information across documents
-   - Check for duplication or contradictions
+The following technical concerns span multiple components and should be documented in the reference architecture:
 
-### Phase 5: Publication and Maintenance
+1. **Distributed Tracing**
+   - *Reference Architecture Documentation*: Tracing architecture, correlation ID propagation, sampling strategies, and observability
+   - *Component Documentation*: Component-specific instrumentation with reference to system-wide tracing standards
+   - *Affected Components*: All core components
 
-1. **Documentation Publication**
-   - Publish updated documentation
-   - Announce changes to stakeholders
-   - Collect initial feedback
+2. **Centralized Logging**
+   - *Reference Architecture Documentation*: Logging architecture, log aggregation, structured logging format, and retention policies
+   - *Component Documentation*: Component-specific logging with reference to system-wide logging standards
+   - *Affected Components*: All core components
 
-2. **Establish Maintenance Process**
-   - Define process for ongoing documentation updates
-   - Integrate documentation updates into development workflow
-   - Assign documentation ownership
+3. **Metrics and Monitoring**
+   - *Reference Architecture Documentation*: Metrics collection, alerting strategies, dashboarding, and SLO/SLA definitions
+   - *Component Documentation*: Component-specific metrics with reference to system-wide monitoring standards
+   - *Affected Components*: All core components
+
+4. **Disaster Recovery**
+   - *Reference Architecture Documentation*: System-wide DR strategy, RPO/RTO objectives, backup strategies, and recovery procedures
+   - *Component Documentation*: Component-specific recovery considerations with reference to system-wide DR strategy
+   - *Affected Components*: All core components
+
+### Documentation Guidelines
+
+When documenting components that implement or interact with these cross-cutting concerns:
+
+1. **Reference, Don't Duplicate**
+   - Briefly mention the pattern or concern as it relates to the component
+   - Include a reference to the detailed documentation in the reference architecture
+   - Focus on component-specific implementation details only
+
+2. **Use Consistent Terminology**
+   - Use the same terminology as defined in the reference architecture
+   - Maintain consistency in diagrams and visual representations
+   - Ensure component-specific documentation aligns with system-wide patterns
+
+3. **Clarify Component Boundaries**
+   - Clearly delineate where component responsibility ends and system-wide patterns begin
+   - Explain how the component participates in the larger pattern
+   - Document component-specific configuration related to the pattern
+
+### Example Documentation Approach
+
+**In Component Documentation:**
+
+```markdown
+## Event-Driven Integration
+
+The API Marketplace publishes the following events to the Event Broker:
+
+| Event | Topic | Purpose | Payload Schema |
+|-------|-------|---------|----------------|
+| ApiRegistered | api.lifecycle | Notify when a new API is registered | [ApiRegisteredEvent](#) |
+| ApiDeprecated | api.lifecycle | Notify when an API is deprecated | [ApiDeprecatedEvent](#) |
+
+For details on the event-driven architecture patterns, event schema standards, and cross-component choreography, see the [Event-Driven Architecture Reference](../../reference_architecture/event-driven-architecture.md).
+```
+
+**In Reference Architecture Documentation:**
+
+```markdown
+## Event-Driven Architecture
+
+The CMM Technology Platform uses an event-driven architecture for asynchronous communication between components. This enables loose coupling, real-time updates, scalability, and resilience.
+
+### Event Flow
+
+[System-wide event flow diagram]
+
+### Event Schema Standards
+
+[Standard event envelope structure, versioning, etc.]
+
+### Component Responsibilities
+
+| Component | Producer Role | Consumer Role |
+|-----------|---------------|---------------|
+| API Marketplace | Publishes API lifecycle events | Consumes usage events |
+| Event Broker | Manages topics and subscriptions | N/A |
+| FHIR Platform | Publishes resource change events | Consumes integration events |
+```
 
 ## Release Lifecycle and Operations Documentation Standards
 
@@ -1162,7 +1194,7 @@ graph LR
 
 ## Environment Management
 
-[Description of how different environments (dev, test, staging, production) are managed]
+[Description of how different environments (dev, staging, production) are managed]
 
 ### Environment Configuration
 
