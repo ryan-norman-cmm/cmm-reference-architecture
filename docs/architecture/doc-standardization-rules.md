@@ -72,52 +72,34 @@ Each component must maintain the following folder structure:
 
 ## Document Templates and Content Guidelines
 
+### Document Templates
+
+All documentation **must** follow the appropriate template from the templates directory. These templates provide detailed guidance on structure, content, and formatting for each document type:
+
+| Document Type | Template | Purpose |
+|--------------|----------|---------|
+| Overview | [overview-template.md](../templates/overview-template.md) | Component introduction and high-level information |
+| Architecture | [architecture-template.md](../templates/architecture-template.md) | Component design and structure |
+| Release Lifecycle | [release-lifecycle-template.md](../templates/release-lifecycle-template.md) | Versioning and release management |
+| API Documentation | [api-documentation-template.md](../templates/api-documentation-template.md) | API endpoints and usage |
+| Deployment | [deployment-template.md](../templates/deployment-template.md) | Deployment procedures and configuration |
+| Regulatory Compliance | [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) | Compliance with regulations |
+| Versioning Policy | [versioning-policy-template.md](../templates/versioning-policy-template.md) | Version management for deployable units |
+| Audit Compliance | [audit-compliance-template.md](../templates/audit-compliance-template.md) | Audit controls and IT general controls |
+
 ### Standard Document Structure
 
-All documentation **must** adhere to the following structure:
+All documentation **must** adhere to the following structure, which is reflected in the templates:
 
 1. **Title (H1)**: Clear, descriptive title using the format `# [Component Name] [Document Topic]`
-   - Example: `# FHIR Interoperability Platform Architecture`
-   - Must be the first element in the document
-   - Must be the only H1 heading in the document
-
 2. **Introduction (H2)**: Brief overview of the document's purpose and scope
-   - Must begin with `## Introduction`
-   - Should be 2-4 paragraphs explaining what the document covers and why it matters
-   - Should identify the target audience
-   - Should not exceed 200 words
-
 3. **Main Content (H2/H3/H4)**: Organized in logical sections with clear hierarchical headings
-   - Use H2 (`##`) for main sections
-   - Use H3 (`###`) for subsections
-   - Use H4 (`####`) for detailed topics within subsections
-   - Each heading should be concise and descriptive
-   - Headings should follow a logical progression
-   - Section titles should not reference technology unless it is the primary focus
-
-4. **Code Examples**: All technical documents must include TypeScript code examples
-   - Use fenced code blocks with language specification: \```typescript
-   - Include comments to explain complex code
-   - Ensure code examples are complete and runnable when possible
-   - Include error handling, monitoring, and observability in code examples
-   - **Use TypeScript for all web and Node.js related code examples**
-
-5. **Diagrams**: Complex concepts should be illustrated with diagrams
-   - Use mermaid diagrams for consistency
-   - Include both the diagram and the source code
-   - Diagrams should have clear labels and a logical flow
-   - Include a brief explanation of the diagram
-
+4. **Code Examples**: TypeScript code examples where applicable
+5. **Diagrams**: Mermaid diagrams for complex concepts
 6. **Conclusion or Summary (H2)**: Recap of key points
-   - Should begin with `## Summary` or `## Conclusion`
-   - Should highlight the most important takeaways
-   - Should not introduce new information
-
 7. **Related Resources (H2)**: Links to related documentation
-   - Must begin with `## Related Resources`
-   - Should include links to related documents within the component
-   - Should include links to relevant documents in other components
-   - Use relative links when linking to other documents in the repository
+
+Refer to the specific template for each document type for detailed guidance on structure and content.
 
 ### Content Focus and Avoiding Redundancy
 
@@ -177,85 +159,54 @@ The following guidelines help determine what content belongs in each document:
 
 Reference architecture documentation should be reserved for system-wide architectural documentation and should not be duplicated in component-specific documentation. Component documentation should reference the system architecture rather than reproducing it.
 
-### Section-Specific Templates
+### Document Templates Reference
 
-#### 01-getting-started
+All document templates are located in the `/docs/architecture/templates/` directory. These templates provide comprehensive guidance for creating consistent, high-quality documentation across all components.
 
-**overview.md**
-```markdown
-# [Component Name] Overview
+#### Available Templates
 
-## Introduction
+**Getting Started Templates**
+- [overview-template.md](../templates/overview-template.md) - Component introduction, key features, and high-level overview
+- [architecture-template.md](../templates/architecture-template.md) - Component architecture, design, and structure
+- [key-concepts-template.md](../templates/key-concepts-template.md) - Core terminology and fundamental concepts
+- [quick-start-template.md](../templates/quick-start-template.md) - Getting started guide with basic examples
+- [release-lifecycle-template.md](../templates/release-lifecycle-template.md) - Release process and versioning strategy
 
-[Brief description of the component, its purpose, and its role in the CMM Technology Platform]
+**Core Functionality Templates**
+- [api-documentation-template.md](../templates/api-documentation-template.md) - API endpoints, parameters, and usage
+- [data-model-template.md](../templates/data-model-template.md) - Data structures and relationships
+- [integration-points-template.md](../templates/integration-points-template.md) - Integration interfaces and protocols
 
-## Key Features
+**Advanced Patterns Templates**
+- [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md) - Complex usage scenarios
+- [extension-points-template.md](../templates/extension-points-template.md) - Extension mechanisms and customization
+- [customization-template.md](../templates/customization-template.md) - Configuration options and theming
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+**Governance & Compliance Templates**
+- [access-controls-template.md](../templates/access-controls-template.md) - Access control models and security policies
+- [data-governance-template.md](../templates/data-governance-template.md) - Data classification and lifecycle
+- [audit-compliance-template.md](../templates/audit-compliance-template.md) - IT general controls and audit framework
+- [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) - Regulatory requirements and implementation
+- [versioning-policy-template.md](../templates/versioning-policy-template.md) - Version management for deployable units
 
-## Architecture Overview
+**Operations Templates**
+- [deployment-template.md](../templates/deployment-template.md) - Deployment procedures and configuration
+- [monitoring-template.md](../templates/monitoring-template.md) - Metrics, logging, and alerting
+- [scaling-template.md](../templates/scaling-template.md) - Scaling strategies and capacity planning
+- [troubleshooting-template.md](../templates/troubleshooting-template.md) - Common issues and resolution
+- [maintenance-template.md](../templates/maintenance-template.md) - Backup, upgrades, and routine tasks
+- [ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) - Continuous integration and deployment
 
-[High-level architecture diagram and description]
+#### Using Templates
 
-```mermaid
-[Diagram code]
-```
+To use a template for a new document:
 
-## Integration Points
-
-[Brief overview of how this component integrates with other components]
-
-## Use Cases
-
-[Primary use cases for this component]
-
-## Getting Started
-
-[Brief instructions on how to get started, with links to more detailed docs]
-```
-
-#### 04-governance-compliance
-
-**access-controls.md**
-
-# Access Control and Security Policies
-
-## Introduction
-
-[Overview of access control and security for this component]
-
-## Access Control Model
-
-[Description of the access control model]
-
-### Role-Based Access Control
-
-[Details on RBAC implementation]
-
-### Authentication Mechanisms
-
-[Authentication methods supported]
-
-## Security Policies
-
-[Security policies and their implementation]
-
-## Implementation Examples
-
-```typescript
-// Example code for implementing access controls
-```
-
-## Best Practices
-
-[Best practices for security and access control]
-
-## Compliance Considerations
-
-[How these controls support compliance requirements]
-```
+1. Copy the appropriate template to the target location
+2. Replace placeholder content with component-specific information
+3. Follow the guidance provided in the template comments
+4. Ensure all sections are completed with relevant information
+5. Remove any sections that are not applicable (with justification)
+6. Add component-specific sections as needed
 
 ## Content Standards
 
@@ -589,157 +540,96 @@ This documentation must be included in the **05-operations/deployment.md** file.
 
 ## Required Documentation by Component
 
-### Common Required Documents and Content Boundaries
+### Required Documents for All Components
 
-All components must include the following documentation, with clear content boundaries to minimize redundancy:
+All core components must include a standard set of documentation following the appropriate templates. This section outlines the required documents for each component and provides guidance on content boundaries to minimize redundancy.
 
-#### 01-getting-started
-- **overview.md**
-  - *Should include*: Component purpose, business value, key features, high-level architecture diagram, primary use cases
-  - *Should not include*: Detailed implementation, code examples, configuration details
-  
-- **quick-start.md**
-  - *Should include*: Prerequisites, installation steps, basic configuration, simple example
-  - *Should not include*: Advanced configurations, detailed architecture, comprehensive API reference
-  
-- **key-concepts.md**
-  - *Should include*: Core terminology, fundamental concepts, mental models, design principles
-  - *Should not include*: Implementation details, code examples, operational procedures
-  
-- **architecture.md**
-  - *Should include*: Component design, internal structure, data flow, integration points, design decisions
-  - *Should not include*: Step-by-step tutorials, detailed code examples, deployment procedures
-  - *Cross-reference*: Reference the system-wide architecture documentation rather than duplicating it
-  
-- **release-lifecycle.md**
-  - *Should include*: Lifecycle stages, versioning strategy, release planning, change management
-  - *Should not include*: Detailed implementation, code examples, component architecture
+#### Required Documents
 
-#### 02-core-functionality
-- **core-apis.md**
-  - *Should include*: API endpoints, parameters, return values, error codes, usage examples
-  - *Should not include*: Internal implementation details, deployment procedures, general concepts
-  
-- **data-model.md**
-  - *Should include*: Data structures, schemas, relationships, constraints, examples
-  - *Should not include*: API details, implementation code, deployment configurations
-  
-- **integration-points.md**
-  - *Should include*: Integration interfaces, protocols, patterns, examples, limitations
-  - *Should not include*: Internal implementation details, deployment procedures
+Each core component must include the following documentation:
 
-#### 03-advanced-patterns
-- **advanced-use-cases.md**
-  - *Should include*: Complex scenarios, advanced configurations, specialized use cases
-  - *Should not include*: Basic usage covered in quick-start, internal implementation details
-  
-- **extension-points.md**
-  - *Should include*: Extension mechanisms, plugin architecture, customization points, examples
-  - *Should not include*: Basic usage, internal implementation details not relevant to extension
-  
-- **customization.md**
-  - *Should include*: Configuration options, theming, branding, behavior modifications
-  - *Should not include*: Extension mechanisms (covered in extension-points.md), basic usage
+| Phase | Required Documents | Template Reference |
+|-------|-------------------|-------------------|
+| **01-getting-started** | overview.md<br>quick-start.md<br>key-concepts.md<br>architecture.md<br>release-lifecycle.md | [overview-template.md](../templates/overview-template.md)<br>[quick-start-template.md](../templates/quick-start-template.md)<br>[key-concepts-template.md](../templates/key-concepts-template.md)<br>[architecture-template.md](../templates/architecture-template.md)<br>[release-lifecycle-template.md](../templates/release-lifecycle-template.md) |
+| **02-core-functionality** | core-apis.md<br>data-model.md<br>integration-points.md | [api-documentation-template.md](../templates/api-documentation-template.md)<br>[data-model-template.md](../templates/data-model-template.md)<br>[integration-points-template.md](../templates/integration-points-template.md) |
+| **03-advanced-patterns** | advanced-use-cases.md<br>extension-points.md<br>customization.md | [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md)<br>[extension-points-template.md](../templates/extension-points-template.md)<br>[customization-template.md](../templates/customization-template.md) |
+| **04-governance-compliance** | access-controls.md<br>data-governance.md<br>audit-compliance.md<br>regulatory-compliance.md<br>versioning-policy.md | [access-controls-template.md](../templates/access-controls-template.md)<br>[data-governance-template.md](../templates/data-governance-template.md)<br>[audit-compliance-template.md](../templates/audit-compliance-template.md)<br>[regulatory-compliance-template.md](../templates/regulatory-compliance-template.md)<br>[versioning-policy-template.md](../templates/versioning-policy-template.md) |
+| **05-operations** | deployment.md<br>monitoring.md<br>scaling.md<br>troubleshooting.md<br>maintenance.md<br>ci-cd-pipeline.md | [deployment-template.md](../templates/deployment-template.md)<br>[monitoring-template.md](../templates/monitoring-template.md)<br>[scaling-template.md](../templates/scaling-template.md)<br>[troubleshooting-template.md](../templates/troubleshooting-template.md)<br>[maintenance-template.md](../templates/maintenance-template.md)<br>[ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) |
 
-#### 04-governance-compliance
-- **access-controls.md**
-  - *Should include*: Access control model, authentication mechanisms, authorization framework
-  - *Should not include*: Audit logging (covered in audit-compliance.md), general security concepts
-  
-- **data-governance.md**
-  - *Should include*: Data classification, lifecycle, quality controls, protection mechanisms
-  - *Should not include*: Access controls (covered in access-controls.md), general data concepts
-  
-- **audit-compliance.md**
-  - *Should include*: IT general controls (ITGCs) key to SOC2, audit framework, event types, data collection, log protection, control objectives and activities, segregation of duties, change management controls, system access controls, and IT operations controls
-  - *Should not include*: Access controls implementation details (covered in access-controls.md), general security concepts
-  - *Must emphasize*: Documentation of IT general controls that support financial reporting and regulatory compliance
-  
-- **regulatory-compliance.md**
-  - *Should include*: Regulatory framework focused on HIPAA, Sarbanes-Oxley (SOX), and United States privacy regulations (CCPA, CPRA, state privacy laws), compliance requirements mapping, technical controls implementation, compliance monitoring, and reporting
-  - *Should not include*: General security concepts, implementation details not related to compliance, non-US regulations unless specifically relevant
-  - *Must emphasize*: Specific technical and administrative safeguards required for HIPAA compliance, internal controls documentation for SOX 404, and data subject rights management for US privacy regulations
-  
-- **versioning-policy.md**
-  - *Should include*: Semantic versioning, API versioning, schema versioning, breaking changes policy
-  - *Should not include*: Release process (covered in release-lifecycle.md), implementation details
+#### Content Boundaries
 
-#### 05-operations
-- **deployment.md**
-  - *Should include*: Cloud-native deployment using container orchestration on Azure's cloud platforms. Use Infrastructure as Code for automation but avoid on-premise scenarios.
-  - *Should not include*: Development setup (covered in quick-start.md), monitoring details
-  
-- **monitoring.md**
-  - *Should include*: Metrics, logging, alerting, dashboards, health checks using Open Telemetry.
-  - *Should not include*: Deployment procedures, troubleshooting steps
-  
-- **scaling.md**
-  - *Should include*: Scaling strategies, performance considerations, capacity planning
-  - *Should not include*: Basic deployment, monitoring details
-  
-- **troubleshooting.md**
-  - *Should include*: Common issues, diagnostics, resolution steps, support process
-  - *Should not include*: Monitoring setup (covered in monitoring.md), deployment procedures
-  
-- **maintenance.md**
-  - *Should include*: Backup/restore, upgrades, patches, routine maintenance tasks
-  - *Should not include*: Deployment procedures, monitoring details
-  
-- **ci-cd-pipeline.md**
-  - *Should include*: High-level CI/CD pipeline details, focusing on automated builds, integrated testing, containerized deployments, and continuous monitoring without delving into detailed technology implementations.
-  - *Should not include*: Detailed implementation code, general CI/CD concepts
-  
-- **testing-strategy.md**
-  - *Should include*: Test types, environments, data management, automation, coverage requirements
-  - *Should not include*: CI/CD pipeline details (covered in ci-cd-pipeline.md), implementation code
+To minimize redundancy and maintain clear content boundaries, follow these guidelines:
 
-### Component-Specific Required Documents
+**01-getting-started**
+- **overview.md**: Focus on high-level introduction, not implementation details
+- **architecture.md**: Reference system-wide architecture documentation rather than duplicating it
+- **release-lifecycle.md**: Include deployable unit information as specified in the template
 
-Each component has additional required documentation specific to its functionality. Clear content boundaries are defined to minimize redundancy.
+#### Content Boundaries by Document Type
 
-#### API Marketplace
-- **api-registration.md** (02-core-functionality)
-  - *Should include*: Registration process, metadata requirements, validation rules, versioning
-  - *Should not include*: API discovery details, general marketplace concepts
-  
-- **api-discovery.md** (02-core-functionality)
-  - *Should include*: Search mechanisms, filtering, categorization, discovery API
-  - *Should not include*: Registration process (covered in api-registration.md)
-  
-- **lifecycle-management.md** (04-governance-compliance)
-  - *Should include*: API lifecycle stages, transitions, approvals, deprecation process
-  - *Should not include*: General versioning (covered in versioning-policy.md), registration process
-  
-- **data-quality.md** (04-governance-compliance)
-  - *Should include*: Quality metrics, validation rules, quality enforcement, monitoring
-  - *Should not include*: General data governance (covered in data-governance.md)
+Each document type has specific content boundaries to minimize redundancy and ensure clear focus. Refer to the templates for detailed guidance on content structure and requirements.
 
+| Document | Content Focus | Content to Avoid | Template Reference |
+|----------|--------------|-----------------|-------------------|
+| **core-apis.md** | API endpoints, parameters, return values, error codes, usage examples | Internal implementation details, deployment procedures | [api-documentation-template.md](../templates/api-documentation-template.md) |
+| **data-model.md** | Data structures, schemas, relationships, constraints, examples | API details, implementation code | [data-model-template.md](../templates/data-model-template.md) |
+| **integration-points.md** | Integration interfaces, protocols, patterns, examples | Internal implementation details | [integration-points-template.md](../templates/integration-points-template.md) |
+| **advanced-use-cases.md** | Complex scenarios, advanced configurations | Basic usage covered in quick-start | [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md) |
+| **extension-points.md** | Extension mechanisms, plugin architecture | Basic usage, non-extension details | [extension-points-template.md](../templates/extension-points-template.md) |
+| **customization.md** | Configuration options, theming, behavior modifications | Extension mechanisms | [customization-template.md](../templates/customization-template.md) |
+| **access-controls.md** | Access control model, authentication, authorization | Audit logging details | [access-controls-template.md](../templates/access-controls-template.md) |
+| **data-governance.md** | Data classification, lifecycle, quality controls | Access control details | [data-governance-template.md](../templates/data-governance-template.md) |
+| **audit-compliance.md** | IT general controls (ITGCs) key to SOC2, audit framework, control activities | Access control implementation | [audit-compliance-template.md](../templates/audit-compliance-template.md) |
+| **regulatory-compliance.md** | HIPAA, SOX, and US privacy regulations compliance | Non-US regulations, general security | [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) |
+| **versioning-policy.md** | Deployable unit versioning, compatibility guarantees | Release process details | [versioning-policy-template.md](../templates/versioning-policy-template.md) |
+| **deployment.md** | Cloud-native deployment, infrastructure as code | Development setup details | [deployment-template.md](../templates/deployment-template.md) |
+| **monitoring.md** | Metrics, logging, alerting, dashboards using Open Telemetry | Deployment procedures | [monitoring-template.md](../templates/monitoring-template.md) |
+| **scaling.md** | Scaling strategies, performance, capacity planning | Basic deployment details | [scaling-template.md](../templates/scaling-template.md) |
+| **troubleshooting.md** | Common issues, diagnostics, resolution steps | Monitoring setup details | [troubleshooting-template.md](../templates/troubleshooting-template.md) |
+| **maintenance.md** | Backup/restore, upgrades, patches | Deployment procedures | [maintenance-template.md](../templates/maintenance-template.md) |
+| **ci-cd-pipeline.md** | CI/CD pipeline, automated builds, testing | Detailed implementation code | [ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) |
+| **testing-strategy.md** | Test types, environments, data management | CI/CD pipeline details | [testing-strategy-template.md](../templates/testing-strategy-template.md) |
 
-#### Federated Graph API
-- **schema-federation.md** (02-core-functionality)
-  - *Should include*: Federation model, schema stitching, composition, conflict resolution
-  - *Should not include*: Query details (covered in query-resolution.md)
-  
-- **query-resolution.md** (02-core-functionality)
-  - *Should include*: Query planning, execution, optimization, distributed resolution
-  - *Should not include*: Schema details (covered in schema-federation.md)
-  
-- **schema-governance.md** (04-governance-compliance)
-  - *Should include*: Schema approval, validation, versioning, deprecation
-  - *Should not include*: Federation mechanics (covered in schema-federation.md)
-  
-- **query-governance.md** (04-governance-compliance)
-  - *Should include*: Query validation, rate limiting, complexity analysis, security
-  - *Should not include*: Resolution mechanics (covered in query-resolution.md)
+#### Special Emphasis Areas
 
-#### FHIR Interoperability Platform
-- **fhir-resources.md** (02-core-functionality)
-  - *Should include*: Resource types, structure, validation, extensions
-  - *Should not include*: Operations details (covered in fhir-operations.md)
-  
-- **fhir-operations.md** (02-core-functionality)
-  - *Should include*: CRUD operations, search, transactions, operations framework
-  - *Should not include*: Resource details (covered in fhir-resources.md)
+**For audit-compliance.md:**
+- Must emphasize documentation of IT general controls that support financial reporting and regulatory compliance
+- Must include segregation of duties, change management controls, system access controls, and IT operations controls
+
+**For regulatory-compliance.md:**
+- Must emphasize technical and administrative safeguards for HIPAA compliance
+- Must include internal controls documentation for SOX 404
+- Must cover data subject rights management for US privacy regulations
+
+### Component-Specific Documentation
+
+In addition to the standard documentation required for all components, each component has additional documentation specific to its functionality. These component-specific documents should follow the same template structure as the standard documents, with adaptations for the specific content requirements.
+
+#### Component-Specific Document Reference
+
+The following table outlines the additional required documentation for each component. All documents should follow the appropriate templates with adaptations for component-specific content.
+
+| Component | Additional Document | Phase | Content Focus | Template to Adapt |
+|-----------|---------------------|-------|--------------|------------------|
+| **API Marketplace** | api-registration.md | 02-core-functionality | Registration process, metadata, validation | [api-documentation-template.md](../templates/api-documentation-template.md) |
+| **API Marketplace** | api-discovery.md | 02-core-functionality | Search mechanisms, filtering, categorization | [api-documentation-template.md](../templates/api-documentation-template.md) |
+| **API Marketplace** | lifecycle-management.md | 04-governance-compliance | API lifecycle stages, transitions, approvals | [versioning-policy-template.md](../templates/versioning-policy-template.md) |
+| **API Marketplace** | data-quality.md | 04-governance-compliance | Quality metrics, validation rules, monitoring | [data-governance-template.md](../templates/data-governance-template.md) |
+| **Federated Graph API** | schema-federation.md | 02-core-functionality | Federation model, schema stitching, composition | [data-model-template.md](../templates/data-model-template.md) |
+| **Federated Graph API** | query-resolution.md | 02-core-functionality | Query planning, execution, optimization | [api-documentation-template.md](../templates/api-documentation-template.md) |
+| **Federated Graph API** | schema-governance.md | 04-governance-compliance | Schema approval, validation, versioning | [data-governance-template.md](../templates/data-governance-template.md) |
+| **Federated Graph API** | query-governance.md | 04-governance-compliance | Query validation, rate limiting, security | [access-controls-template.md](../templates/access-controls-template.md) |
+| **FHIR Platform** | fhir-resources.md | 02-core-functionality | Resource types, structure, validation | [data-model-template.md](../templates/data-model-template.md) |
+| **FHIR Platform** | fhir-operations.md | 02-core-functionality | CRUD operations, search, transactions | [api-documentation-template.md](../templates/api-documentation-template.md) |
+
+#### Content Boundaries for Component-Specific Documentation
+
+When creating component-specific documentation:
+
+1. **Follow Template Structure**: Use the appropriate template as a starting point
+2. **Maintain Clear Boundaries**: Avoid duplicating content from standard documents
+3. **Cross-Reference**: Link to related documents rather than duplicating content
+4. **Focus on Component-Specific Details**: Emphasize what is unique to the component
   
 - **resource-governance.md** (04-governance-compliance)
   - *Should include*: Resource validation, conformance, profiles, extensions governance
