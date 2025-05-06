@@ -340,10 +340,10 @@ All documentation that describes architecture, workflows, or complex concepts **
 
 - **Visual Standards**
   - Use the following color scheme:
-    - Core components: #4285F4 (blue)
-    - External systems: #34A853 (green)
-    - Data stores: #FBBC05 (yellow)
-    - Security elements: #EA4335 (red)
+    - Core components: #00426A (navy)
+    - External systems: #E70665 (magenta)
+    - Data stores: #FF8F1D (yellow)
+    - Security elements: #1E91D6 (blue)
   - Use consistent shapes:
     - Rectangles for services and components
     - Cylinders for databases
@@ -463,6 +463,42 @@ Compliance with documentation standards is measured and tracked:
    - Each component is assessed for compliance with these standards
    - The tracking document is updated monthly
 
+## Deployable Objects Documentation
+
+### Overview
+
+Each core component produces specific deployable objects that must be clearly documented. This section outlines the required documentation for each component's deployable objects.
+
+### Required Deployable Object Documentation
+
+All core components must include documentation about their deployable objects in the following locations:
+
+1. **01-getting-started/release-lifecycle.md**: Must include a section titled "Deployable Objects" that describes the primary artifacts produced by the component
+2. **05-operations/deployment.md**: Must include detailed deployment procedures specific to the component's deployable objects
+
+### Component-Specific Deployable Objects
+
+| Component | Primary Deployable Objects | Required Documentation |
+|-----------|----------------------------|------------------------|
+| FHIR Interoperability Platform | FHIR Implementation Guides, Profiles | Profile authoring, validation, and publishing process |
+| API Marketplace | API Definitions, Portal | API definition format, validation, and gateway integration |
+| Event Broker | Event Schemas, Topics | Schema definition, compatibility rules, topic configuration |
+| Design System | Web Components, Style Libraries | Component packaging, versioning, and consumption |
+| Federated Graph API | GraphQL Schemas, Subgraphs | Schema definition, composition rules, gateway configuration |
+| Workflow Orchestration Engine | Workflow Definitions, Connectors | Workflow authoring, testing, and deployment process |
+
+### CI/CD Pipeline Documentation
+
+Each component must document its CI/CD pipeline for deployable objects, including:
+
+1. **Build Process**: How deployable objects are built from source
+2. **Validation Process**: How deployable objects are validated
+3. **Packaging Process**: How deployable objects are packaged
+4. **Deployment Process**: How deployable objects are deployed
+5. **Rollback Process**: How deployable objects can be rolled back
+
+This documentation must be included in the **05-operations/deployment.md** file.
+
 ## Required Documentation by Component
 
 ### Common Required Documents and Content Boundaries
@@ -540,11 +576,11 @@ All components must include the following documentation, with clear content boun
 
 #### 05-operations
 - **deployment.md**
-  - *Should include*: Cloud-native deployment using container orchestration on major cloud platforms (e.g., AWS, Azure, or GCP). Use Infrastructure as Code for automation but avoid on-premise scenarios.
+  - *Should include*: Cloud-native deployment using container orchestration on Azure's cloud platforms. Use Infrastructure as Code for automation but avoid on-premise scenarios.
   - *Should not include*: Development setup (covered in quick-start.md), monitoring details
   
 - **monitoring.md**
-  - *Should include*: Metrics, logging, alerting, dashboards, health checks
+  - *Should include*: Metrics, logging, alerting, dashboards, health checks using Open Telemetry.
   - *Should not include*: Deployment procedures, troubleshooting steps
   
 - **scaling.md**
@@ -588,39 +624,6 @@ Each component has additional required documentation specific to its functionali
   - *Should include*: Quality metrics, validation rules, quality enforcement, monitoring
   - *Should not include*: General data governance (covered in data-governance.md)
 
-#### Security and Access Framework
-- **authentication-services.md** (02-core-functionality)
-  - *Should include*: Authentication methods, flows, token management, integration
-  - *Should not include*: Authorization details (covered in authorization-services.md)
-  
-- **authorization-services.md** (02-core-functionality)
-  - *Should include*: Authorization models, policy enforcement, permission management
-  - *Should not include*: Authentication details (covered in authentication-services.md)
-  
-- **multi-tenancy.md** (03-advanced-patterns)
-  - *Should include*: Tenant isolation, tenant-specific configurations, tenant management
-  - *Should not include*: Basic authentication/authorization (covered in respective docs)
-  
-- **identity-governance.md** (04-governance-compliance)
-  - *Should include*: Identity lifecycle, attestation, reviews, privileged access management
-  - *Should not include*: Basic access controls (covered in access-controls.md)
-
-#### Workflow Orchestration Engine
-- **workflow-definition.md** (02-core-functionality)
-  - *Should include*: Workflow structure, states, transitions, conditions, actions
-  - *Should not include*: Execution details (covered in workflow-execution.md)
-  
-- **workflow-execution.md** (02-core-functionality)
-  - *Should include*: Execution model, state management, concurrency, transactions
-  - *Should not include*: Definition details (covered in workflow-definition.md)
-  
-- **error-handling.md** (03-advanced-patterns)
-  - *Should include*: Error types, retry strategies, compensation, recovery patterns
-  - *Should not include*: Basic execution (covered in workflow-execution.md)
-  
-- **workflow-compliance.md** (04-governance-compliance)
-  - *Should include*: Compliance requirements for workflows, validation, enforcement
-  - *Should not include*: General regulatory compliance (covered in regulatory-compliance.md)
 
 #### Federated Graph API
 - **schema-federation.md** (02-core-functionality)

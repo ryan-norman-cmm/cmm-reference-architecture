@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Overview of the deployment process for this component. Focus on the deployment options, prerequisites, and high-level deployment workflow.]
+[Overview of the deployment process for this component. Focus on the deployable objects, deployment targets, and high-level deployment workflow.]
 
 ## Deployment Options
 
@@ -46,6 +46,94 @@
 | [Port] | [Protocol] | [Purpose] | [Notes] |
 | [Port] | [Protocol] | [Purpose] | [Notes] |
 | [Port] | [Protocol] | [Purpose] | [Notes] |
+
+## Deployable Objects
+
+### Primary Deployable Objects
+
+[Component Name] produces the following deployable objects:
+
+1. **[Deployable Object 1]**
+   - [Description of the object]
+   - [How it is packaged/published]
+   - [What it is used for]
+
+2. **[Deployable Object 2]**
+   - [Description of the object]
+   - [How it is packaged/published]
+   - [What it is used for]
+
+3. **[Deployable Object 3]**
+   - [Description of the object]
+   - [How it is packaged/published]
+   - [What it is used for]
+
+### Deployment Targets
+
+| Deployable Object | Deployment Target | Update Frequency | Validation Requirements |
+|-------------------|-------------------|------------------|--------------------------|
+| [Object 1] | [Target] | [Frequency] | [Requirements] |
+| [Object 2] | [Target] | [Frequency] | [Requirements] |
+| [Object 3] | [Target] | [Frequency] | [Requirements] |
+
+## CI/CD Pipeline
+
+### Build Process
+
+[Description of how deployable objects are built from source]
+
+```mermaid
+graph TD
+    A[Source Code] -->|Trigger| B[Build Process]
+    B --> C[Unit Tests]
+    C --> D[Integration Tests]
+    D --> E[Package Creation]
+    E --> F[Artifact Repository]
+    
+    classDef component fill:#00426A,stroke:#333,stroke-width:1px;
+    classDef external fill:#E70665,stroke:#333,stroke-width:1px;
+    classDef database fill:#FF8F1D,stroke:#333,stroke-width:1px;
+    classDef security fill:#1E91D6,stroke:#333,stroke-width:1px;
+    
+    class A,B,C,D component;
+    class E external;
+    class F database;
+```
+
+### Validation Process
+
+[Description of how deployable objects are validated]
+
+| Validation Type | Tools | Criteria | Handling Failures |
+|----------------|-------|----------|-------------------|
+| [Type 1] | [Tools] | [Criteria] | [Handling] |
+| [Type 2] | [Tools] | [Criteria] | [Handling] |
+| [Type 3] | [Tools] | [Criteria] | [Handling] |
+
+### Deployment Environments
+
+[Description of the different environments used in the deployment pipeline]
+
+| Environment | Purpose | Access Control | Data Characteristics |
+|------------|---------|---------------|----------------------|
+| Development | [Purpose] | [Access Control] | [Data Characteristics] |
+| Testing | [Purpose] | [Access Control] | [Data Characteristics] |
+| Staging | [Purpose] | [Access Control] | [Data Characteristics] |
+| Production | [Purpose] | [Access Control] | [Data Characteristics] |
+
+### Rollback Process
+
+[Description of how to roll back deployments if issues are detected]
+
+1. **Automated Rollback Triggers**
+   - [Trigger 1]
+   - [Trigger 2]
+   - [Trigger 3]
+
+2. **Manual Rollback Process**
+   - [Step 1]
+   - [Step 2]
+   - [Step 3]
 
 ## Deployment Process
 

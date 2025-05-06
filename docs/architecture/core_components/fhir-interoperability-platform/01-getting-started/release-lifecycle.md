@@ -98,6 +98,50 @@ The deprecation stage involves phasing out support for older versions and guidin
 - Migration guides
 - Archive of deprecated versions
 
+## Deployable Objects
+
+### Primary Deployable Objects
+
+The FHIR Interoperability Platform produces the following deployable objects:
+
+1. **FHIR Implementation Guides**
+   - Comprehensive documentation of FHIR profiles, extensions, and implementation patterns
+   - Published as static websites with navigable documentation and downloadable resources
+   - Includes examples, validation rules, and implementation guidance
+
+2. **FHIR Profiles and Extensions**
+   - Structured definitions that constrain and extend FHIR resources for specific use cases
+   - Published as FHIR StructureDefinition resources
+   - Packaged for deployment to FHIR servers and validation tools
+
+3. **Terminology Resources**
+   - Value sets, code systems, and concept maps that define terminologies used in profiles
+   - Published as FHIR ValueSet, CodeSystem, and ConceptMap resources
+   - Support validation and semantic interoperability
+
+4. **FHIR Packages**
+   - NPM packages containing profiles, extensions, and terminology resources
+   - Used for distribution and versioning of FHIR artifacts
+   - Consumed by FHIR servers, validators, and development tools
+
+### Deployment Targets
+
+| Deployable Object | Deployment Target | Update Frequency | Validation Requirements |
+|-------------------|-------------------|------------------|--------------------------|
+| Implementation Guides | Static Web Hosting | With each minor/major release | FHIR Publisher validation |
+| FHIR Profiles | FHIR Servers, Validators | With each minor/major release | Structure and invariant validation |
+| Terminology Resources | Terminology Servers | With each minor/major release | Code system integrity checks |
+| FHIR Packages | NPM Registry, FHIR Package Registry | With each release | Package structure validation |
+
+### Deployment Process Overview
+
+1. **Authoring**: Profiles and terminology resources are authored in FHIR Shorthand (FSH) or directly in JSON/XML
+2. **Validation**: Resources are validated against the FHIR specification using FHIR Validator
+3. **Publishing**: The FHIR Publisher tool generates the implementation guide website
+4. **Packaging**: Resources are packaged as NPM packages and FHIR packages
+5. **Distribution**: Packages are published to registries and implementation guides to web hosting
+6. **Deployment**: FHIR servers and validators are updated with the new packages
+
 ## Versioning Strategy
 
 The FHIR Interoperability Platform follows semantic versioning (MAJOR.MINOR.PATCH) to clearly communicate the nature of changes in each release.
