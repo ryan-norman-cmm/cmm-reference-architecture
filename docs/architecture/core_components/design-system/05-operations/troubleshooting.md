@@ -372,7 +372,7 @@ This document provides guidance for troubleshooting common issues with the Desig
 
 - Design System documentation: [internal-link/design-system]()
 - Component examples: [internal-link/design-system/examples]()
-- Design System team Slack channel: #design-system-help
+- Design System team Microsoft Teams channel: #design-system-help
 
 ### External Resources
 
