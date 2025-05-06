@@ -1,64 +1,27 @@
 # [Component Name] Overview
 
 ## Introduction
-
-[Brief description of the component, its purpose, and its role in the CMM Technology Platform. Focus on the component's business value and high-level functionality.]
+Briefly describe the component, its purpose, and its role in the platform.
 
 ## Key Features
-
-- [Feature 1]: [Brief description]
-- [Feature 2]: [Brief description]
-- [Feature 3]: [Brief description]
-- [Feature 4]: [Brief description]
+- List and explain the most important features and capabilities.
 
 ## Architecture Overview
-
-[High-level architecture diagram and description. Focus on the component's internal structure and how it fits into the broader CMM Reference Architecture.]
-
-```mermaid
-graph TD
-    A[Client Applications] --> B[[Component Name]]
-    B --> C[Subcomponent 1]
-    B --> D[Subcomponent 2]
-    B --> E[Subcomponent 3]
-    C --> F[(Data Store)]
-    D --> F
-    E --> G[External Systems]
-```
+- High-level summary of how the component fits into the overall system.
+- Include a diagram only if it directly clarifies a complex relationship or integration.
 
 ## Integration Points
-
-[Brief overview of how this component integrates with other components in the CMM Technology Platform. Include key integration interfaces and protocols.]
-
-### Integration with [Component 1]
-
-[Brief description of integration with Component 1]
-
-### Integration with [Component 2]
-
-[Brief description of integration with Component 2]
+- Describe how this component interacts with other components or external systems.
 
 ## Use Cases
+- List common use cases and scenarios.
 
-[Primary use cases for this component, focusing on healthcare-specific scenarios]
+## Learn More
+- [Link to external blog post](https://example.com/blog-post) — Brief description of this external resource
+- [Link to YouTube video](https://youtube.com/example) — Brief description of this video resource
+- [Link to industry publication](https://example.com/publication) — Brief description of this publication
 
-### Use Case 1: [Name]
-
-[Brief description of use case 1]
-
-### Use Case 2: [Name]
-
-[Brief description of use case 2]
-
-## Getting Started
-
-[Brief instructions on how to get started with this component]
-
-For detailed setup instructions, see the [Quick Start Guide](./quick-start.md).
-
-## Related Documentation
-
-- [Quick Start Guide](./quick-start.md)
-- [Key Concepts](./key-concepts.md)
-- [Architecture Details](./architecture.md)
-- [Release Lifecycle](./release-lifecycle.md)
+## Next Steps
+- [Link to architecture](./architecture.md)
+- [Link to quick start](./quick-start.md)
+- [Link to core functionality](./02-core-functionality/core-apis.md)

@@ -18,12 +18,12 @@ All core components **must** follow a consistent 5-tier documentation structure.
 2. **02-core-functionality**: Core features, main APIs, and primary use cases
    - Purpose: Document the core capabilities and interfaces of the component
    - Target audience: Developers implementing or integrating with the component
-   - Required files: core-apis.md, data-model.md, integration-points.md
+   - Required files: core-apis.md, data-model.md
 
 3. **03-advanced-patterns**: Advanced usage patterns, integrations, and complex scenarios
    - Purpose: Document advanced usage scenarios and extension mechanisms
    - Target audience: Experienced developers customizing or extending the component
-   - Required files: advanced-use-cases.md, extension-points.md, customization.md
+   - Required files: advanced-use-cases.md, customization.md
 
 4. **04-governance-compliance**: Governance frameworks, compliance considerations, and security controls
    - Purpose: Document governance, security, and compliance aspects
@@ -49,19 +49,16 @@ Each component must maintain the following folder structure:
 ├── 02-core-functionality/
 │   ├── core-apis.md
 │   ├── data-model.md
-│   ├── integration-points.md
 │   └── [feature-specific-docs].md
 ├── 03-advanced-patterns/
 │   ├── advanced-use-cases.md
-│   ├── extension-points.md
 │   ├── customization.md
 │   └── [pattern-specific-docs].md
 ├── 04-governance-compliance/
 │   ├── access-controls.md
 │   ├── data-governance.md
 │   ├── audit-compliance.md
-│   ├── regulatory-compliance.md
-│   └── [additional-governance-docs].md
+│   └── regulatory-compliance.md
 └── 05-operations/
     ├── deployment.md
     ├── monitoring.md
@@ -69,6 +66,13 @@ Each component must maintain the following folder structure:
     ├── troubleshooting.md
     └── maintenance.md
 ```
+
+## Template Usage Requirement
+
+All new documentation (including but not limited to overview, quick start, architecture, and advanced topics) **must** be created using the official templates provided in the `/docs/architecture/templates/` folder. Each documentation type (e.g., overview, quick start, etc.) has a corresponding template that must be followed to ensure consistency, completeness, and compliance with CMM documentation standards.
+
+- Deviations from the templates are not permitted unless explicitly reviewed and approved by the documentation governance team or project lead.
+- Templates must be updated centrally, and any changes to template structure should be communicated to all documentation contributors.
 
 ## Document Templates and Content Guidelines
 
@@ -79,13 +83,23 @@ All documentation **must** follow the appropriate template from the templates di
 | Document Type | Template | Purpose |
 |--------------|----------|---------|
 | Overview | [overview-template.md](../templates/overview-template.md) | Component introduction and high-level information |
+| Quick Start | [quick-start-template.md](../templates/quick-start-template.md) | Fast setup and first-use guidance |
+| Key Concepts | [key-concepts-template.md](../templates/key-concepts-template.md) | Terminology, glossary, and foundational ideas |
 | Architecture | [architecture-template.md](../templates/architecture-template.md) | Component design and structure |
-| Release Lifecycle | [release-lifecycle-template.md](../templates/release-lifecycle-template.md) | Versioning and release management |
-| API Documentation | [api-documentation-template.md](../templates/api-documentation-template.md) | API endpoints and usage |
-| Deployment | [deployment-template.md](../templates/deployment-template.md) | Deployment procedures and configuration |
-| Regulatory Compliance | [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) | Compliance with regulations |
-| Versioning Policy | [versioning-policy-template.md](../templates/versioning-policy-template.md) | Version management for deployable units |
+| Core APIs | [core-apis-template.md](../templates/core-apis-template.md) | Main API endpoints and usage |
+| Data Model | [data-model-template.md](../templates/data-model-template.md) | Data structures and relationships |
+| Feature-Specific | [feature-specific-template.md](../templates/feature-specific-template.md) | Documentation for unique or optional features |
+| Advanced Use Cases | [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md) | Complex usage scenarios and workflows |
+| Customization | [customization-template.md](../templates/customization-template.md) | Configuration and extension options |
+| Advanced Feature | [advanced-feature-template.md](../templates/advanced-feature-template.md) | Deep dives into advanced component features |
+| Access Controls | [access-controls-template.md](../templates/access-controls-template.md) | RBAC, policy enforcement, and authentication |
+| Data Governance | [data-governance-template.md](../templates/data-governance-template.md) | Data quality, lifecycle, and stewardship |
 | Audit Compliance | [audit-compliance-template.md](../templates/audit-compliance-template.md) | Audit controls and IT general controls |
+| Regulatory Compliance | [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) | Compliance with regulations |
+| Monitoring | [monitoring-template.md](../templates/monitoring-template.md) | Metrics, logging, and alerting |
+| Scaling | [scaling-template.md](../templates/scaling-template.md) | Scaling strategies and operational procedures |
+| Troubleshooting | [troubleshooting-template.md](../templates/troubleshooting-template.md) | Actionable troubleshooting steps for component-specific issues |
+| Maintenance | [maintenance-template.md](../templates/maintenance-template.md) | Routine operations, upgrades, and support |
 
 ### Standard Document Structure
 
@@ -95,11 +109,13 @@ All documentation **must** adhere to the following structure, which is reflected
 2. **Introduction (H2)**: Brief overview of the document's purpose and scope
 3. **Main Content (H2/H3/H4)**: Organized in logical sections with clear hierarchical headings
 4. **Code Examples**: TypeScript code examples where applicable
-5. **Diagrams**: Mermaid diagrams for complex concepts
+5. **Diagrams**: Mermaid diagrams only when they directly clarify a complex operational process or are essential for understanding escalation, flow, or architecture. Avoid diagrams unless they provide clear, actionable value to the reader.
 6. **Conclusion or Summary (H2)**: Recap of key points
 7. **Related Resources (H2)**: Links to related documentation
 
 Refer to the specific template for each document type for detailed guidance on structure and content.
+
+---
 
 ### Content Focus and Avoiding Redundancy
 
@@ -166,36 +182,44 @@ All document templates are located in the `/docs/architecture/templates/` direct
 #### Available Templates
 
 **Getting Started Templates**
-- [overview-template.md](../templates/overview-template.md) - Component introduction, key features, and high-level overview
-- [architecture-template.md](../templates/architecture-template.md) - Component architecture, design, and structure
-- [key-concepts-template.md](../templates/key-concepts-template.md) - Core terminology and fundamental concepts
-- [quick-start-template.md](../templates/quick-start-template.md) - Getting started guide with basic examples
-- [release-lifecycle-template.md](../templates/release-lifecycle-template.md) - Release process and versioning strategy
+- [overview-template.md](../templates/overview-template.md) — Introduction, key features, and high-level overview of the component
+- [quick-start-template.md](../templates/quick-start-template.md) — Fast setup, installation, and first-use guidance
+- [key-concepts-template.md](../templates/key-concepts-template.md) — Terminology, glossary, and foundational concepts
+- [architecture-template.md](../templates/architecture-template.md) — Component architecture, design, structure, and integration points
 
 **Core Functionality Templates**
-- [api-documentation-template.md](../templates/api-documentation-template.md) - API endpoints, parameters, and usage
-- [data-model-template.md](../templates/data-model-template.md) - Data structures and relationships
-- [integration-points-template.md](../templates/integration-points-template.md) - Integration interfaces and protocols
+- [core-apis-template.md](../templates/core-apis-template.md) — Main API endpoints, authentication, and usage examples
+- [data-model-template.md](../templates/data-model-template.md) — Data structures, relationships, and example schemas
+- [feature-specific-template.md](../templates/feature-specific-template.md) — Documentation for unique or optional features
 
 **Advanced Patterns Templates**
-- [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md) - Complex usage scenarios
-- [extension-points-template.md](../templates/extension-points-template.md) - Extension mechanisms and customization
-- [customization-template.md](../templates/customization-template.md) - Configuration options and theming
+- [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md) — Complex usage scenarios, workflows, and advanced patterns
+- [customization-template.md](../templates/customization-template.md) — Configuration, extension, and theming options
+- [advanced-feature-template.md](../templates/advanced-feature-template.md) — Deep dives into advanced component features
 
 **Governance & Compliance Templates**
-- [access-controls-template.md](../templates/access-controls-template.md) - Access control models and security policies
-- [data-governance-template.md](../templates/data-governance-template.md) - Data classification and lifecycle
-- [audit-compliance-template.md](../templates/audit-compliance-template.md) - IT general controls and audit framework
-- [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) - Regulatory requirements and implementation
-- [versioning-policy-template.md](../templates/versioning-policy-template.md) - Version management for deployable units
+- [access-controls-template.md](../templates/access-controls-template.md) — RBAC, policy enforcement, and authentication
+- [data-governance-template.md](../templates/data-governance-template.md) — Data quality, lifecycle, stewardship, and schema governance
+- [audit-compliance-template.md](../templates/audit-compliance-template.md) — Audit controls, logging, and compliance framework
+- [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) — Regulatory requirements, data privacy, and compliance measures
 
 **Operations Templates**
-- [deployment-template.md](../templates/deployment-template.md) - Deployment procedures and configuration
+- [deployment-template.md](../templates/deployment-template.md) — Deployment procedures, configuration, and infrastructure
+- [monitoring-template.md](../templates/monitoring-template.md) — Metrics, logging, alerting, and dashboards
+- [scaling-template.md](../templates/scaling-template.md) — Scaling strategies, auto-scaling, and operational procedures
+- [troubleshooting-template.md](../templates/troubleshooting-template.md) — Actionable troubleshooting steps and diagnostic procedures
+- [maintenance-template.md](../templates/maintenance-template.md) — Routine operations, upgrades, and support
+
+- [access-controls-template.md](../templates/access-controls-template.md) - Access control models and security policies
+- [audit-compliance-template.md](../templates/audit-compliance-template.md) - Audit requirements and implementation
+- [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) - Regulatory requirements and implementation
+
+**Operations Templates**
+- [deployment-template.md](../templates/deployment-template.md) - Deployment procedures of core component technologies and configuration with a focus on cloud-native deployment and infrastructure as code
 - [monitoring-template.md](../templates/monitoring-template.md) - Metrics, logging, and alerting
 - [scaling-template.md](../templates/scaling-template.md) - Scaling strategies and capacity planning
 - [troubleshooting-template.md](../templates/troubleshooting-template.md) - Common issues and resolution
 - [maintenance-template.md](../templates/maintenance-template.md) - Backup, upgrades, and routine tasks
-- [ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) - Continuous integration and deployment
 
 #### Using Templates
 
@@ -209,6 +233,13 @@ To use a template for a new document:
 6. Add component-specific sections as needed
 
 ## Content Standards
+
+### Vendor Documentation Links
+
+- When available and appropriate to share, always include a link to the official vendor documentation for any commercial or open-source product used by the component (e.g., Confluent Kafka, Aidbox, Apollo GraphOS, Okta, MuleSoft, etc.).
+- Vendor documentation links must point to the most relevant page for the specific product, feature, or API being referenced—not just the vendor's home page or general documentation index.
+- Vendor documentation links should be provided in context, typically in the 'Related Resources' section or alongside the first mention of the vendor product.
+- Do not include vendor documentation links for internal, proprietary, or confidential vendor resources unless explicitly permitted.
 
 ### Writing Style
 
@@ -1262,6 +1293,7 @@ All `regulatory-compliance.md` files must include:
 - [ ] Diagrams are included where helpful
 - [ ] Conclusion summarizes key points
 - [ ] Related resources are linked
+- [ ] Vendor documentation links are included when available and appropriate
 
 ### Technical Validation
 

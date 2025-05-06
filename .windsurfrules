@@ -1,0 +1,5 @@
+1. Always reference the doc-standardization-rules.md for documentation standards and best practices.
+2. Use the templates when provided to consistently structure documentation.
+3. Only provide diagrams when they will be most impactful and not to describe a simple, well-understood process
+4. Use TypeScript code examples when provided
+5. Only provide valid links for external resources

@@ -11,7 +11,6 @@ Our modern platform leverages healthcare standards like FHIR to create a unified
 | [Code Examples →](link) | [Security Framework →](link) | [Feature Planning →](link) |
 
 ## Key Implementation Decisions
-<!-- Decision Tree Diagram: A simple flowchart showing 3-4 key decision points that teams will face when implementing the platform, with branches showing different options and their primary implications. -->
 
 | Decision Point | Options | Considerations | Learn More |
 |----------------|---------|----------------|-----------|
@@ -21,31 +20,8 @@ Our modern platform leverages healthcare standards like FHIR to create a unified
 
 ## Core Platform Components
 
-### Security and Access Framework
-Our comprehensive security solution combines Role-Based Access Control (RBAC), OAuth 2.0, OpenID Connect, and federated identity providers with Okta as the primary IDP. This framework provides robust authentication, authorization, and access control across all platform components.
-
-**Key Capabilities:**
-- Multi-factor authentication and single sign-on
-- Role-based and policy-based access control
-- SMART on FHIR authentication flows
-- Zero Trust security architecture
-- Healthcare-specific compliance controls
-
-```javascript
-// Example: OAuth 2.0 token request for API access
-POST /oauth2/token
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=authorization_code&
-code=AUTH_CODE&
-client_id=CLIENT_ID&
-redirect_uri=https://app.example.com/callback
-```
-
-[Security and Access Framework Documentation →](/architecture/core_components/security-and-access-framework/01-getting-started/overview/)
-
 ### API Marketplace
-Our API Marketplace provides a comprehensive approach to API management combining F5 Distributed Cloud App Connect for universal ingress, service mesh for internal communication, and Mulesoft for API integration and management.
+Our API Marketplace provides a comprehensive approach to API management combining F5 Distributed Cloud App Connect for universal ingress, Voltmesh for internal communication, and Mulesoft for API integration and management.
 
 **Key Capabilities:**
 - Universal API gateway with multi-cloud support
@@ -54,63 +30,31 @@ Our API Marketplace provides a comprehensive approach to API management combinin
 - Healthcare-specific API patterns and transformations
 - Comprehensive API lifecycle management
 
-```yaml
-# Example: API definition in the marketplace
-apiVersion: api.marketplace.healthcare.org/v1
-kind: APIProduct
-metadata:
-  name: medication-management-api
-spec:
-  version: v1
-  description: "Medication management capabilities"
-  endpoints:
-    - path: /api/v1/medications
-      operations: [GET, POST]
-      scopes: [read:medications, write:medications]
-```
 
 [API Marketplace Documentation →](/architecture/core_components/api-marketplace/01-getting-started/overview/)
 
 ### FHIR Interoperability Platform
-Our comprehensive FHIR Interoperability Platform serves as the foundation for healthcare data exchange, providing not just a FHIR-compliant data repository but a complete solution for healthcare interoperability. The platform includes robust APIs, flexible data persistence options, role-based access control, subscription capabilities, and comprehensive implementation guide support, enabling seamless integration with the broader healthcare ecosystem.
+Our comprehensive FHIR Interoperability Platform serves as the foundation for healthcare data exchange, providing not just a FHIR-compliant data repository but a complete solution for healthcare interoperability. The platform is enabled through Health Samurai's Aidbox product, which includes robust APIs, flexible data persistence options, role-based access control, subscription capabilities, and comprehensive implementation guide support, enabling seamless integration with the broader healthcare ecosystem.
 
 **Key Capabilities:**
-- Comprehensive FHIR Server APIs with RESTful endpoints
+- Comprehensive FHIR Server APIs with RESTful and GraphQL endpoints
 - Flexible data persistence with optimized storage options
 - Role-based access control for healthcare data
 - FHIR Subscription Topics and real-time notifications
 - Implementation Guide installation and development
 - Bulk data operations for population health management
 
-```javascript
-// Example: Retrieving a patient resource
-GET /fhir/Patient/123456
-Accept: application/fhir+json
-```
 
 [FHIR Interoperability Platform Documentation →](/architecture/core_components/fhir-interoperability-platform/01-getting-started/overview/)
 
 ### Federated Graph API
-The unified API layer exposes capabilities across all systems through a coherent GraphQL interface, enabling product teams to efficiently access data and services while maintaining service boundaries.
+The unified API layer exposes capabilities across all systems through a coherent GraphQL interface through Apollo Router and GraphOS, enabling product teams to efficiently access data and services while maintaining service boundaries.
 
-```graphql
-# Example: Querying patient and medication data
-query {
-  patient(id: "123456") {
-    name { given family }
-    medications {
-      name
-      dosage
-      status
-    }
-  }
-}
-```
 
 [Federated Graph API Documentation →](/architecture/core_components/federated-graph-api/01-getting-started/overview/)
 
 ### Design System
-Our comprehensive design system combines Radix UI primitives and Material-UI components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
+Our comprehensive design system ShadCN components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
 
 **Key Capabilities:**
 - Accessible, WCAG 2.1 AA compliant components
@@ -119,70 +63,20 @@ Our comprehensive design system combines Radix UI primitives and Material-UI com
 - Comprehensive documentation and examples
 - Automated testing and quality assurance
 
-```jsx
-// Example: Using a clinical component
-import { PatientBanner } from '@healthcare/clinical';
-
-function PatientView({ patientId }) {
-  return (
-    <div className="p-4">
-      <PatientBanner 
-        patientId={patientId}
-        showAllergies={true}
-        compact={false}
-      />
-      {/* Additional patient information */}
-    </div>
-  );
-}
-```
 
 [Design System Documentation →](/architecture/core_components/design-system/01-getting-started/overview/)
 
 ### Event Broker
 Our platform uses Confluent Kafka to implement a robust event broker, enabling real-time data processing, system decoupling, and comprehensive visibility into the patient journey.
 
-**Key Event Types:**
-- Patient registration events
-- Medication access events
-- Insurance verification events
-- Clinical data updates
+**Key Capabilities:**
+- Real-time event processing
+- System decoupling
+- Comprehensive patient journey visibility
+- Event schema standards
+- Event-driven architecture
 
-[Event Broker Documentation →](link)
-
-### Workflow Orchestration Engine
-Our Workflow Orchestration Engine combines multiple technologies to create a comprehensive solution for healthcare process automation. This engine integrates a business process manager, rules engine, Confluent Kafka, and Azure Functions to build flexible orchestration pipelines that handle complex healthcare workflows efficiently.
-
-**Key Components:**
-- Business process manager for workflow definition and monitoring
-- Rules engine for complex decision logic and policy enforcement
-- Confluent Kafka for event-driven process triggers and communication
-- Azure Functions for serverless process execution and integration
-- Process analytics and monitoring dashboards
-
-```javascript
-// Example: Defining a workflow step in Azure Functions
-export default async function (context, event) {
-  // Process a prior authorization event
-  const patientId = event.data.patientId;
-  const medicationRequest = event.data.medicationRequest;
-  
-  // Apply rules engine for coverage determination
-  const coverageDecision = await determineCoverage(patientId, medicationRequest);
-  
-  // Publish result to next step in workflow
-  context.bindings.outputEvent = {
-    patientId,
-    medicationRequest,
-    coverageDecision,
-    timestamp: new Date().toISOString()
-  };
-  
-  return { status: 'completed' };
-}
-```
-
-[Workflow Orchestration Engine Documentation →](/architecture/core_components/workflow-orchestration-engine/01-getting-started/overview/)
+[Event Broker Documentation →](/architecture/core_components/event-broker/01-getting-started/overview/)
 
 ## Healthcare Capabilities
 

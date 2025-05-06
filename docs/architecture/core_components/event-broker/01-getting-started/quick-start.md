@@ -1,246 +1,106 @@
-# Event Broker Quick Start Guide
+# Event Broker Quick Start
 
-## Introduction
-
-This guide walks you through the process of setting up the Event Broker for the CMM Technology Platform. It covers the installation and configuration of Confluent Kafka, the implementation of healthcare-specific event schemas, and the integration with other core components. By following these steps, you'll establish a robust foundation for event-driven healthcare applications that enable real-time data exchange and workflow automation.
-
-The setup process is organized into logical sections that progress from basic infrastructure setup to advanced configuration. Each section builds upon the previous ones, allowing for incremental implementation and testing. While this guide provides a comprehensive approach, you can adapt it to your specific environment and requirements.
+This guide provides a step-by-step process to help you quickly get started with the Event Broker core component.
 
 ## Prerequisites
+- Access to the CMM platform environment (development, staging, or production)
+- Provisioned credentials for the Event Broker (Kafka username/password or certificates)
+- Network access to the Event Broker endpoints
+- Familiarity with Apache Kafka concepts (topics, producers, consumers)
 
-Before beginning the Event Broker setup process, ensure you have:
 
-### Hardware Requirements
+## Step 1: Reference Confluent Kafka Quick Start
 
-- **Development Environment**:
-  - Minimum: 3 servers (16GB RAM, 4 vCPUs, 100GB SSD each)
-  - Recommended: 5 servers (32GB RAM, 8 vCPUs, 250GB SSD each)
+> **Recommended:** Follow the official Confluent Kafka quick start guide for setup and local development: [Confluent Kafka Quick Start (Official Docs)](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html)
 
-- **Production Environment**:
-  - Minimum: 5 servers (32GB RAM, 8 vCPUs, 500GB SSD each)
-  - Recommended: 9+ servers (64GB RAM, 16 vCPUs, 1TB SSD each)
-  - Network: 10 Gbps between broker nodes
+### Summary of Steps:
+1. **Install Docker**: Download and install Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/).
+2. **Download and Start Confluent Platform**: Use the official Docker Compose file provided in the [Confluent quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-1-download-and-start-cp).
+3. **Set Environment Variables**: Configure any required environment variables as described in the vendor documentation.
+4. **Start the Platform**: Run `docker-compose up -d` to start all required Kafka services (Zookeeper, Broker, Schema Registry, etc.).
+5. **Access the Control Center**: By default, Confluent Control Center is available at [http://localhost:9021](http://localhost:9021).
 
-### Software Requirements
+For troubleshooting, advanced configuration, and more, refer to the [official Confluent quick start guide](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html).
+## Step 2: Connect to the Event Broker
 
-- **Operating System**: Linux (RHEL 8+, Ubuntu 20.04+, or similar)
-- **Java**: OpenJDK 11 or later
-- **Confluent Platform**: Version 7.0 or later
-- **Docker**: Version 20.10 or later (for containerized deployment)
-- **Kubernetes**: Version 1.21 or later (for cloud-native deployment)
+Refer to the [Confluent Kafka quick start guide](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-3-produce-and-consume-events) for producing and consuming events using the Confluent CLI, REST Proxy, or your preferred client library (Java, Python, Node.js, etc.).
 
-## Quick Setup with Docker Compose
+The guide provides step-by-step instructions and code samples for each supported language and tool.
+## Step 3: Publish and Consume Events
 
-For a quick development setup, use Docker Compose:
+Below is a TypeScript example using the official KafkaJS client, following Confluent's best practices. For more details and language options, see the [official Confluent Kafka quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-3-produce-and-consume-events).
 
-1. **Create Docker Compose File**
-   
-   Create `docker-compose.yml`:
-   ```yaml
-   ---
-   version: '3'
-   services:
-     zookeeper:
-       image: confluentinc/cp-zookeeper:7.0.1
-       hostname: zookeeper
-       container_name: zookeeper
-       ports:
-         - "2181:2181"
-       environment:
-         ZOOKEEPER_CLIENT_PORT: 2181
-         ZOOKEEPER_TICK_TIME: 2000
-       volumes:
-         - ./data/zookeeper/data:/var/lib/zookeeper/data
-         - ./data/zookeeper/log:/var/lib/zookeeper/log
-       healthcheck:
-         test: ["CMD", "bash", "-c", "echo ruok | nc localhost 2181 | grep imok"]
-         interval: 10s
-         timeout: 5s
-         retries: 5
-   
-     broker1:
-       image: confluentinc/cp-server:7.0.1
-       hostname: broker1
-       container_name: broker1
-       depends_on:
-         - zookeeper
-       ports:
-         - "9092:9092"
-         - "9101:9101"
-       environment:
-         KAFKA_BROKER_ID: 1
-         KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker1:29092,PLAINTEXT_HOST://localhost:9092
-         KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
-         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-         KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-         KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
-         KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
-         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-         KAFKA_JMX_PORT: 9101
-         KAFKA_JMX_HOSTNAME: localhost
-         CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker1:29092
-         CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-         CONFLUENT_METRICS_ENABLE: 'true'
-         CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-       volumes:
-         - ./data/broker1/data:/var/lib/kafka/data
-   
-     schema-registry:
-       image: confluentinc/cp-schema-registry:7.0.1
-       hostname: schema-registry
-       container_name: schema-registry
-       depends_on:
-         - broker1
-       ports:
-         - "8081:8081"
-       environment:
-         SCHEMA_REGISTRY_HOST_NAME: schema-registry
-         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker1:29092'
-         SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
-   
-     control-center:
-       image: confluentinc/cp-enterprise-control-center:7.0.1
-       hostname: control-center
-       container_name: control-center
-       depends_on:
-         - broker1
-         - schema-registry
-       ports:
-         - "9021:9021"
-       environment:
-         CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker1:29092'
-         CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
-         CONTROL_CENTER_REPLICATION_FACTOR: 1
-         CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
-         CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
-         CONFLUENT_METRICS_TOPIC_REPLICATION: 1
-         PORT: 9021
-   ```
+### Produce an Event
+```typescript
+import { Kafka } from 'kafkajs';
 
-2. **Start the Environment**
-   ```bash
-   # Create data directories
-   mkdir -p data/zookeeper/data data/zookeeper/log data/broker1/data
-   
-   # Start the containers
-   docker-compose up -d
-   ```
+const kafka = new Kafka({
+  clientId: 'my-app',
+  brokers: ['localhost:9092'],
+});
 
-3. **Verify the Setup**
-   ```bash
-   # Check container status
-   docker-compose ps
-   
-   # Access Control Center UI
-   # Open http://localhost:9021 in your browser
-   ```
+const producer = kafka.producer();
 
-## Create Basic Healthcare Topics
+async function produce() {
+  await producer.connect();
+  await producer.send({
+    topic: 'test-topic',
+    messages: [
+      { key: 'key1', value: 'Hello from KafkaJS!' },
+    ],
+  });
+  await producer.disconnect();
+}
 
-1. **Create Healthcare Domain Topics**
-   ```bash
-   # Create a shell in the broker container
-   docker-compose exec broker1 bash
-   
-   # Create clinical events topic
-   kafka-topics --create --topic clinical-events \
-     --bootstrap-server localhost:9092 \
-     --partitions 8 --replication-factor 1 \
-     --config retention.ms=604800000
-   
-   # Create patient demographics topic
-   kafka-topics --create --topic patient-demographics \
-     --bootstrap-server localhost:9092 \
-     --partitions 4 --replication-factor 1 \
-     --config retention.ms=1209600000 \
-     --config cleanup.policy=compact
-   ```
-
-2. **Verify Topic Creation**
-   ```bash
-   # List all topics
-   kafka-topics --list --bootstrap-server localhost:9092
-   
-   # Describe a specific topic
-   kafka-topics --describe --topic clinical-events \
-     --bootstrap-server localhost:9092
-   ```
-
-## Register a Sample Schema
-
-1. **Create a Sample AVRO Schema**
-   ```bash
-   # Create a file called patient-schema.json
-   cat > patient-schema.json << 'EOF'
-   {
-     "type": "record",
-     "name": "Patient",
-     "namespace": "com.healthcare.events",
-     "fields": [
-       {"name": "patientId", "type": "string"},
-       {"name": "firstName", "type": "string"},
-       {"name": "lastName", "type": "string"},
-       {"name": "dateOfBirth", "type": "string"},
-       {"name": "gender", "type": ["null", "string"], "default": null},
-       {"name": "mrn", "type": "string"},
-       {"name": "timestamp", "type": "long"}
-     ]
-   }
-   EOF
-   ```
-
-2. **Register the Schema**
-   ```bash
-   # Register the schema with the Schema Registry
-   curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
-     --data @patient-schema.json \
-     http://localhost:8081/subjects/patient-demographics-value/versions
-   ```
-
-## Next Steps
-
-Now that you have completed the basic setup of your Event Broker, you can:
-
-1. Review the [Event Schemas](../02-core-functionality/event-schemas.md) documentation for healthcare data modeling
-2. Explore [Stream Processing](../03-advanced-patterns/stream-processing.md) for real-time data transformation
-3. Learn about [Connectors](../02-core-functionality/connectors.md) for integrating with healthcare systems
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Connection Problems**
-   - Verify network connectivity between clients and brokers
-   - Check firewall rules for required ports (9092, 2181, 8081)
-   - Ensure DNS resolution is working correctly
-
-2. **Authentication Failures**
-   - Verify credentials in client configuration
-   - Check that JAAS configuration is correct
-   - Ensure SSL certificates are valid and trusted
-
-### Diagnostic Commands
-
-```bash
-# Check container logs
-docker-compose logs broker1
-
-# Test producer functionality
-docker-compose exec broker1 kafka-console-producer \
-  --bootstrap-server localhost:9092 \
-  --topic test-topic
-
-# Test consumer functionality
-docker-compose exec broker1 kafka-console-consumer \
-  --bootstrap-server localhost:9092 \
-  --topic test-topic --from-beginning
+produce().catch(console.error);
 ```
 
-## Resources
+### Consume Events
+```typescript
+import { Kafka } from 'kafkajs';
 
-- [Confluent Kafka Documentation](https://docs.confluent.io/)
-- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
-- [Kafka Monitoring Tools](https://docs.confluent.io/platform/current/control-center/index.html)
+const kafka = new Kafka({
+  clientId: 'my-app',
+  brokers: ['localhost:9092'],
+});
+
+const consumer = kafka.consumer({ groupId: 'test-group' });
+
+async function consume() {
+  await consumer.connect();
+  await consumer.subscribe({ topic: 'test-topic', fromBeginning: true });
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      console.log({
+        partition,
+        offset: message.offset,
+        value: message.value?.toString(),
+      });
+    },
+  });
+}
+
+consume().catch(console.error);
+```
+
+For CLI, REST Proxy, or other language examples, refer to the [official Confluent Kafka quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-3-produce-and-consume-events).
+## Step 4: Validate Setup
+- Ensure you can produce and consume events without errors using your client, the Confluent CLI, or integration tests.
+- Access the Confluent Control Center UI at [http://localhost:9021](http://localhost:9021) (or your configured endpoint) and log in with your credentials.
+- In the Control Center, navigate to your Kafka cluster and view the "Topics" and "Consumers" sections to verify that your test messages appear and that consumers are active.
+- Use the Control Center's monitoring and log features to check for errors or performance issues.
+- Troubleshoot connection, authentication, or configuration issues by verifying credentials, network access, and reviewing the [Confluent troubleshooting documentation](https://docs.confluent.io/platform/current/kafka/multi-node.html#troubleshooting).
+
+## Next Steps
+- [Explore Schema Registry & Advanced Kafka Features](../03-advanced-topics/schema-registry.md)
+- [Integration Guide: FHIR Interoperability Platform](../../fhir-interoperability-platform/01-getting-started/quick-start.md)
+- [Integration Guide: Federated Graph API](../../federated-graph-api/01-getting-started/quick-start.md)
+- [Integration Guide: API Marketplace](../../api-marketplace/01-getting-started/quick-start.md)
+- [Best Practices: Event Schema Design](../03-advanced-topics/event-schema-design.md)
+- [Error Handling & Troubleshooting](../03-advanced-topics/error-handling.md)
+
+## Related Resources
+- [Confluent Kafka Documentation](https://docs.confluent.io/platform/current/clients/index.html)
+- [Event Broker Overview](./overview.md)
+- [Event Broker Architecture](./architecture.md)
+- [Event Broker Key Concepts](./key-concepts.md)

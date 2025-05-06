@@ -1,193 +1,40 @@
-# Federated Graph API Documentation
+# Federated Graph API Overview
 
 ## Introduction
+The Federated Graph API unifies access to all platform data and services through a single GraphQL endpoint, powered by Apollo Router and GraphOS. It provides a consistent, efficient interface for client applications to query and mutate data across multiple backend services while maintaining separation of concerns and service autonomy.
 
-The Federated Graph API is a core component of the CMM Technology Platform, providing a unified GraphQL interface that aggregates data from multiple sources, including FHIR servers, legacy systems, and cloud services. Built with TypeScript and modern cloud-native technologies, this federated architecture delivers a cohesive API layer for healthcare applications while maintaining domain separation and independent scalability.
+## Key Features
+- Unified GraphQL interface for all platform services
+- Service federation and composition
+- Fine-grained access control and security
+- High performance and scalability
+- Real-time subscriptions
+- Schema governance and validation
 
-Our implementation leverages Apollo Federation 2.0 with TypeScript for type safety, containerized deployments for scalability, and cloud-native security patterns for healthcare data protection. This approach is particularly valuable in healthcare environments where data exists in multiple systems and formats but needs to be presented through a unified, consistent API with strong typing and security guarantees.
+## Architecture Overview
+- The Federated Graph API acts as a composition layer that unifies multiple GraphQL subgraphs into a single cohesive graph.
+- It leverages Apollo Federation to delegate queries to the appropriate backend services.
+- The architecture enables teams to independently develop and deploy their own subgraphs while maintaining a unified API for clients.
 
-### Quick Start
+## Integration Points
+- Integrates with the FHIR Interoperability Platform to expose healthcare data
+- Connects with the Event Broker for real-time subscriptions
+- Provides a unified API layer for the API Marketplace
+- Enables consistent data access for frontend applications
 
-1. Begin with the [Federated Graph API Setup Guide](setup-guide.md) to configure your environment
-2. Set up secure access with [API Authentication](../02-core-functionality/authentication.md)
-3. Learn how to [Create Your First Subgraph](../02-core-functionality/creating-subgraphs.md)
-4. Explore [Querying the Federated Graph](../02-core-functionality/querying.md) for data retrieval patterns
-5. Optimize performance with [Query Optimization](../03-advanced-patterns/query-optimization.md) techniques
+## Use Cases
+- Building unified healthcare dashboards and applications
+- Enabling complex, cross-service data queries
+- Supporting real-time data updates in user interfaces
+- Simplifying client-side data fetching and state management
+- Enforcing consistent access control across services
 
-### Related Components
+## Learn More
+- [Apollo Federation Overview](https://www.apollographql.com/docs/federation/) — Comprehensive guide to GraphQL federation concepts
+- [GraphQL in Healthcare](https://www.youtube.com/watch?v=nCWE6eonL7k) — YouTube presentation on GraphQL for healthcare data
+- [The GraphQL Guide](https://graphql.guide/) — Complete resource for GraphQL development
 
-- [FHIR Server](../../fhir-server/01-getting-started/overview.md): Provides standardized healthcare data storage
-- [Event Broker](../../event-broker/01-getting-started/overview.md): Enables event-driven architecture patterns
-- [Business Process Management](../../business-process-management/01-getting-started/overview.md): Orchestrates complex healthcare workflows
-
-## Technical Guides
-
-### Implementation & Setup
-
-- [Federated Graph API Setup Guide](setup-guide.md)
-  - Local development environment configuration
-  - Apollo Federation setup
-  - Gateway configuration
-  - Subgraph registration
-
-- [API Authentication](../02-core-functionality/authentication.md)
-  - OAuth 2.0 authentication flows
-  - JWT validation
-  - Role-Based Access Control (RBAC)
-  - Field-level authorization
-
-### Subgraph Development
-
-- [Creating Subgraphs](../02-core-functionality/creating-subgraphs.md)
-  - Subgraph architecture principles
-  - Schema design best practices
-  - Entity references and keys
-  - Type extensions
-
-- [Legacy System Integration](../02-core-functionality/legacy-integration.md)
-  - Mapping FHIR resources to GraphQL types
-  - Handling FHIR search parameters
-  - Resource references and includes
-  - Versioning support
-
-- [Legacy System Integration](../02-core-functionality/legacy-integration.md)
-  - Wrapping REST APIs as subgraphs
-  - Database-direct subgraphs
-  - Caching strategies
-  - Error handling
-
-### Data Access & Querying
-
-- [Querying the Federated Graph](../02-core-functionality/querying.md)
-  - Basic query patterns
-  - Query variables
-  - Fragments and reusable components
-  - Error handling
-
-- [Query Optimization](../03-advanced-patterns/query-optimization.md)
-  - Query planning and execution
-  - Batching and dataloader patterns
-  - Caching strategies
-  - Performance monitoring
-
-- [Subscriptions](../03-advanced-patterns/subscriptions.md)
-  - Real-time data updates
-  - WebSocket implementation
-  - Filtering subscription events
-  - Scaling considerations
-
-### Advanced Patterns
-
-- [Schema Federation Patterns](../03-advanced-patterns/schema-federation.md)
-  - Entity boundaries and ownership
-  - Resolving references across subgraphs
-  - Schema composition strategies
-  - Handling schema conflicts
-
-- [Custom Directives](../03-advanced-patterns/custom-directives.md)
-  - Authorization directives
-  - Transformation directives
-  - Validation directives
-  - Implementing directive resolvers
-
-### Security & Data Management
-
-- [Data Access Control](../04-data-management/access-control.md)
-  - User-based access control
-  - Tenant isolation
-  - Data masking and filtering
-  - Audit logging
-
-- [Schema Governance](../04-data-management/schema-governance.md)
-  - Schema versioning
-  - Breaking vs. non-breaking changes
-  - Deprecation strategies
-  - Schema validation workflows
-
-## Reference Architecture Documents
-
-- Federated Graph API High-Level Architecture (Coming Soon)
-  - Component diagrams
-  - Integration points with other platform services
-  - Scalability and availability design
-  - Deployment models
-
-- GraphQL Schema Design Principles (Coming Soon)
-  - Type design best practices
-  - Query vs. Mutation design
-  - Pagination patterns
-  - Error handling conventions
-
-- Security Framework (Coming Soon)
-  - Authentication models
-  - Authorization patterns
-  - Audit logging
-  - Threat modeling
-
-- Integration Patterns Documentation (Coming Soon)
-  - FHIR server integration
-  - Legacy system integration approaches
-  - External partner integration models
-  - API gateway integration
-
-## Educational Materials
-
-- [Federated GraphQL Benefits Overview](benefits-overview.md)
-  - Healthcare interoperability advantages
-  - Developer productivity improvements
-  - Performance benefits
-  - Organizational scaling advantages
-
-- [GraphQL vs. REST Comparison](graphql-vs-rest.md)
-  - Architectural differences
-  - Performance considerations
-  - Developer experience
-  - Implementation complexity
-
-- [Modernization Case Studies](../06-case-studies/modernization-case-studies.md)
-  - Healthcare data integration examples
-  - API consolidation success stories
-  - Performance improvements
-  - Developer productivity gains
-
-## Administrative Documentation
-
-- [Monitoring and Alerting](../05-operations/monitoring.md)
-  - Gateway health metrics
-  - Subgraph health metrics
-  - Query performance monitoring
-  - Alerting strategies
-  - Operational dashboards
-
-- [Performance Tuning](../05-operations/performance-tuning.md)
-  - Query execution optimization
-  - Caching strategies
-  - Database query optimization
-  - Network optimization
-  - Load testing and benchmarking
-
-- [Deployment Automation](../05-operations/deployment.md) (Coming Soon)
-  - CI/CD pipelines
-  - Infrastructure as code
-  - Environment management
-  - Automated testing
-
-- [Scaling Strategies](../05-operations/scaling.md) (Coming Soon)
-  - Horizontal vs. vertical scaling
-  - Subgraph independent scaling
-  - Gateway scaling
-  - Load balancing approaches
-
-## Development Resources
-
-- Code Examples (Coming Soon)
-  - Subgraph implementation examples
-  - Query examples
-  - Authentication implementation
-  - Error handling patterns
-
-- Testing Framework (Coming Soon)
-  - Unit testing patterns
-  - Integration test approaches
-  - Schema testing
-  - Performance testing
+## Next Steps
+- [Federated Graph API Architecture](./architecture.md)
+- [Federated Graph API Quick Start](./quick-start.md)
+- [Federated Graph API Core APIs](../02-core-functionality/core-apis.md)
