@@ -955,11 +955,43 @@ All `release-lifecycle.md` files must include:
 
 ### Versioning Policy Documentation
 
-All `versioning-policy.md` files must include:
+All `versioning-policy.md` files must include component-specific versioning strategies focused on the deployable units of each component. The versioning policy must address the following areas:
 
-1. **Semantic Versioning**: Detailed explanation of semantic versioning implementation
-2. **API Versioning**: How APIs are versioned and backward compatibility is maintained
-3. **Schema Versioning**: How data schemas are versioned and evolved
+1. **Deployable Unit Versioning**: Specific versioning strategy for the component's primary deployable units
+2. **Semantic Versioning Implementation**: How semantic versioning is applied to the specific deployable units
+3. **Compatibility Guarantees**: Clear definition of backward and forward compatibility guarantees
+4. **Dependency Management**: How dependencies are versioned and managed
+5. **Version Lifecycle**: Lifecycle stages for each version including support and deprecation policies
+
+#### Component-Specific Versioning Requirements
+
+| Component | Deployable Units | Versioning Requirements |
+|-----------|-----------------|--------------------------|
+| FHIR Interoperability Platform | FHIR Implementation Guides, Profiles | - Implementation Guide versioning aligned with FHIR version<br>- Profile versioning with canonical URLs<br>- Extension versioning strategy<br>- Terminology versioning (ValueSets, CodeSystems) |
+| API Marketplace | API Definitions, Portal | - API definition versioning (OpenAPI)<br>- API endpoint versioning strategy (URI, header, parameter)<br>- Breaking vs. non-breaking changes criteria<br>- API deprecation and sunset policy |
+| Event Broker | Event Schemas, Topics | - Schema evolution rules (backward/forward compatibility)<br>- Schema Registry versioning<br>- Topic naming and versioning conventions<br>- Consumer/producer compatibility guarantees |
+| Design System | Web Components, Style Libraries | - Web component versioning (custom elements)<br>- CSS/design token versioning<br>- Package versioning (npm)<br>- Visual regression testing for versions |
+| Federated Graph API | GraphQL Schemas, Subgraphs | - Schema versioning strategy<br>- Subgraph versioning and composition<br>- Query compatibility guarantees<br>- Federation specification version support |
+| Workflow Orchestration Engine | Workflow Definitions, Connectors | - Workflow definition versioning<br>- Connector interface versioning<br>- State serialization versioning<br>- Migration paths between workflow versions |
+
+#### Version Numbering Guidelines
+
+For each deployable unit, the versioning policy must clearly define:
+
+1. **Major Version Increments (X.0.0)**
+   - Specific criteria for the deployable unit that constitutes a breaking change
+   - Migration requirements between major versions
+   - Support policy for previous major versions
+
+2. **Minor Version Increments (0.X.0)**
+   - Criteria for backward-compatible feature additions
+   - Compatibility guarantees for the deployable unit
+   - Feature deprecation notices
+
+3. **Patch Version Increments (0.0.X)**
+   - Criteria for bug fixes and security updates
+   - Deployment and adoption recommendations
+   - Hotfix process for critical issues
 4. **Dependency Management**: How dependencies are managed and updated
 5. **Breaking Changes**: Policy for handling breaking changes
 6. **Version Lifecycle**: Support policy for different versions
