@@ -1,4 +1,4 @@
-# Design Component Library Setup Guide
+# Design Component Library Quick Start Guide
 
 ## Introduction
 
