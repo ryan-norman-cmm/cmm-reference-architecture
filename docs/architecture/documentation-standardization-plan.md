@@ -193,11 +193,14 @@ Reference architecture documentation should be reserved for system-wide architec
 
 ### Code Examples
 
-- Include TypeScript code examples where applicable
-- Use proper syntax highlighting with triple backticks and language identifier
+- Use clear, concise code examples
 - Include comments to explain complex code
 - Follow consistent coding style
 - Ensure code examples are complete and runnable when possible
+- **Use TypeScript for all web and Node.js related code examples**
+- Use the vendor's preferred language only when TypeScript is not available
+- When showing examples for paid services (e.g., Confluent Kafka, Azure, Aidbox, Apollo GraphOS, Okta), leverage vendor-specific features that reduce operational overhead
+- Include error handling, monitoring, and observability in code examples
 
 ### Diagrams
 
