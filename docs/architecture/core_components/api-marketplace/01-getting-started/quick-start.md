@@ -37,11 +37,6 @@ This guide provides a step-by-step process to help you quickly get started with 
 - Check API Manager for applied policies, monitoring, and analytics.
 - For troubleshooting, see [MuleSoft troubleshooting docs](https://docs.mulesoft.com/exchange/troubleshooting-exchange) and [API Manager troubleshooting](https://docs.mulesoft.com/api-manager/troubleshooting-api-manager).
 
-## Reference Vendor Quick Start
-- [MuleSoft: Publish an API to Exchange](https://docs.mulesoft.com/exchange/publish-api-to-exchange)
-- [MuleSoft: API Manager Getting Started](https://docs.mulesoft.com/api-manager/getting-started)
-- [MuleSoft: Exchange Documentation](https://docs.mulesoft.com/exchange/)
-- [MuleSoft: API Manager Documentation](https://docs.mulesoft.com/api-manager/)
 
 ## Next Steps
 - [Explore Advanced API Policies](../03-advanced-topics/policies.md)

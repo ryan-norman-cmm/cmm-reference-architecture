@@ -135,53 +135,6 @@ Refer to the [MkDocs Material theme documentation](https://squidfunk.github.io/m
 4. Add code examples with proper syntax highlighting and inline comments
 5. Update the `mkdocs.yml` file to include the new page in the navigation structure
 
-#### Standardized Documentation Structure
-
-All core components of the Modern Technology Platform should follow a consistent, hierarchical documentation structure to improve navigation and discoverability. The following structure has been established as the standard pattern:
-
-```
-docs/
-├── index.md                                # Home page
-├── architecture/
-│   ├── overview.md                        # Architecture overview
-│   ├── principles.md                      # Architectural principles
-│   └── core_components/                   # Core component documentation
-│       ├── component-name/                # Component root folder
-│       │   ├── 01-getting-started/     # Introduction and basic usage
-│       │   │   ├── overview.md         # Component overview
-│       │   │   ├── setup-guide.md      # Setup instructions
-│       │   │   └── ...                 
-│       │   ├── 02-core-functionality/    # Essential features
-│       │   │   ├── feature-one.md        # Core feature documentation
-│       │   │   ├── feature-two.md        # Core feature documentation
-│       │   │   ├── best-practices.md     # Core feature best practices
-│       │   │   └── ...
-│       │   ├── 03-advanced-patterns/     # Complex usage scenarios
-│       │   │   ├── pattern-one.md        # Advanced usage documentation
-│       │   │   ├── pattern-two.md        # Advanced usage documentation
-│       │   │   ├── best-practices.md     # Advanced usage best practices
-│       │   │   └── ...
-│       │   ├── 04-governance-compliance/ # Governance and compliance
-│       │   │   ├── access-controls.md    # Access control and security policies
-│       │   │   ├── data-governance.md    # Schema/data governance
-│       │   │   ├── audit-compliance.md   # Audit and compliance
-│       │   │   ├── data-quality.md       # Data quality and validation
-│       │   │   ├── lifecycle-management.md # Lifecycle management
-│       │   │   ├── regulatory-compliance.md # Regulatory considerations
-│       │   │   └── ...
-│       │   └── 05-operations/            # Operational concerns
-│       │       ├── monitoring.md         # Monitoring and alerting
-│       │       ├── performance.md        # Performance optimization
-│       │       ├── maintenance.md        # Maintenance and support
-│       │       ├── disaster-recovery.md  # Disaster recovery
-│       │       └── ...
-│       ├── another-component/            # Another component folder
-│       │   └── ...
-│       └── ...
-└── ...
-```
-
-This structure follows a progressive disclosure model, organizing content from basic concepts to advanced topics. The numbered folders (01-, 02-, etc.) ensure a logical order in file explorers and documentation navigation.
 
 #### Publishing Process
 

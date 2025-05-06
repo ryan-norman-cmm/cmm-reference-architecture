@@ -533,42 +533,6 @@ All components must document the following common elements across regulations:
    - Configuration examples for compliance settings
    - Integration examples with compliance frameworks
 
-## Deployable Objects Documentation
-
-### Overview
-
-Each core component produces specific deployable objects that must be clearly documented. This section outlines the required documentation for each component's deployable objects.
-
-### Required Deployable Object Documentation
-
-All core components must include documentation about their deployable objects in the following locations:
-
-1. **01-getting-started/release-lifecycle.md**: Must include a section titled "Deployable Objects" that describes the primary artifacts produced by the component
-2. **05-operations/deployment.md**: Must include detailed deployment procedures specific to the component's deployable objects
-
-### Component-Specific Deployable Objects
-
-| Component | Primary Deployable Objects | Required Documentation |
-|-----------|----------------------------|------------------------|
-| FHIR Interoperability Platform | FHIR Implementation Guides, Profiles | Profile authoring, validation, and publishing process |
-| API Marketplace | API Definitions, Portal | API definition format, validation, and gateway integration |
-| Event Broker | Event Schemas, Topics | Schema definition, compatibility rules, topic configuration |
-| Design System | Web Components, Style Libraries | Component packaging, versioning, and consumption |
-| Federated Graph API | GraphQL Schemas, Subgraphs | Schema definition, composition rules, gateway configuration |
-| Workflow Orchestration Engine | Workflow Definitions, Connectors | Workflow authoring, testing, and deployment process |
-
-### CI/CD Pipeline Documentation
-
-Each component must document its CI/CD pipeline for deployable objects, including:
-
-1. **Build Process**: How deployable objects are built from source
-2. **Validation Process**: How deployable objects are validated
-3. **Packaging Process**: How deployable objects are packaged
-4. **Deployment Process**: How deployable objects are deployed
-5. **Rollback Process**: How deployable objects can be rolled back
-
-This documentation must be included in the **05-operations/deployment.md** file.
-
 ## Required Documentation by Component
 
 ### Required Documents for All Components
@@ -577,24 +541,11 @@ All core components must include a standard set of documentation following the a
 
 #### Required Documents
 
-Each core component must include the following documentation:
-
-| Phase | Required Documents | Template Reference |
-|-------|-------------------|-------------------|
-| **01-getting-started** | overview.md<br>quick-start.md<br>key-concepts.md<br>architecture.md<br>release-lifecycle.md | [overview-template.md](../templates/overview-template.md)<br>[quick-start-template.md](../templates/quick-start-template.md)<br>[key-concepts-template.md](../templates/key-concepts-template.md)<br>[architecture-template.md](../templates/architecture-template.md)<br>[release-lifecycle-template.md](../templates/release-lifecycle-template.md) |
-| **02-core-functionality** | core-apis.md<br>data-model.md<br>integration-points.md | [api-documentation-template.md](../templates/api-documentation-template.md)<br>[data-model-template.md](../templates/data-model-template.md)<br>[integration-points-template.md](../templates/integration-points-template.md) |
-| **03-advanced-patterns** | advanced-use-cases.md<br>extension-points.md<br>customization.md | [advanced-use-cases-template.md](../templates/advanced-use-cases-template.md)<br>[extension-points-template.md](../templates/extension-points-template.md)<br>[customization-template.md](../templates/customization-template.md) |
-| **04-governance-compliance** | access-controls.md<br>data-governance.md<br>audit-compliance.md<br>regulatory-compliance.md<br>versioning-policy.md | [access-controls-template.md](../templates/access-controls-template.md)<br>[data-governance-template.md](../templates/data-governance-template.md)<br>[audit-compliance-template.md](../templates/audit-compliance-template.md)<br>[regulatory-compliance-template.md](../templates/regulatory-compliance-template.md)<br>[versioning-policy-template.md](../templates/versioning-policy-template.md) |
-| **05-operations** | deployment.md<br>monitoring.md<br>scaling.md<br>troubleshooting.md<br>maintenance.md<br>ci-cd-pipeline.md | [deployment-template.md](../templates/deployment-template.md)<br>[monitoring-template.md](../templates/monitoring-template.md)<br>[scaling-template.md](../templates/scaling-template.md)<br>[troubleshooting-template.md](../templates/troubleshooting-template.md)<br>[maintenance-template.md](../templates/maintenance-template.md)<br>[ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) |
+Each core component must include the documentation as outlined in the [Available Templates](#available-templates).
 
 #### Content Boundaries
 
 To minimize redundancy and maintain clear content boundaries, follow these guidelines:
-
-**01-getting-started**
-- **overview.md**: Focus on high-level introduction, not implementation details
-- **architecture.md**: Reference system-wide architecture documentation rather than duplicating it
-- **release-lifecycle.md**: Include deployable unit information as specified in the template
 
 #### Content Boundaries by Document Type
 
@@ -612,14 +563,11 @@ Each document type has specific content boundaries to minimize redundancy and en
 | **data-governance.md** | Data classification, lifecycle, quality controls | Access control details | [data-governance-template.md](../templates/data-governance-template.md) |
 | **audit-compliance.md** | IT general controls (ITGCs) key to SOC2, audit framework, control activities | Access control implementation | [audit-compliance-template.md](../templates/audit-compliance-template.md) |
 | **regulatory-compliance.md** | HIPAA, SOX, and US privacy regulations compliance | Non-US regulations, general security | [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) |
-| **versioning-policy.md** | Deployable unit versioning, compatibility guarantees | Release process details | [versioning-policy-template.md](../templates/versioning-policy-template.md) |
 | **deployment.md** | Cloud-native deployment, infrastructure as code | Development setup details | [deployment-template.md](../templates/deployment-template.md) |
 | **monitoring.md** | Metrics, logging, alerting, dashboards using Open Telemetry | Deployment procedures | [monitoring-template.md](../templates/monitoring-template.md) |
 | **scaling.md** | Scaling strategies, performance, capacity planning | Basic deployment details | [scaling-template.md](../templates/scaling-template.md) |
 | **troubleshooting.md** | Common issues, diagnostics, resolution steps | Monitoring setup details | [troubleshooting-template.md](../templates/troubleshooting-template.md) |
 | **maintenance.md** | Backup/restore, upgrades, patches | Deployment procedures | [maintenance-template.md](../templates/maintenance-template.md) |
-| **ci-cd-pipeline.md** | CI/CD pipeline, automated builds, testing | Detailed implementation code | [ci-cd-pipeline-template.md](../templates/ci-cd-pipeline-template.md) |
-| **testing-strategy.md** | Test types, environments, data management | CI/CD pipeline details | [testing-strategy-template.md](../templates/testing-strategy-template.md) |
 
 #### Special Emphasis Areas
 

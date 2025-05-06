@@ -8,17 +8,24 @@ This guide provides a step-by-step process to help you quickly get started with 
 - Network access to the Event Broker endpoints
 - Familiarity with Apache Kafka concepts (topics, producers, consumers)
 
-
 ## Step 1: Reference Confluent Kafka Quick Start
 
 > **Recommended:** Follow the official Confluent Kafka quick start guide for setup and local development: [Confluent Kafka Quick Start (Official Docs)](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html)
 
-### Summary of Steps:
-1. **Install Docker**: Download and install Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/).
-2. **Download and Start Confluent Platform**: Use the official Docker Compose file provided in the [Confluent quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-1-download-and-start-cp).
-3. **Set Environment Variables**: Configure any required environment variables as described in the vendor documentation.
-4. **Start the Platform**: Run `docker-compose up -d` to start all required Kafka services (Zookeeper, Broker, Schema Registry, etc.).
-5. **Access the Control Center**: By default, Confluent Control Center is available at [http://localhost:9021](http://localhost:9021).
+### Install Docker
+Download and install Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/).
+
+### Download and Start Confluent Platform
+Use the official Docker Compose file provided in the [Confluent quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-1-download-and-start-cp).
+
+### Set Environment Variables
+Configure any required environment variables as described in the vendor documentation.
+
+### Start the Platform
+Run `docker-compose up -d` to start all required Kafka services (Zookeeper, Broker, Schema Registry, etc.).
+
+### Access the Control Center
+By default, Confluent Control Center is available at [http://localhost:9021](http://localhost:9021).
 
 For troubleshooting, advanced configuration, and more, refer to the [official Confluent quick start guide](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html).
 ## Step 2: Connect to the Event Broker
@@ -84,6 +91,7 @@ consume().catch(console.error);
 ```
 
 For CLI, REST Proxy, or other language examples, refer to the [official Confluent Kafka quick start](https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html#step-3-produce-and-consume-events).
+
 ## Step 4: Validate Setup
 - Ensure you can produce and consume events without errors using your client, the Confluent CLI, or integration tests.
 - Access the Confluent Control Center UI at [http://localhost:9021](http://localhost:9021) (or your configured endpoint) and log in with your credentials.

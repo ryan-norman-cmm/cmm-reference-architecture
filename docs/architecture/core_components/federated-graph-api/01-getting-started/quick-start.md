@@ -87,9 +87,7 @@ console.log(data);
 ## Step 5: Validate Setup
 - Ensure you can query data without errors using your client or integration tests.
 - Access the Apollo Router Admin UI at [http://localhost:8088](http://localhost:8088) (or your configured endpoint) to view router status, health, and metrics. See [Apollo Router Admin UI docs](https://www.apollographql.com/docs/router/telemetry/admin-ui/) for details.
-- Use the Explorer in Apollo Studio or GraphOS at [https://studio.apollographql.com/](https://studio.apollographql.com/) to run queries, inspect the schema, and validate responses in real-time.
-- Review Apollo Router logs in your terminal or container output for errors, warnings, and performance metrics.
-- For troubleshooting setup, authentication, or network issues, see the [Apollo Router troubleshooting guide](https://www.apollographql.com/docs/router/troubleshooting/) and [Apollo Studio troubleshooting docs](https://www.apollographql.com/docs/studio/troubleshooting/).
+- For troubleshooting setup, authentication, or network issues, see the [Apollo Router troubleshooting guide](https://www.apollographql.com/docs/router/troubleshooting/).
 
 ## Next Steps
 - [Explore Advanced GraphQL Operations](../03-advanced-topics/advanced-graphql-operations.md)

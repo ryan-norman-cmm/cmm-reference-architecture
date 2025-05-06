@@ -24,7 +24,7 @@ npm install @your-org/design-system
 - Import or extend the Tailwind config from the design system package if available.
 
 ## Step 3: Use Components in Your React App
-Example usage (TypeScript/React):
+Example usage:
 
 ```tsx
 import { Button } from '@your-org/design-system';
@@ -51,14 +51,6 @@ npm run storybook
   - [Tailwind Troubleshooting](https://tailwindcss.com/docs/installation#troubleshooting)
   - [ShadCN UI Docs](https://ui.shadcn.com/docs/installation)
 
-## Reference Vendor Quick Start (If Applicable)
-- [Storybook: Get Started](https://storybook.js.org/docs/react/get-started/install)
-- [ShadCN UI: Installation](https://ui.shadcn.com/docs/installation)
-- [Tailwind CSS: Installation](https://tailwindcss.com/docs/installation)
-- [React: Getting Started](https://react.dev/learn)
-- [GitHub Actions: Documentation](https://docs.github.com/en/actions)
-- [Artifactory: NPM Registry](https://jfrog.com/help/r/jfrog-artifactory-documentation/npm-registry)
-
 ## Next Steps
 - [Explore Advanced Theming & Customization](../03-advanced-topics/theming.md)
 - [Integration Guide: Application Shell](../../application-shell/01-getting-started/quick-start.md)
@@ -66,7 +58,9 @@ npm run storybook
 - [Error Handling & Troubleshooting](../03-advanced-topics/error-handling.md)
 
 ## Related Resources
-- [Storybook Documentation](https://storybook.js.org/docs/react)
-- [ShadCN UI Documentation](https://ui.shadcn.com/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [React Documentation](https://react.dev/learn)
+- [Storybook: Get Started](https://storybook.js.org/docs/react/get-started/install)
+- [ShadCN UI: Installation](https://ui.shadcn.com/docs/installation)
+- [Tailwind CSS: Installation](https://tailwindcss.com/docs/installation)
+- [React: Getting Started](https://react.dev/learn)
+- [GitHub Actions: Documentation](https://docs.github.com/en/actions)
+- [Artifactory: NPM Registry](https://jfrog.com/help/r/jfrog-artifactory-documentation/npm-registry)
