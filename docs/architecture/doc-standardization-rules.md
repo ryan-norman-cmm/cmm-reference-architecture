@@ -13,12 +13,12 @@ All key capabilities **must** follow a consistent 5-tier documentation structure
 1. **01-overview**: Component introduction, key concepts, and architecture
    - Purpose: Help users understand the component's purpose, design, and concepts
    - Target audience: Architects, developers, and stakeholders
-   - Required files: overview.md, key-concepts.md, architecture.md, integration-points.md
+   - Required files: overview.md, key-concepts.md, architecture.md, integration-points.md, business-value.md
    
 2. **02-getting-started**: Implementation guides for cloud and local environments
    - Purpose: Help users quickly set up and begin using the component
    - Target audience: Developers and implementation teams
-   - Required files: quick-start-cloud.md, local-setup.md
+   - Required files: quick-start-cloud.md, local-setup.md, learning-resources.md
    - Optional consumer-friendly files: use-case-examples.md, api-sandbox.md, client-libraries.md, troubleshooting-guide.md
 
 3. **03-core-functionality**: Core features, main APIs, and primary use cases
@@ -51,10 +51,12 @@ Each capability must maintain the following folder structure:
 │   ├── overview.md
 │   ├── key-concepts.md
 │   ├── architecture.md
-│   └── integration-points.md
+│   ├── integration-points.md
+│   └── business-value.md
 ├── 02-getting-started/
 │   ├── quick-start-cloud.md
 │   ├── local-setup.md
+│   ├── learning-resources.md
 │   ├── use-case-examples.md
 │   ├── api-sandbox.md
 │   ├── client-libraries.md
@@ -96,8 +98,10 @@ All documentation **must** follow the appropriate template from the templates di
 | Document Type | Template | Purpose |
 |--------------|----------|---------|
 | Overview | [overview-template.md](../templates/overview-template.md) | Component introduction and high-level information |
+| Business Value | [business-value-template.md](../templates/business-value-template.md) | Business outcomes, ROI metrics, and strategic alignment |
 | Quick Start (Cloud) | [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) | Accessing managed components in CMM Azure development environment |
 | Local Setup | [local-setup-template.md](../templates/local-setup-template.md) | Setting up a local development environment |
+| Learning Resources | [learning-resources-template.md](../templates/learning-resources-template.md) | Comprehensive collection of learning materials by skill level |
 | Use Case Examples | [use-case-examples-template.md](../templates/use-case-examples-template.md) | Practical examples solving common healthcare workflow challenges |
 | API Sandbox | [api-sandbox-template.md](../templates/api-sandbox-template.md) | Interactive exploration environment for testing APIs without coding |
 | Client Libraries | [client-libraries-template.md](../templates/client-libraries-template.md) | Documentation for language-specific SDKs and client libraries |
