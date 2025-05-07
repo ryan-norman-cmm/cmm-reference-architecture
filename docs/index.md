@@ -31,7 +31,7 @@ Our API Marketplace provides a comprehensive approach to API management combinin
 - Comprehensive API lifecycle management
 
 
-[API Marketplace Documentation →](/architecture/key_capabilities/api-marketplace/01-getting-started/overview/)
+[API Marketplace Documentation →](/architecture/key_capabilities/api-marketplace/01-overview/overview/)
 
 ### FHIR Interoperability Platform
 Our comprehensive FHIR Interoperability Platform serves as the foundation for healthcare data exchange, providing not just a FHIR-compliant data repository but a complete solution for healthcare interoperability. The platform is enabled through Health Samurai's Aidbox product, which includes robust APIs, flexible data persistence options, role-based access control, subscription capabilities, and comprehensive implementation guide support, enabling seamless integration with the broader healthcare ecosystem.
@@ -45,8 +45,8 @@ Our comprehensive FHIR Interoperability Platform serves as the foundation for he
 - Bulk data operations for population health management
 
 
-[FHIR Interoperability Platform Documentation →](/architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/overview/)
-[FHIR Integration Points →](/architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/integration-points/)
+[FHIR Interoperability Platform Documentation →](/architecture/key_capabilities/fhir-interoperability-platform/01-overview/overview/)
+[FHIR Integration Points →](/architecture/key_capabilities/fhir-interoperability-platform/01-overview/integration-points/)
 
 ### Federated Graph API
 The unified API layer exposes capabilities across all systems through a coherent GraphQL interface through Apollo Router and GraphOS, enabling product teams to efficiently access data and services while maintaining service boundaries.
@@ -59,8 +59,8 @@ The unified API layer exposes capabilities across all systems through a coherent
 - Access control at the field level
 
 
-[Federated Graph API Documentation →](/architecture/key_capabilities/federated-graph-api/01-getting-started/overview/)
-[Federated Graph API Integration Points →](/architecture/key_capabilities/federated-graph-api/01-getting-started/integration-points/)
+[Federated Graph API Documentation →](/architecture/key_capabilities/federated-graph-api/01-overview/overview/)
+[Federated Graph API Integration Points →](/architecture/key_capabilities/federated-graph-api/01-overview/integration-points/)
 
 ### Design System
 Our comprehensive design system ShadCN components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
@@ -73,20 +73,22 @@ Our comprehensive design system ShadCN components with Tailwind CSS, Storybook, 
 - Automated testing and quality assurance
 
 
-[Design System Documentation →](/architecture/key_capabilities/design-system/01-getting-started/overview/)
+[Design System Documentation →](/architecture/key_capabilities/design-system/01-overview/overview/)
 
-### Event Broker
-Our platform uses Confluent Kafka to implement a robust event broker, enabling real-time data processing, system decoupling, and comprehensive visibility into the patient journey.
+### Event-Driven Architecture
+Our platform implements a comprehensive event-driven architecture that serves as the communication backbone and processing framework for the entire healthcare ecosystem, enabling real-time data flows, resilient systems, and reactive applications.
 
 **Key Capabilities:**
-- Real-time event processing
-- System decoupling
-- Comprehensive patient journey visibility
-- Event schema standards
-- Event-driven architecture
+- Event Broker infrastructure based on Confluent Kafka
+- Event sourcing and CQRS patterns
+- Stream processing for real-time analytics
+- Event choreography and orchestration
+- Healthcare-specific event schemas
+- Comprehensive observability and monitoring
 
-[Event Broker Documentation →](/architecture/key_capabilities/event-broker/01-getting-started/overview/)
-[Event Broker Integration Points →](/architecture/key_capabilities/event-broker/01-getting-started/integration-points/)
+[Event-Driven Architecture Documentation →](/architecture/key_capabilities/event-driven-architecture/01-overview/overview/)
+[Event-Driven Architecture Integration Points →](/architecture/key_capabilities/event-driven-architecture/01-overview/integration-points/)
+[Event-Driven Architecture Business Value →](/architecture/key_capabilities/event-driven-architecture/01-overview/business-value/)
 
 ## Healthcare Capabilities
 
@@ -127,7 +129,7 @@ Implementation of standardized healthcare workflows following established FHIR i
 
 ### Prior Authorization Submission
 
-A common implementation scenario involves connecting an EHR system to our prior authorization workflow. This process leverages our FHIR server, event broker, and business process management capabilities to automate and streamline the authorization process.
+A common implementation scenario involves connecting an EHR system to our prior authorization workflow. This process leverages our FHIR server, event-driven architecture, and business process management capabilities to automate and streamline the authorization process.
 
 1. EHR system sends patient and prescription data via FHIR API
 2. Platform translates incoming data to canonical FHIR format

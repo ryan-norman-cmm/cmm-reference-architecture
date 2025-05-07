@@ -215,7 +215,7 @@ All document templates are located in the `/docs/architecture/templates/` direct
 - [architecture-template.md](../templates/architecture-template.md) — Component architecture, design, structure, and integration points
 
 **Getting Started Templates**
-- [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) — Fast setup and usage guidance for managed components in CMM Azure dev environment
+- [quick-start-template.md](../templates/quick-start-template.md) — Fast setup and usage guidance for managed components in CMM Azure dev environment
 - [local-setup-template.md](../templates/local-setup-template.md) — Setup and configuration guidance for local development environment
 - [use-case-examples-template.md](../templates/use-case-examples-template.md) — Practical examples solving common healthcare workflow challenges
 - [api-sandbox-template.md](../templates/api-sandbox-template.md) — Interactive exploration environment for testing APIs without coding
@@ -684,35 +684,6 @@ The reference architecture documentation should be maintained separately from co
 ### Overview
 
 Certain architectural concepts and patterns span multiple key capabilities and should be documented in the reference architecture rather than duplicated across individual capability documentation. This section identifies these cross-cutting concerns and provides guidance on how to reference them in capability documentation.
-
-### Cross-Component Architectural Patterns
-
-The following architectural patterns involve multiple components and should be documented in the reference architecture:
-
-1. **Command Query Responsibility Segregation (CQRS)**
-   - *Reference Architecture Documentation*: Detailed pattern description, implementation guidance, and system-wide considerations
-   - *Component Documentation*: Brief mention of CQRS usage with reference to the system-wide pattern documentation
-   - *Affected Components*: API Marketplace, Event Broker, FHIR Interoperability Platform, Workflow Orchestration Engine
-
-2. **Event-Driven Architecture (EDA)**
-   - *Reference Architecture Documentation*: Overall event flow, event schema standards, reliability patterns, and cross-component choreography
-   - *Component Documentation*: Component-specific event production/consumption with reference to system-wide event standards
-   - *Affected Components*: Event Broker, API Marketplace, FHIR Interoperability Platform, Workflow Orchestration Engine
-
-3. **Microservices Architecture**
-   - *Reference Architecture Documentation*: Service boundaries, communication patterns, deployment models, and orchestration
-   - *Component Documentation*: Component-specific service implementation with reference to system-wide microservice standards
-   - *Affected Components*: All key capabilities
-
-4. **API Gateway Pattern**
-   - *Reference Architecture Documentation*: Gateway architecture, routing rules, cross-cutting concerns (auth, rate limiting, etc.)
-   - *Component Documentation*: Component-specific API exposure with reference to system-wide gateway configuration
-   - *Affected Components*: API Marketplace, FHIR Interoperability Platform, Federated Graph API
-
-5. **Circuit Breaker Pattern**
-   - *Reference Architecture Documentation*: Pattern implementation, configuration standards, monitoring, and recovery strategies
-   - *Component Documentation*: Component-specific usage with reference to system-wide resilience patterns
-   - *Affected Components*: All key capabilities
 
 ### Legacy and On-Premises Integration Patterns
 

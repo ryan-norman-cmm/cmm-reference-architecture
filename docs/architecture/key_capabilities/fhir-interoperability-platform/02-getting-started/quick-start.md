@@ -1,4 +1,4 @@
-# FHIR Interoperability Platform Quick Start Guide (Cloud)
+# FHIR Interoperability Platform Quick Start Guide
 
 ## Introduction
 

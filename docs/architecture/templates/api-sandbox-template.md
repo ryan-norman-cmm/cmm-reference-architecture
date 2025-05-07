@@ -20,7 +20,7 @@ The sandbox environment is a fully functional replica of the production environm
 
 The sandbox uses simplified authentication compared to production:
 
-1. Navigate to the sandbox portal: `https://[component-name]-sandbox.dev.cmm.azure.com`
+1. Navigate to the sandbox portal: `https://component-name-placeholder-sandbox.dev.cmm.azure.com`
 2. Log in using your CMM Azure AD credentials
 3. The system will automatically provision a sandbox account and API keys
 
@@ -43,7 +43,7 @@ x-cmm-sandbox-api-key: sb_[component_name]_00000000000000000000000000000000
 
 The sandbox includes an interactive API explorer based on Swagger UI:
 
-1. Navigate to `https://[component-name]-sandbox.dev.cmm.azure.com/explorer`
+1. Navigate to `https://component-name-placeholder-sandbox.dev.cmm.azure.com/explorer`
 2. Your sandbox API key is automatically included in requests
 3. Explore available endpoints organized by category
 4. Try operations directly from the browser UI
@@ -92,7 +92,7 @@ For more advanced testing, a Postman collection is available:
 1. Download the [Component Name] Postman collection: [Download Link]
 2. Import the collection into Postman
 3. Configure the collection variables:
-   - `sandbox_url`: `https://[component-name]-sandbox.dev.cmm.azure.com`
+   - `sandbox_url`: `https://component-name-placeholder-sandbox.dev.cmm.azure.com`
    - `api_key`: Your sandbox API key
 
 The collection includes:
@@ -119,14 +119,14 @@ docker run -p 8080:8080 covermymeds/[component-name]-mock:latest
 ### Static Response Files
 
 Alternatively, download static response files for offline use:
-- [JSON Response Pack](https://[component-name]-sandbox.dev.cmm.azure.com/downloads/mock-responses.zip)
-- [OpenAPI Specification](https://[component-name]-sandbox.dev.cmm.azure.com/downloads/openapi.yaml)
+- [JSON Response Pack](https://component-name-placeholder-sandbox.dev.cmm.azure.com/downloads/mock-responses.zip)
+- [OpenAPI Specification](https://component-name-placeholder-sandbox.dev.cmm.azure.com/downloads/openapi.yaml)
 
 ## Data Generation
 
 The sandbox includes tools to generate synthetic test data:
 
-1. Navigate to `https://[component-name]-sandbox.dev.cmm.azure.com/data-generator`
+1. Navigate to `https://component-name-placeholder-sandbox.dev.cmm.azure.com/data-generator`
 2. Select the data type you need (patients, claims, providers, etc.)
 3. Configure generation parameters
 4. Generate synthetic data that conforms to FHIR standards
@@ -136,7 +136,7 @@ The sandbox includes tools to generate synthetic test data:
 
 To test webhooks and event notifications:
 
-1. Navigate to `https://[component-name]-sandbox.dev.cmm.azure.com/webhooks`
+1. Navigate to `https://component-name-placeholder-sandbox.dev.cmm.azure.com/webhooks`
 2. Register a webhook URL (can be a service like webhook.site for testing)
 3. Select the events you want to receive
 4. Trigger events using the appropriate API calls
@@ -164,7 +164,7 @@ After exploring the API in the sandbox:
 
 For help with the sandbox environment:
 
-- Chat: Join the Microsoft Teams channel `#[component-name]-sandbox-support`
+- Chat: Join the Microsoft Teams channel `#component-name-placeholder-sandbox-support`
 - Email: [sandbox-support@covermymeds.com](mailto:sandbox-support@covermymeds.com)
 - Office Hours: Sandbox support team is available weekdays 9am-5pm ET
 
