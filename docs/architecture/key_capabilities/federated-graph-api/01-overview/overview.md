@@ -18,7 +18,7 @@ The Federated Graph API unifies access to all platform data and services through
 
 ## Integration Points
 - Integrates with the FHIR Interoperability Platform to expose healthcare data
-- Connects with the Event Broker for real-time subscriptions
+- Connects with the Event-Driven Architecture for real-time subscriptions
 - Provides a unified API layer for the API Marketplace
 - Enables consistent data access for frontend applications
 

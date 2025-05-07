@@ -227,14 +227,15 @@ const server = new ApolloServer({
 });
 ```
 
-### Event Broker Integration
+### Event-Driven Architecture Integration
 
-The Federated Graph API integrates with the Event Broker to enable real-time data capabilities:
+The Federated Graph API integrates with the Event-Driven Architecture to enable real-time data capabilities:
 
 #### Key Integration Points:
-- **GraphQL Subscriptions**: Implementing real-time GraphQL subscriptions using Kafka events
+- **GraphQL Subscriptions**: Implementing real-time GraphQL subscriptions using event streams
 - **Cache Invalidation**: Managing GraphQL cache invalidation based on event notifications
-- **Event-Driven Resolvers**: Supporting resolvers that consume events from the Event Broker
+- **Event-Driven Resolvers**: Supporting resolvers that consume events from the Event-Driven Architecture
+- **Event Sourcing**: Leveraging event sourcing patterns for data consistency
 - **Operational Events**: Publishing GraphQL operational events for monitoring and analytics
 
 #### Integration Pattern:
@@ -247,10 +248,10 @@ import { SchemaRegistry } from '@kafkajs/confluent-schema-registry';
 // Initialize PubSub for GraphQL subscriptions
 const pubsub = new PubSub();
 
-// Initialize Kafka client
+// Initialize Kafka client for Event-Driven Architecture
 const kafka = new Kafka({
   clientId: 'graphql-subscription-service',
-  brokers: ['event-broker.cmm.internal:9092'],
+  brokers: ['event-architecture.cmm.internal:9092'],
   // Auth and SSL configuration
 });
 
@@ -1870,5 +1871,5 @@ const typeDefs = gql`
 - [Federated Graph API Core APIs](../02-core-functionality/core-apis.md)
 - [Federated Graph API Data Model](../02-core-functionality/data-model.md)
 - [FHIR Interoperability Platform Integration](../../fhir-interoperability-platform/01-getting-started/integration-points.md)
-- [Event Broker Integration](../../event-broker/01-getting-started/integration-points.md)
+- [Event-Driven Architecture Integration](../../event-driven-architecture/01-overview/integration-points.md)
 - [API Marketplace Integration](../../api-marketplace/01-getting-started/integration-points.md)

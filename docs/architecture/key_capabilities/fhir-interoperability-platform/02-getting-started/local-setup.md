@@ -495,10 +495,10 @@ The FHIR platform can publish and subscribe to healthcare events through the Eve
 import { client } from './client';
 import { Kafka } from 'kafkajs';
 
-// Configure Kafka client
+// Configure Kafka client for Event-Driven Architecture
 const kafka = new Kafka({
   clientId: 'fhir-service',
-  brokers: ['kafka-broker:9092'], // Replace with your broker addresses
+  brokers: ['event-architecture:9092'], // Replace with your broker addresses
   // Add authentication if needed
 });
 
@@ -1101,7 +1101,8 @@ To effectively integrate the FHIR Interoperability Platform with other core comp
 1. **Event-Driven Architecture**:
    - Configure FHIR resource hooks to publish events when resources are created, updated, or deleted
    - Implement consumers to process events from other systems and update FHIR resources
-   - Use the Event Broker for reliable, asynchronous communication between healthcare services
+   - Use the Event-Driven Architecture for reliable, asynchronous communication between healthcare services
+   - Leverage event sourcing patterns for maintaining healthcare data history
 
 2. **GraphQL Federation**:
    - Ensure your FHIR resources follow the expected schema for the Federated Graph API

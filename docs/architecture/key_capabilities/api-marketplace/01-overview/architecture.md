@@ -90,10 +90,11 @@ The architecture follows a zero-trust model with perimeter security, fine-graine
   - Exposes FHIR APIs through standardized healthcare endpoints
   - Translates between FHIR and other healthcare standards
 
-- **Event Broker**:
+- **Event-Driven Architecture**:
   - Enables event-driven API patterns
   - Provides Webhook registration and delivery
   - Supports asynchronous API workflows
+  - Facilitates event sourcing and CQRS integration
 
 - **Federated Graph API**:
   - Routes GraphQL queries through API security controls

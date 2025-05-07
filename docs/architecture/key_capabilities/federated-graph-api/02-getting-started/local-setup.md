@@ -1510,10 +1510,10 @@ import { Kafka } from 'kafkajs';
 import { ApolloClient, InMemoryCache, HttpLink, gql } from '@apollo/client/core';
 import fetch from 'cross-fetch';
 
-// Configure Kafka client
+// Configure Kafka client for Event-Driven Architecture
 const kafka = new Kafka({
   clientId: 'federated-graph-service',
-  brokers: ['localhost:9092'], // Replace with your broker addresses
+  brokers: ['localhost:9092'], // Replace with your Event-Driven Architecture broker addresses
 });
 
 const consumer = kafka.consumer({ groupId: 'federated-graph-consumer' });
@@ -2043,7 +2043,7 @@ Now that you have a foundation with the Federated Graph API, consider these next
 
 - [Explore Advanced GraphQL Operations](../03-advanced-patterns/advanced-graphql-operations.md)
 - [Integration Guide: FHIR Interoperability Platform](../../fhir-interoperability-platform/01-getting-started/quick-start.md)
-- [Integration Guide: Event Broker](../../event-broker/01-getting-started/quick-start.md)
+- [Integration Guide: Event-Driven Architecture](../../event-driven-architecture/01-overview/quick-start.md)
 - [Integration Guide: API Marketplace](../../api-marketplace/01-getting-started/quick-start.md)
 - [Best Practices: GraphQL Schema Design](../03-advanced-patterns/schema-design.md)
 - [Error Handling & Troubleshooting](../03-advanced-patterns/error-handling.md)

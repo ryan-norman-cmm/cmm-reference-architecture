@@ -17,7 +17,7 @@ The FHIR Interoperability Platform enables secure, standards-based exchange of h
 - The platform includes validation, security, and transformation capabilities to ensure data quality and compliance.
 
 ## Integration Points
-- Integrates with the Event Broker for real-time FHIR resource change notifications
+- Integrates with the Event-Driven Architecture for real-time FHIR resource change notifications
 - Connects with the Federated Graph API to expose FHIR data through GraphQL
 - Provides standardized APIs for the API Marketplace
 - Enables healthcare data exchange with external EHRs, payers, and partners

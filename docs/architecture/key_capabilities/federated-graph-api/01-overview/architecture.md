@@ -103,10 +103,11 @@ The architecture follows a distributed gateway pattern where the Apollo Router i
   - FHIR search translated to GraphQL queries
   - FHIR operations mapped to GraphQL mutations
 
-- **Event Broker**:
+- **Event-Driven Architecture**:
   - GraphQL subscriptions backed by event streams
   - Event-driven cache invalidation
   - Real-time updates for UI components
+  - Event sourcing patterns for data consistency
 
 - **API Marketplace**:
   - GraphQL schema published as an API product

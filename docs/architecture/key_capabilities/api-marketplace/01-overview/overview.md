@@ -18,7 +18,7 @@ The API Marketplace provides a unified gateway and management layer for all APIs
 
 ## Integration Points
 - Integrates with the FHIR Interoperability Platform for healthcare API standards
-- Connects with the Event Broker for event-driven API workflows
+- Connects with the Event-Driven Architecture for event-driven API workflows
 - Provides API access to the Federated Graph API
 - Enables secure external partner and third-party integrations
 

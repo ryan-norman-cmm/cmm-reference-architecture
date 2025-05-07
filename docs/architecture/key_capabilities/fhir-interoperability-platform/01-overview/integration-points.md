@@ -5,9 +5,9 @@ This document outlines the integration points between the FHIR Interoperability 
 
 ## Core Component Integrations
 
-### Event Broker Integration
+### Event-Driven Architecture Integration
 
-The FHIR Interoperability Platform integrates with the Event Broker to support event-driven healthcare data exchange:
+The FHIR Interoperability Platform integrates with the Event-Driven Architecture to support event-driven healthcare data exchange:
 
 #### Key Integration Points:
 - **FHIR Resource Change Notifications**: Publishing events when FHIR resources are created, updated, or deleted
@@ -1737,6 +1737,6 @@ function extractDiagnosisFromMedicationRequest(medicationRequest) {
 - [FHIR Interoperability Platform Overview](./overview.md)
 - [FHIR Core APIs](../02-core-functionality/core-apis.md)
 - [FHIR Data Model](../02-core-functionality/data-model.md)
-- [Event Broker Integration Points](../../event-broker/01-getting-started/integration-points.md)
+- [Event-Driven Architecture Integration Points](../../event-driven-architecture/01-overview/integration-points.md)
 - [Federated Graph API Integration Guide](../../federated-graph-api/02-core-functionality/integration-patterns.md)
 - [API Marketplace Registration Process](../../api-marketplace/02-core-functionality/api-registration.md)

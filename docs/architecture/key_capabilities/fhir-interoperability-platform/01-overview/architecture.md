@@ -97,10 +97,11 @@ The architecture follows a resource-oriented design with multiple API access pat
 
 ### Integration with Core Components
 
-- **Event Broker**: 
+- **Event-Driven Architecture**: 
   - Publishing FHIR resource change events
   - Implementing FHIR Subscription mechanism
   - Enabling event-driven healthcare workflows
+  - Supporting event sourcing for healthcare data streams
 
 - **API Marketplace**:
   - Exposing FHIR APIs through the API gateway
