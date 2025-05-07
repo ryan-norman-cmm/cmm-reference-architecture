@@ -11,6 +11,13 @@ The FHIR Interoperability Platform enables secure, standards-based exchange of h
 - Bulk data operations for population health
 - SMART on FHIR application support
 
+## Technology Stack
+- Health Level Seven (HL7) FHIR R4 specification
+- Aidbox FHIR Server
+- PostgreSQL for data persistence
+- OAuth 2.0 and OpenID Connect for authentication
+- Docker and Kubernetes for containerization and orchestration
+
 ## Architecture Overview
 - The FHIR Interoperability Platform serves as the central data standard implementation for healthcare information exchange.
 - It provides a FHIR-compliant server with multiple API access patterns (REST, GraphQL) built on Aidbox.
@@ -29,6 +36,13 @@ The FHIR Interoperability Platform enables secure, standards-based exchange of h
 - Claims and administrative data exchange
 - Patient access to health information via SMART apps
 
+## Business Value
+- Accelerates interoperability implementation by leveraging industry standards
+- Reduces integration costs through standardized APIs and data models
+- Improves care coordination by enabling seamless data exchange
+- Enhances patient engagement through SMART on FHIR applications
+- Supports regulatory compliance with interoperability requirements
+
 ## Learn More
 - [HL7 FHIR Documentation](https://hl7.org/fhir/) — Official FHIR specification and implementation guides
 - [Aidbox Platform Overview](https://docs.aidbox.app/overview) — Comprehensive guide to the Aidbox FHIR platform
@@ -36,5 +50,5 @@ The FHIR Interoperability Platform enables secure, standards-based exchange of h
 
 ## Next Steps
 - [FHIR Interoperability Platform Architecture](./architecture.md)
-- [FHIR Interoperability Platform Quick Start](./quick-start.md)
-- [FHIR Interoperability Platform Core APIs](../02-core-functionality/core-apis.md)
+- [FHIR Interoperability Platform Quick Start](../02-getting-started/quick-start.md)
+- [FHIR Interoperability Platform Core APIs](../03-core-functionality/core-apis.md)
