@@ -10,27 +10,32 @@ This document defines the mandatory standards for all CMM Technology Platform ke
 
 All key capabilities **must** follow a consistent 5-tier documentation structure. No exceptions or deviations are permitted without explicit approval from the architecture team.
 
-1. **01-getting-started**: Introduction, quick start guides, and basic concepts
-   - Purpose: Help new users understand the component and get started quickly
-   - Target audience: New developers, architects, and stakeholders
-   - Required files: overview.md, quick-start.md, key-concepts.md, architecture.md
+1. **01-overview**: Component introduction, key concepts, and architecture
+   - Purpose: Help users understand the component's purpose, design, and concepts
+   - Target audience: Architects, developers, and stakeholders
+   - Required files: overview.md, key-concepts.md, architecture.md, integration-points.md
+   
+2. **02-getting-started**: Implementation guides for cloud and local environments
+   - Purpose: Help users quickly set up and begin using the component
+   - Target audience: Developers and implementation teams
+   - Required files: quick-start-cloud.md, local-setup.md
 
-2. **02-core-functionality**: Core features, main APIs, and primary use cases
+3. **03-core-functionality**: Core features, main APIs, and primary use cases
    - Purpose: Document the core capabilities and interfaces of the component
    - Target audience: Developers implementing or integrating with the component
    - Required files: core-apis.md, data-model.md
 
-3. **03-advanced-patterns**: Advanced usage patterns, integrations, and complex scenarios
+4. **04-advanced-patterns**: Advanced usage patterns, integrations, and complex scenarios
    - Purpose: Document advanced usage scenarios and extension mechanisms
    - Target audience: Experienced developers customizing or extending the component
    - Required files: advanced-use-cases.md, customization.md
 
-4. **04-governance-compliance**: Governance frameworks, compliance considerations, and security controls
+5. **05-governance-compliance**: Governance frameworks, compliance considerations, and security controls
    - Purpose: Document governance, security, and compliance aspects
    - Target audience: Security specialists, compliance officers, and architects
    - Required files: access-controls.md, data-governance.md, audit-compliance.md, regulatory-compliance.md
 
-5. **05-operations**: Deployment, monitoring, scaling, and maintenance
+6. **06-operations**: Deployment, monitoring, scaling, and maintenance
    - Purpose: Document operational aspects of the component
    - Target audience: DevOps engineers, SREs, and system administrators
    - Required files: deployment.md, monitoring.md, scaling.md, troubleshooting.md, maintenance.md
@@ -41,25 +46,28 @@ Each capability must maintain the following folder structure:
 
 ```
 /docs/architecture/key_capabilities/[capability-name]/
-├── 01-getting-started/
+├── 01-overview/
 │   ├── overview.md
-│   ├── quick-start.md
 │   ├── key-concepts.md
-│   └── architecture.md
-├── 02-core-functionality/
+│   ├── architecture.md
+│   └── integration-points.md
+├── 02-getting-started/
+│   ├── quick-start-cloud.md
+│   └── local-setup.md
+├── 03-core-functionality/
 │   ├── core-apis.md
 │   ├── data-model.md
 │   └── [feature-specific-docs].md
-├── 03-advanced-patterns/
+├── 04-advanced-patterns/
 │   ├── advanced-use-cases.md
 │   ├── customization.md
 │   └── [pattern-specific-docs].md
-├── 04-governance-compliance/
+├── 05-governance-compliance/
 │   ├── access-controls.md
 │   ├── data-governance.md
 │   ├── audit-compliance.md
 │   └── regulatory-compliance.md
-└── 05-operations/
+└── 06-operations/
     ├── deployment.md
     ├── monitoring.md
     ├── scaling.md
@@ -83,7 +91,8 @@ All documentation **must** follow the appropriate template from the templates di
 | Document Type | Template | Purpose |
 |--------------|----------|---------|
 | Overview | [overview-template.md](../templates/overview-template.md) | Component introduction and high-level information |
-| Quick Start | [quick-start-template.md](../templates/quick-start-template.md) | Fast setup and first-use guidance |
+| Quick Start (Cloud) | [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) | Accessing managed components in CMM Azure development environment |
+| Local Setup | [local-setup-template.md](../templates/local-setup-template.md) | Setting up a local development environment |
 | Key Concepts | [key-concepts-template.md](../templates/key-concepts-template.md) | Terminology, glossary, and foundational ideas |
 | Architecture | [architecture-template.md](../templates/architecture-template.md) | Component design and structure |
 | Core APIs | [core-apis-template.md](../templates/core-apis-template.md) | Main API endpoints and usage |
@@ -169,6 +178,8 @@ The following guidelines help determine what content belongs in each document:
 |--------------|----------------|-------------------|
 | Overview | Component purpose, key features, high-level architecture, primary use cases | Detailed implementation, code examples, configuration details |
 | Architecture | Component design, internal structure, data flow, integration points | Detailed code examples, step-by-step tutorials, operational procedures |
+| Quick Start (Cloud) | Authentication, service endpoints, basic usage examples, managed environment limitations, cleanup procedures | Local development setup, detailed architecture, advanced configuration |
+| Local Setup | Local environment setup, prerequisites, development-focused configuration, testing guidance | Production deployment instructions, managed service configuration |  
 | API Documentation | API endpoints, parameters, return values, error codes, usage examples | Internal implementation details, deployment procedures, general concepts |
 | Tutorials | Step-by-step instructions, specific use cases, expected outcomes | Comprehensive API references, architectural details, theoretical concepts |
 | Reference Architecture | System-wide architecture, component relationships, design patterns, architectural decisions | Component-specific implementation details, code examples, operational procedures |
@@ -181,11 +192,14 @@ All document templates are located in the `/docs/architecture/templates/` direct
 
 #### Available Templates
 
-**Getting Started Templates**
+**Overview Templates**
 - [overview-template.md](../templates/overview-template.md) — Introduction, key features, and high-level overview of the component
-- [quick-start-template.md](../templates/quick-start-template.md) — Fast setup, installation, and first-use guidance
 - [key-concepts-template.md](../templates/key-concepts-template.md) — Terminology, glossary, and foundational concepts
 - [architecture-template.md](../templates/architecture-template.md) — Component architecture, design, structure, and integration points
+
+**Getting Started Templates**
+- [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) — Fast setup and usage guidance for managed components in CMM Azure dev environment
+- [local-setup-template.md](../templates/local-setup-template.md) — Setup and configuration guidance for local development environment
 
 **Core Functionality Templates**
 - [core-apis-template.md](../templates/core-apis-template.md) — Main API endpoints, authentication, and usage examples
