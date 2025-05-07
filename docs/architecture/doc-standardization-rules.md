@@ -1,14 +1,14 @@
-# Core Component Documentation Standards
+# Key Capability Documentation Standards
 
 ## Introduction
 
-This document defines the mandatory standards for all CMM Technology Platform core component documentation. These standards ensure consistency, completeness, and quality across all components, making the documentation more accessible and useful for developers, architects, and other stakeholders. All contributors **must** follow these standards when creating or updating documentation.
+This document defines the mandatory standards for all CMM Technology Platform key capability documentation. These standards ensure consistency, completeness, and quality across all capabilities, making the documentation more accessible and useful for developers, architects, and other stakeholders. All contributors **must** follow these standards when creating or updating documentation.
 
 ## Documentation Structure
 
 ### Tier-Based Organization
 
-All core components **must** follow a consistent 5-tier documentation structure. No exceptions or deviations are permitted without explicit approval from the architecture team.
+All key capabilities **must** follow a consistent 5-tier documentation structure. No exceptions or deviations are permitted without explicit approval from the architecture team.
 
 1. **01-getting-started**: Introduction, quick start guides, and basic concepts
    - Purpose: Help new users understand the component and get started quickly
@@ -37,10 +37,10 @@ All core components **must** follow a consistent 5-tier documentation structure.
 
 ### Folder Structure
 
-Each component must maintain the following folder structure:
+Each capability must maintain the following folder structure:
 
 ```
-/docs/architecture/core_components/[component-name]/
+/docs/architecture/key_capabilities/[capability-name]/
 ├── 01-getting-started/
 │   ├── overview.md
 │   ├── quick-start.md
@@ -215,7 +215,7 @@ All document templates are located in the `/docs/architecture/templates/` direct
 - [regulatory-compliance-template.md](../templates/regulatory-compliance-template.md) - Regulatory requirements and implementation
 
 **Operations Templates**
-- [deployment-template.md](../templates/deployment-template.md) - Deployment procedures of core component technologies and configuration with a focus on cloud-native deployment and infrastructure as code
+- [deployment-template.md](../templates/deployment-template.md) - Deployment procedures of key capability technologies and configuration with a focus on cloud-native deployment and infrastructure as code
 - [monitoring-template.md](../templates/monitoring-template.md) - Metrics, logging, and alerting
 - [scaling-template.md](../templates/scaling-template.md) - Scaling strategies and capacity planning
 - [troubleshooting-template.md](../templates/troubleshooting-template.md) - Common issues and resolution
@@ -449,7 +449,7 @@ Compliance with documentation standards is measured and tracked:
 
 ### Overview
 
-All core components must include comprehensive documentation of compliance with key United States regulations. This section outlines the specific documentation requirements for HIPAA, Sarbanes-Oxley (SOX), and US privacy regulations.
+All key capabilities must include comprehensive documentation of compliance with key United States regulations. This section outlines the specific documentation requirements for HIPAA, Sarbanes-Oxley (SOX), and US privacy regulations.
 
 ### HIPAA Compliance Documentation Requirements
 
@@ -537,11 +537,11 @@ All components must document the following common elements across regulations:
 
 ### Required Documents for All Components
 
-All core components must include a standard set of documentation following the appropriate templates. This section outlines the required documents for each component and provides guidance on content boundaries to minimize redundancy.
+All key capabilities must include a standard set of documentation following the appropriate templates. This section outlines the required documents for each capability and provides guidance on content boundaries to minimize redundancy.
 
 #### Required Documents
 
-Each core component must include the documentation as outlined in the [Available Templates](#available-templates).
+Each key capability must include the documentation as outlined in the [Available Templates](#available-templates).
 
 #### Content Boundaries
 
@@ -648,7 +648,7 @@ The reference architecture documentation should be maintained separately from co
 
 ### Overview
 
-Certain architectural concepts and patterns span multiple core components and should be documented in the reference architecture rather than duplicated across individual component documentation. This section identifies these cross-cutting concerns and provides guidance on how to reference them in component documentation.
+Certain architectural concepts and patterns span multiple key capabilities and should be documented in the reference architecture rather than duplicated across individual capability documentation. This section identifies these cross-cutting concerns and provides guidance on how to reference them in capability documentation.
 
 ### Cross-Component Architectural Patterns
 
@@ -667,7 +667,7 @@ The following architectural patterns involve multiple components and should be d
 3. **Microservices Architecture**
    - *Reference Architecture Documentation*: Service boundaries, communication patterns, deployment models, and orchestration
    - *Component Documentation*: Component-specific service implementation with reference to system-wide microservice standards
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 4. **API Gateway Pattern**
    - *Reference Architecture Documentation*: Gateway architecture, routing rules, cross-cutting concerns (auth, rate limiting, etc.)
@@ -677,7 +677,7 @@ The following architectural patterns involve multiple components and should be d
 5. **Circuit Breaker Pattern**
    - *Reference Architecture Documentation*: Pattern implementation, configuration standards, monitoring, and recovery strategies
    - *Component Documentation*: Component-specific usage with reference to system-wide resilience patterns
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 ### Legacy and On-Premises Integration Patterns
 
@@ -691,12 +691,12 @@ Integration with legacy and on-premises systems involves multiple components and
 2. **On-Premises Deployment Patterns**
    - *Reference Architecture Documentation*: Hybrid cloud/on-premises architectures, network considerations, data residency, and synchronization
    - *Component Documentation*: Component-specific deployment considerations with reference to system-wide hybrid deployment patterns
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 3. **Legacy Authentication Integration**
    - *Reference Architecture Documentation*: Integration with legacy identity providers, token translation, and federation patterns
    - *Component Documentation*: Component-specific authentication requirements with reference to system-wide authentication patterns
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 ### Cross-Cutting Technical Concerns
 
@@ -705,22 +705,22 @@ The following technical concerns span multiple components and should be document
 1. **Distributed Tracing**
    - *Reference Architecture Documentation*: Tracing architecture, correlation ID propagation, sampling strategies, and observability
    - *Component Documentation*: Component-specific instrumentation with reference to system-wide tracing standards
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 2. **Centralized Logging**
    - *Reference Architecture Documentation*: Logging architecture, log aggregation, structured logging format, and retention policies
    - *Component Documentation*: Component-specific logging with reference to system-wide logging standards
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 3. **Metrics and Monitoring**
    - *Reference Architecture Documentation*: Metrics collection, alerting strategies, dashboarding, and SLO/SLA definitions
    - *Component Documentation*: Component-specific metrics with reference to system-wide monitoring standards
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 4. **Disaster Recovery**
    - *Reference Architecture Documentation*: System-wide DR strategy, RPO/RTO objectives, backup strategies, and recovery procedures
    - *Component Documentation*: Component-specific recovery considerations with reference to system-wide DR strategy
-   - *Affected Components*: All core components
+   - *Affected Components*: All key capabilities
 
 ### Documentation Guidelines
 

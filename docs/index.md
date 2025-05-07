@@ -18,7 +18,7 @@ Our modern platform leverages healthcare standards like FHIR to create a unified
 | Authentication Model | SMART on FHIR, OAuth 2.0, mTLS | Security requirements, partner standards, user types | [Security Framework →](link) |
 | Application Strategy | Backend-for-Frontend, Shared Capability, Pipeline Service | User experience, workflow complexity, reusability | [Application Models →](link) |
 
-## Core Platform Components
+## Key Platform Capabilities
 
 ### API Marketplace
 Our API Marketplace provides a comprehensive approach to API management combining F5 Distributed Cloud App Connect for universal ingress, Voltmesh for internal communication, and Mulesoft for API integration and management.
@@ -31,7 +31,7 @@ Our API Marketplace provides a comprehensive approach to API management combinin
 - Comprehensive API lifecycle management
 
 
-[API Marketplace Documentation →](/architecture/core_components/api-marketplace/01-getting-started/overview/)
+[API Marketplace Documentation →](/architecture/key_capabilities/api-marketplace/01-getting-started/overview/)
 
 ### FHIR Interoperability Platform
 Our comprehensive FHIR Interoperability Platform serves as the foundation for healthcare data exchange, providing not just a FHIR-compliant data repository but a complete solution for healthcare interoperability. The platform is enabled through Health Samurai's Aidbox product, which includes robust APIs, flexible data persistence options, role-based access control, subscription capabilities, and comprehensive implementation guide support, enabling seamless integration with the broader healthcare ecosystem.
@@ -45,13 +45,22 @@ Our comprehensive FHIR Interoperability Platform serves as the foundation for he
 - Bulk data operations for population health management
 
 
-[FHIR Interoperability Platform Documentation →](/architecture/core_components/fhir-interoperability-platform/01-getting-started/overview/)
+[FHIR Interoperability Platform Documentation →](/architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/overview/)
+[FHIR Integration Points →](/architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/integration-points/)
 
 ### Federated Graph API
 The unified API layer exposes capabilities across all systems through a coherent GraphQL interface through Apollo Router and GraphOS, enabling product teams to efficiently access data and services while maintaining service boundaries.
 
+**Key Capabilities:**
+- Schema federation for unified API access
+- Type-safe GraphQL queries and mutations
+- Real-time subscriptions for live updates
+- Efficient data fetching with optimized resolvers
+- Access control at the field level
 
-[Federated Graph API Documentation →](/architecture/core_components/federated-graph-api/01-getting-started/overview/)
+
+[Federated Graph API Documentation →](/architecture/key_capabilities/federated-graph-api/01-getting-started/overview/)
+[Federated Graph API Integration Points →](/architecture/key_capabilities/federated-graph-api/01-getting-started/integration-points/)
 
 ### Design System
 Our comprehensive design system ShadCN components with Tailwind CSS, Storybook, and healthcare-specific patterns to create consistent, accessible user interfaces across all applications.
@@ -64,7 +73,7 @@ Our comprehensive design system ShadCN components with Tailwind CSS, Storybook, 
 - Automated testing and quality assurance
 
 
-[Design System Documentation →](/architecture/core_components/design-system/01-getting-started/overview/)
+[Design System Documentation →](/architecture/key_capabilities/design-system/01-getting-started/overview/)
 
 ### Event Broker
 Our platform uses Confluent Kafka to implement a robust event broker, enabling real-time data processing, system decoupling, and comprehensive visibility into the patient journey.
@@ -76,7 +85,8 @@ Our platform uses Confluent Kafka to implement a robust event broker, enabling r
 - Event schema standards
 - Event-driven architecture
 
-[Event Broker Documentation →](/architecture/core_components/event-broker/01-getting-started/overview/)
+[Event Broker Documentation →](/architecture/key_capabilities/event-broker/01-getting-started/overview/)
+[Event Broker Integration Points →](/architecture/key_capabilities/event-broker/01-getting-started/integration-points/)
 
 ## Healthcare Capabilities
 
