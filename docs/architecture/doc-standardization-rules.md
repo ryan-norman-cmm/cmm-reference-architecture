@@ -19,6 +19,7 @@ All key capabilities **must** follow a consistent 5-tier documentation structure
    - Purpose: Help users quickly set up and begin using the component
    - Target audience: Developers and implementation teams
    - Required files: quick-start-cloud.md, local-setup.md
+   - Optional consumer-friendly files: use-case-examples.md, api-sandbox.md, client-libraries.md, troubleshooting-guide.md
 
 3. **03-core-functionality**: Core features, main APIs, and primary use cases
    - Purpose: Document the core capabilities and interfaces of the component
@@ -53,7 +54,11 @@ Each capability must maintain the following folder structure:
 │   └── integration-points.md
 ├── 02-getting-started/
 │   ├── quick-start-cloud.md
-│   └── local-setup.md
+│   ├── local-setup.md
+│   ├── use-case-examples.md
+│   ├── api-sandbox.md
+│   ├── client-libraries.md
+│   └── troubleshooting-guide.md
 ├── 03-core-functionality/
 │   ├── core-apis.md
 │   ├── data-model.md
@@ -93,6 +98,10 @@ All documentation **must** follow the appropriate template from the templates di
 | Overview | [overview-template.md](../templates/overview-template.md) | Component introduction and high-level information |
 | Quick Start (Cloud) | [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) | Accessing managed components in CMM Azure development environment |
 | Local Setup | [local-setup-template.md](../templates/local-setup-template.md) | Setting up a local development environment |
+| Use Case Examples | [use-case-examples-template.md](../templates/use-case-examples-template.md) | Practical examples solving common healthcare workflow challenges |
+| API Sandbox | [api-sandbox-template.md](../templates/api-sandbox-template.md) | Interactive exploration environment for testing APIs without coding |
+| Client Libraries | [client-libraries-template.md](../templates/client-libraries-template.md) | Documentation for language-specific SDKs and client libraries |
+| Troubleshooting Guide | [troubleshooting-guide-template.md](../templates/troubleshooting-guide-template.md) | Solutions for common issues with detailed step-by-step resolution |
 | Key Concepts | [key-concepts-template.md](../templates/key-concepts-template.md) | Terminology, glossary, and foundational ideas |
 | Architecture | [architecture-template.md](../templates/architecture-template.md) | Component design and structure |
 | Core APIs | [core-apis-template.md](../templates/core-apis-template.md) | Main API endpoints and usage |
@@ -179,7 +188,11 @@ The following guidelines help determine what content belongs in each document:
 | Overview | Component purpose, key features, high-level architecture, primary use cases | Detailed implementation, code examples, configuration details |
 | Architecture | Component design, internal structure, data flow, integration points | Detailed code examples, step-by-step tutorials, operational procedures |
 | Quick Start (Cloud) | Authentication, service endpoints, basic usage examples, managed environment limitations, cleanup procedures | Local development setup, detailed architecture, advanced configuration |
-| Local Setup | Local environment setup, prerequisites, development-focused configuration, testing guidance | Production deployment instructions, managed service configuration |  
+| Local Setup | Local environment setup, prerequisites, development-focused configuration, testing guidance | Production deployment instructions, managed service configuration |
+| Use Case Examples | Practical real-world scenarios, complete code examples, business context, implementation considerations | Exhaustive API documentation, detailed architectural explanations, theoretical discussions |
+| API Sandbox | Interactive API explorer access, authentication details, sample requests, mock servers, test data generation | Production access instructions, full API reference, internal implementation details |
+| Client Libraries | Library installation, initialization, basic usage examples, language-specific patterns, migration guides | Full API documentation, detailed internal library mechanics, non-client-related implementation details |
+| Troubleshooting Guide | Common issues and solutions, symptom identification, step-by-step resolution, escalation paths | Complete API reference, architectural explanations, general programming tutorials |
 | API Documentation | API endpoints, parameters, return values, error codes, usage examples | Internal implementation details, deployment procedures, general concepts |
 | Tutorials | Step-by-step instructions, specific use cases, expected outcomes | Comprehensive API references, architectural details, theoretical concepts |
 | Reference Architecture | System-wide architecture, component relationships, design patterns, architectural decisions | Component-specific implementation details, code examples, operational procedures |
@@ -200,6 +213,10 @@ All document templates are located in the `/docs/architecture/templates/` direct
 **Getting Started Templates**
 - [quick-start-cloud-template.md](../templates/quick-start-cloud-template.md) — Fast setup and usage guidance for managed components in CMM Azure dev environment
 - [local-setup-template.md](../templates/local-setup-template.md) — Setup and configuration guidance for local development environment
+- [use-case-examples-template.md](../templates/use-case-examples-template.md) — Practical examples solving common healthcare workflow challenges
+- [api-sandbox-template.md](../templates/api-sandbox-template.md) — Interactive exploration environment for testing APIs without coding
+- [client-libraries-template.md](../templates/client-libraries-template.md) — Documentation for language-specific SDKs and client libraries
+- [troubleshooting-guide-template.md](../templates/troubleshooting-guide-template.md) — Solutions for common issues with detailed step-by-step resolution
 
 **Core Functionality Templates**
 - [core-apis-template.md](../templates/core-apis-template.md) — Main API endpoints, authentication, and usage examples
