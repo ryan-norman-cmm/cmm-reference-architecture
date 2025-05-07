@@ -6,96 +6,101 @@ nav:
   - Principles: architecture/principles.md
   - Key Capabilities:
     - API Marketplace:
+      - Overview:
+        - Overview: architecture/key_capabilities/api-marketplace/01-overview/overview.md
+        - Key Concepts: architecture/key_capabilities/api-marketplace/01-overview/key-concepts.md
+        - Architecture: architecture/key_capabilities/api-marketplace/01-overview/architecture.md
       - Getting Started:
-        - Overview: architecture/key_capabilities/api-marketplace/01-getting-started/overview.md
-        - Key Concepts: architecture/key_capabilities/api-marketplace/01-getting-started/key-concepts.md
-        - Architecture: architecture/key_capabilities/api-marketplace/01-getting-started/architecture.md
-        - Quick Start: architecture/key_capabilities/api-marketplace/01-getting-started/quick-start.md
+        - Quick Start: architecture/key_capabilities/api-marketplace/02-getting-started/quick-start.md
     - Design System:
+      - Overview:
+        - Overview: architecture/key_capabilities/design-system/01-overview/overview.md
+        - Key Concepts: architecture/key_capabilities/design-system/01-overview/key-concepts.md
+        - Architecture: architecture/key_capabilities/design-system/01-overview/architecture.md
       - Getting Started:
-        - Overview: architecture/key_capabilities/design-system/01-getting-started/overview.md
-        - Key Concepts: architecture/key_capabilities/design-system/01-getting-started/key-concepts.md
-        - Architecture: architecture/key_capabilities/design-system/01-getting-started/architecture.md
-        - Quick Start: architecture/key_capabilities/design-system/01-getting-started/quick-start.md
+        - Quick Start: architecture/key_capabilities/design-system/02-getting-started/quick-start.md
     - FHIR Interoperability Platform:
+      - Overview:
+        - Overview: architecture/key_capabilities/fhir-interoperability-platform/01-overview/overview.md
+        - Key Concepts: architecture/key_capabilities/fhir-interoperability-platform/01-overview/key-concepts.md
+        - Architecture: architecture/key_capabilities/fhir-interoperability-platform/01-overview/architecture.md
+        - Integration Points: architecture/key_capabilities/fhir-interoperability-platform/01-overview/integration-points.md
       - Getting Started:
-        - Overview: architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/overview.md
-        - Key Concepts: architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/key-concepts.md
-        - Architecture: architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/architecture.md
-        - Quick Start: architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/quick-start.md
-        - Integration Points: architecture/key_capabilities/fhir-interoperability-platform/01-getting-started/integration-points.md
+        - Quick Start: architecture/key_capabilities/fhir-interoperability-platform/02-getting-started/quick-start.md
       - Core Functionality:
-        - Core APIs: architecture/key_capabilities/fhir-interoperability-platform/02-core-functionality/core-apis.md
-        - Data Model: architecture/key_capabilities/fhir-interoperability-platform/02-core-functionality/data-model.md
+        - Core APIs: architecture/key_capabilities/fhir-interoperability-platform/03-core-functionality/core-apis.md
+        - Data Model: architecture/key_capabilities/fhir-interoperability-platform/03-core-functionality/data-model.md
       - Advanced Patterns:
-        - Advanced Use Cases: architecture/key_capabilities/fhir-interoperability-platform/03-advanced-patterns/advanced-use-cases.md
-        - Extension Points: architecture/key_capabilities/fhir-interoperability-platform/03-advanced-patterns/extension-points.md
-        - Customization: architecture/key_capabilities/fhir-interoperability-platform/03-advanced-patterns/customization.md
+        - Advanced Use Cases: architecture/key_capabilities/fhir-interoperability-platform/04-advanced-patterns/advanced-use-cases.md
+        - Extension Points: architecture/key_capabilities/fhir-interoperability-platform/04-advanced-patterns/extension-points.md
+        - Customization: architecture/key_capabilities/fhir-interoperability-platform/04-advanced-patterns/customization.md
       - Governance & Compliance:
-        - Access Controls: architecture/key_capabilities/fhir-interoperability-platform/04-governance-compliance/access-controls.md
-        - Audit Compliance: architecture/key_capabilities/fhir-interoperability-platform/04-governance-compliance/audit-compliance.md
-        - Data Governance: architecture/key_capabilities/fhir-interoperability-platform/04-governance-compliance/data-governance.md
+        - Access Controls: architecture/key_capabilities/fhir-interoperability-platform/05-governance-compliance/access-controls.md
+        - Audit Compliance: architecture/key_capabilities/fhir-interoperability-platform/05-governance-compliance/audit-compliance.md
+        - Data Governance: architecture/key_capabilities/fhir-interoperability-platform/05-governance-compliance/data-governance.md
       - Operations:
-        - Deployment: architecture/key_capabilities/fhir-interoperability-platform/05-operations/deployment.md
-        - Maintenance: architecture/key_capabilities/fhir-interoperability-platform/05-operations/maintenance.md
-        - Monitoring: architecture/key_capabilities/fhir-interoperability-platform/05-operations/monitoring.md
-        - Troubleshooting: architecture/key_capabilities/fhir-interoperability-platform/05-operations/troubleshooting.md
+        - Deployment: architecture/key_capabilities/fhir-interoperability-platform/06-operations/deployment.md
+        - Maintenance: architecture/key_capabilities/fhir-interoperability-platform/06-operations/maintenance.md
+        - Monitoring: architecture/key_capabilities/fhir-interoperability-platform/06-operations/monitoring.md
+        - Troubleshooting: architecture/key_capabilities/fhir-interoperability-platform/06-operations/troubleshooting.md
     - Event Broker:
+      - Overview:
+        - Overview: architecture/key_capabilities/event-broker/01-overview/overview.md
+        - Key Concepts: architecture/key_capabilities/event-broker/01-overview/key-concepts.md
+        - Architecture: architecture/key_capabilities/event-broker/01-overview/architecture.md
+        - Integration Points: architecture/key_capabilities/event-broker/01-overview/integration-points.md
       - Getting Started:
-        - Overview: architecture/key_capabilities/event-broker/01-getting-started/overview.md
-        - Key Concepts: architecture/key_capabilities/event-broker/01-getting-started/key-concepts.md
-        - Architecture: architecture/key_capabilities/event-broker/01-getting-started/architecture.md
-        - Quick Start: architecture/key_capabilities/event-broker/01-getting-started/quick-start.md
-        - Integration Points: architecture/key_capabilities/event-broker/01-getting-started/integration-points.md
+        - Quick Start: architecture/key_capabilities/event-broker/02-getting-started/quick-start.md
       - Core Functionality:
-        - Core APIs: architecture/key_capabilities/event-broker/02-core-functionality/core-apis.md
-        - Data Model: architecture/key_capabilities/event-broker/02-core-functionality/data-model.md
-        - Message Patterns: architecture/key_capabilities/event-broker/02-core-functionality/message-patterns.md
-        - Topic Management: architecture/key_capabilities/event-broker/02-core-functionality/topic-management.md
+        - Core APIs: architecture/key_capabilities/event-broker/03-core-functionality/core-apis.md
+        - Data Model: architecture/key_capabilities/event-broker/03-core-functionality/data-model.md
+        - Message Patterns: architecture/key_capabilities/event-broker/03-core-functionality/message-patterns.md
+        - Topic Management: architecture/key_capabilities/event-broker/03-core-functionality/topic-management.md
       - Advanced Patterns:
-        - Advanced Use Cases: architecture/key_capabilities/event-broker/03-advanced-patterns/advanced-use-cases.md
-        - Extension Points: architecture/key_capabilities/event-broker/03-advanced-patterns/extension-points.md
-        - Customization: architecture/key_capabilities/event-broker/03-advanced-patterns/customization.md
+        - Advanced Use Cases: architecture/key_capabilities/event-broker/04-advanced-patterns/advanced-use-cases.md
+        - Extension Points: architecture/key_capabilities/event-broker/04-advanced-patterns/extension-points.md
+        - Customization: architecture/key_capabilities/event-broker/04-advanced-patterns/customization.md
       - Governance & Compliance:
-        - Access Controls: architecture/key_capabilities/event-broker/04-governance-compliance/access-controls.md
-        - Data Governance: architecture/key_capabilities/event-broker/04-governance-compliance/data-governance.md
-        - Audit Compliance: architecture/key_capabilities/event-broker/04-governance-compliance/audit-compliance.md
-        - Regulatory Compliance: architecture/key_capabilities/event-broker/04-governance-compliance/regulatory-compliance.md
-        - Data Retention & Archiving: architecture/key_capabilities/event-broker/04-governance-compliance/data-retention-archiving.md
-        - Schema Registry Management: architecture/key_capabilities/event-broker/04-governance-compliance/schema-registry-management.md
-        - Topic Governance: architecture/key_capabilities/event-broker/04-governance-compliance/topic-governance.md
+        - Access Controls: architecture/key_capabilities/event-broker/05-governance-compliance/access-controls.md
+        - Data Governance: architecture/key_capabilities/event-broker/05-governance-compliance/data-governance.md
+        - Audit Compliance: architecture/key_capabilities/event-broker/05-governance-compliance/audit-compliance.md
+        - Regulatory Compliance: architecture/key_capabilities/event-broker/05-governance-compliance/regulatory-compliance.md
+        - Data Retention & Archiving: architecture/key_capabilities/event-broker/05-governance-compliance/data-retention-archiving.md
+        - Schema Registry Management: architecture/key_capabilities/event-broker/05-governance-compliance/schema-registry-management.md
+        - Topic Governance: architecture/key_capabilities/event-broker/05-governance-compliance/topic-governance.md
       - Operations:
-        - Deployment: architecture/key_capabilities/event-broker/05-operations/deployment.md
-        - Monitoring: architecture/key_capabilities/event-broker/05-operations/monitoring.md
-        - Maintenance: architecture/key_capabilities/event-broker/05-operations/maintenance.md
-        - Scaling: architecture/key_capabilities/event-broker/05-operations/scaling.md
-        - Troubleshooting: architecture/key_capabilities/event-broker/05-operations/troubleshooting.md
+        - Deployment: architecture/key_capabilities/event-broker/06-operations/deployment.md
+        - Monitoring: architecture/key_capabilities/event-broker/06-operations/monitoring.md
+        - Maintenance: architecture/key_capabilities/event-broker/06-operations/maintenance.md
+        - Scaling: architecture/key_capabilities/event-broker/06-operations/scaling.md
+        - Troubleshooting: architecture/key_capabilities/event-broker/06-operations/troubleshooting.md
     - Federated Graph API:
+      - Overview:
+        - Overview: architecture/key_capabilities/federated-graph-api/01-overview/overview.md
+        - Key Concepts: architecture/key_capabilities/federated-graph-api/01-overview/key-concepts.md
+        - Architecture: architecture/key_capabilities/federated-graph-api/01-overview/architecture.md
+        - Integration Points: architecture/key_capabilities/federated-graph-api/01-overview/integration-points.md
       - Getting Started:
-        - Overview: architecture/key_capabilities/federated-graph-api/01-getting-started/overview.md
-        - Key Concepts: architecture/key_capabilities/federated-graph-api/01-getting-started/key-concepts.md
-        - Architecture: architecture/key_capabilities/federated-graph-api/01-getting-started/architecture.md
-        - Quick Start: architecture/key_capabilities/federated-graph-api/01-getting-started/quick-start.md
-        - Integration Points: architecture/key_capabilities/federated-graph-api/01-getting-started/integration-points.md
+        - Quick Start: architecture/key_capabilities/federated-graph-api/02-getting-started/quick-start.md
       - Core Functionality:
-        - Core APIs: architecture/key_capabilities/federated-graph-api/02-core-functionality/core-apis.md
-        - Data Model: architecture/key_capabilities/federated-graph-api/02-core-functionality/data-model.md
+        - Core APIs: architecture/key_capabilities/federated-graph-api/03-core-functionality/core-apis.md
+        - Data Model: architecture/key_capabilities/federated-graph-api/03-core-functionality/data-model.md
       - Advanced Patterns:
-        - Advanced Use Cases: architecture/key_capabilities/federated-graph-api/03-advanced-patterns/advanced-use-cases.md
-        - Extension Points: architecture/key_capabilities/federated-graph-api/03-advanced-patterns/extension-points.md
-        - Customization: architecture/key_capabilities/federated-graph-api/03-advanced-patterns/customization.md
+        - Advanced Use Cases: architecture/key_capabilities/federated-graph-api/04-advanced-patterns/advanced-use-cases.md
+        - Extension Points: architecture/key_capabilities/federated-graph-api/04-advanced-patterns/extension-points.md
+        - Customization: architecture/key_capabilities/federated-graph-api/04-advanced-patterns/customization.md
       - Governance & Compliance:
-        - Access Controls: architecture/key_capabilities/federated-graph-api/04-governance-compliance/access-controls.md
-        - Audit Compliance: architecture/key_capabilities/federated-graph-api/04-governance-compliance/audit-compliance.md
-        - Data Governance: architecture/key_capabilities/federated-graph-api/04-governance-compliance/data-governance.md
-        - Regulatory Compliance: architecture/key_capabilities/federated-graph-api/04-governance-compliance/regulatory-compliance.md
-        - Schema Governance: architecture/key_capabilities/federated-graph-api/04-governance-compliance/schema-governance.md
+        - Access Controls: architecture/key_capabilities/federated-graph-api/05-governance-compliance/access-controls.md
+        - Audit Compliance: architecture/key_capabilities/federated-graph-api/05-governance-compliance/audit-compliance.md
+        - Data Governance: architecture/key_capabilities/federated-graph-api/05-governance-compliance/data-governance.md
+        - Regulatory Compliance: architecture/key_capabilities/federated-graph-api/05-governance-compliance/regulatory-compliance.md
+        - Schema Governance: architecture/key_capabilities/federated-graph-api/05-governance-compliance/schema-governance.md
       - Operations:
-        - Deployment: architecture/key_capabilities/federated-graph-api/05-operations/deployment.md
-        - Maintenance: architecture/key_capabilities/federated-graph-api/05-operations/maintenance.md
-        - Monitoring: architecture/key_capabilities/federated-graph-api/05-operations/monitoring.md
-        - Scaling: architecture/key_capabilities/federated-graph-api/05-operations/scaling.md
-        - Troubleshooting: architecture/key_capabilities/federated-graph-api/05-operations/troubleshooting.md
+        - Deployment: architecture/key_capabilities/federated-graph-api/06-operations/deployment.md
+        - Maintenance: architecture/key_capabilities/federated-graph-api/06-operations/maintenance.md
+        - Monitoring: architecture/key_capabilities/federated-graph-api/06-operations/monitoring.md
+        - Scaling: architecture/key_capabilities/federated-graph-api/06-operations/scaling.md
+        - Troubleshooting: architecture/key_capabilities/federated-graph-api/06-operations/troubleshooting.md
 
 plugins:
   - techdocs-core

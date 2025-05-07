@@ -18,20 +18,22 @@ Systematically review and update all required documentation artifacts for each c
 - 01-getting-started/
   - overview.md
   - key-concepts.md
-  - quick-start.md
   - architecture.md
-- 02-core-functionality/
+- 02-getting-started/
+  - quick-start.md
+  - local-setup.md
+- 03-core-functionality/
   - core-apis.md (if applicable)
   - data-model.md (if applicable)
-- 03-advanced-patterns/
+- 04-advanced-patterns/
   - advanced-use-cases.md (if applicable)
   - customization.md (if applicable)
-- 04-governance-compliance/
+- 05-governance-compliance/
   - access-controls.md
   - data-governance.md
   - audit-compliance.md
   - regulatory-compliance.md
-- 05-operations/
+- 06-operations/
   - deployment.md
   - monitoring.md
   - scaling.md
